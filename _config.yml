@@ -24,8 +24,8 @@ description              : "SITE DESCRIPTION."
 url                      : "https://chocobubble.github.io"
 baseurl                  : "/blog"
 repository               : "chocobubble/chocobubble.github.io"
-teaser                   : "/assets/images/500x300.png"
-logo                     : "/assets/images/88x88.png"
+teaser                   : "/assets/images/teaser.jpg"
+logo                     : "/assets/images/log.jpg"
 masthead_title           : "masthead_title"# overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -105,7 +105,7 @@ analytics:
 # Site Author
 author:
   name             : "Chocobubble"
-  avatar           : "/assets/images/bio-photo.jpg"# path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/avatar.jpg"# path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Game programmer"
   location         : "Seoul, South Korea"
   email            :
