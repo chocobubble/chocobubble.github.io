@@ -18,14 +18,14 @@ minimal_mistakes_skin    : "mint" # "air", "aqua", "contrast", "dark", "dirt", "
 locale                   : "en-US"
 title                    : "Take responsibility for our dreams"
 title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
+subtitle                 : "subtitle"# site tagline that appears below site title in masthead
 name                     : "Moon"
 description              : "SITE DESCRIPTION."
 url                      : #"https://chocobubble.github.io"
 baseurl                  : #"/blog"
 repository               : #"chocobubble/chocobubble.github.io"
 teaser                   : "/assets/images/teaser.jpg"
-logo                     : "/assets/images/log.jpg"
+logo                     : "/assets/images/logo.jpg"
 masthead_title           : "masthead_title"# overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
