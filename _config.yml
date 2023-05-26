@@ -23,14 +23,14 @@ name                     : "Moon"
 description              : "SITE DESCRIPTION."
 url                      : #"https://chocobubble.github.io"
 baseurl                  : #"/blog"
-repository               : #"chocobubble/chocobubble.github.io"
+repository               : "chocobubble/chocobubble.github.io"
 teaser                   : "/assets/images/teaser.jpg"
 logo                     : "/assets/images/logo.jpg"
 masthead_title           : "masthead_title"# overrides the website title displayed in the masthead, use " " for no title
-# breadcrumbs            : false # true, false (default)
+breadcrumbs              : true # true, false (default)
 words_per_minute         : 200
 comments:
-  provider               : # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
+  provider               : "utterances"# false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
   disqus:
     shortname            : # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
   discourse:
@@ -41,8 +41,8 @@ comments:
     num_posts            : # 5 (default)
     colorscheme          : # "light" (default), "dark"
   utterances:
-    theme                : # "github-light" (default), "github-dark"
-    issue_term           : # "pathname" (default)
+    theme                : "photon-dark"# "github-light" (default), "github-dark"
+    issue_term           : "pathname"# "pathname" (default)
   giscus:
     repo_id              : # Shown during giscus setup at https://giscus.app
     category_name        : # Full text name of the category
@@ -290,4 +290,5 @@ defaults:
       comments: true # true
       share: true
       related: true
+      sidebar: true
       sidebar_main: true
