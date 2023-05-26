@@ -1,7 +1,7 @@
 ---
 title: "Test"
 layout: archive
-permalink: /Category/Test
+permalink: /Test/
 ---
 
 {% assign posts = site.categories.blog %}

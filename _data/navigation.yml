@@ -11,9 +11,13 @@ main:
   # - title: "Sitemap"
   #   url: /sitemap/
 sidebar-category:
-  - title: "Category"
+  - title: "Test Category"
     children:
       - title: "Category 1"
-        url: "/Category/1"
+        url: "/categories/1"
       - title: "Test"
-        url: "/Category/Test"
+        url: "/categories/Test"
+  - title: "CS"
+    children:
+      - title: "Data Structure"
+        url: "/categories/DS"
