@@ -1,1 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-05-24T22:46:02+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Site Title</title><subtitle>An amazing website.</subtitle><author><name>Your Name</name></author></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-05-27T00:26:58+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Take responsibility for our dreams</title><subtitle>SITE DESCRIPTION.</subtitle><author><name>Chocobubble</name></author><entry><title type="html">DS Test 1</title><link href="http://localhost:4000/ds/ds-test/" rel="alternate" type="text/html" title="DS Test 1" /><published>2023-05-26T00:00:00+09:00</published><updated>2023-05-26T00:00:00+09:00</updated><id>http://localhost:4000/ds/ds-test-</id><content type="html" xml:base="http://localhost:4000/ds/ds-test/"><![CDATA[<h1 id="for-test">For Test</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"Hello"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>1</p>
+</blockquote>
+
+<p>This <strong>post</strong> is <em>for</em> testing.</p>
+
+<p>And and and <u>and</u></p>
+<ul>
+  <li>111</li>
+  <li>222</li>
+</ul>
+
+<ol>
+  <li>111</li>
+  <li>222</li>
+</ol>]]></content><author><name>Chocobubble</name></author><category term="DS" /><category term="ds" /><summary type="html"><![CDATA[For Test int main() { cout&lt;&lt;"Hello"; } 1 This post is for testing. And and and and 111 222 111 222]]></summary></entry><entry><title type="html">자료 구조 - 시작</title><link href="http://localhost:4000/ds/ds-1/" rel="alternate" type="text/html" title="자료 구조 - 시작" /><published>2023-05-26T00:00:00+09:00</published><updated>2023-05-26T00:00:00+09:00</updated><id>http://localhost:4000/ds/ds-1</id><content type="html" xml:base="http://localhost:4000/ds/ds-1/"><![CDATA[<blockquote>
+  <p>‘c++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규’ 책을 참고하여 작성한 포스트입니다.</p>
+</blockquote>
+
+<h1 id="자료구조">자료구조</h1>
+<h3 id="자료구조란">자료구조란?</h3>
+<ul>
+  <li>자료들을 편리하고 효율적으로 처리하기 위해 정리하고 조직화하는 구조이다.
+    <h2 id="자료구조의-분류">자료구조의 분류</h2>
+    <p>자료구조는 단순 자료구조와 여러 가지 자료들이 복합적으로 구성된 복합 자료구조로 나눌 수 있다.</p>
+  </li>
+  <li>단순 자료구조 : 정수, 실수, 문자, 문자열, 포인터 같이 많은 프로그래밍 언어에서 기본적으로 제공하는 단순 자료구조</li>
+  <li>복합 자료구조 : 여러 가지 자료들이 복합적으로 구성된 자료구조이며, 선형 구조와 비선형 구조로 나눌 수 있다.</li>
+</ul>
+
+<h3 id="선형-자료구조linear-data-structure">선형 자료구조(linear data structure)</h3>
+<ul>
+  <li>선형 자료구조는 기본적으로 자료들이 순서적으로 나열된다. 배열, 연결 리스트, 스택, 큐, 덱 등이 이에 해당한다. 접근하는 방법으로 <strong>순서 접근(sequential access)</strong>과 <strong>직접 접근(direct access)</strong> 방법으로 나눌 수 있다. 대표적인 직접 접근 방법으로 배열이 있으며, 순서 접근 방법으로는 연결 리스트가 있다</li>
+</ul>
+
+<h3 id="비선형-자료구조non-linear-data-structure">비선형 자료구조(non-linear data structure)</h3>
+<ul>
+  <li>자료들 간에 선형적인 순서가 있는 것이 아니라 보다 복잡한 연결을 갖는 형태로 트리와 그래프 등이 여기에 속한다.</li>
+</ul>
+
+<h2 id="자료구조의-활용">자료구조의 활용</h2>
+<ul>
+  <li>컴퓨터에서 다양한 자료구조를 활용하는 대표적인 사례가 정렬과 탐색이다. 정렬은 주어진 자료들을 어떤 기준을 바탕으로 순서대로 나열한다. 효율적인 정렬을 위해 다양한 자료구조의 활용이 필요하다. 적절한 자료구조와 그에 따른 알고리즘을 사용하는 경우 효율적인 탐색이 가능하다.</li>
+</ul>
+
+<h1 id="알고리즘">알고리즘</h1>
+<p>a</p>
+
+<h2 id="for-test-ds-2">For test ds 2</h2>
+<h3 id="for-test-ds-2-1">for test ds 2</h3>]]></content><author><name>Chocobubble</name></author><category term="DS" /><category term="DS" /><summary type="html"><![CDATA[C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규]]></summary></entry><entry><title type="html">Post:Sample Test</title><link href="http://localhost:4000/test/test-post/" rel="alternate" type="text/html" title="Post:Sample Test" /><published>2023-05-25T00:00:00+09:00</published><updated>2023-05-25T00:00:00+09:00</updated><id>http://localhost:4000/test/test-post</id><content type="html" xml:base="http://localhost:4000/test/test-post/"><![CDATA[<h1 id="for-test">For Test</h1>
+
+<blockquote>
+  <p>1</p>
+</blockquote>
+
+<p>This post is for testing.</p>]]></content><author><name>Chocobubble</name></author><category term="Test" /><category term="test" /><summary type="html"><![CDATA[For Test 1 This post is for testing.]]></summary></entry><entry><title type="html">DS Test 2</title><link href="http://localhost:4000/ds/ds-test-2/" rel="alternate" type="text/html" title="DS Test 2" /><published>2020-05-25T00:00:00+09:00</published><updated>2020-05-25T00:00:00+09:00</updated><id>http://localhost:4000/ds/ds-test-2</id><content type="html" xml:base="http://localhost:4000/ds/ds-test-2/"><![CDATA[<h1 id="for-test-ds-2">For Test DS 2</h1>
+<h2 id="for-test-ds-2-1">For test ds 2</h2>
+<h3 id="for-test-ds-2-2">for test ds 2</h3>]]></content><author><name>Chocobubble</name></author><category term="DS" /><category term="ds" /><summary type="html"><![CDATA[md 파일에 마크다운 문법으로 작성하여 Github 원격 저장소에 업로드 해보자. 에디터는 Visual Studio code 사용! 로컬 서버에서 확인도 해보자.]]></summary></entry></feed>
