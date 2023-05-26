@@ -4,7 +4,6 @@ layout: archive
 permalink: categories/DS
 author_profile: true
 sidebar_main: true
-types: posts
 ---
 
 {% assign posts = site.categories.DS%}
