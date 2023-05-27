@@ -24,7 +24,7 @@ var store = [{
         "teaser": "/assets/images/teaser.jpg"
       },{
     "title": "Data Structure",
-    "excerpt":"DS Test 1 less than 1 minute read For Test int main() { cout&lt;&lt;\"Hello\"; } 1 This post is for testing. And and and and 111 222 111 222 자료 구조 - 시작 less than 1 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 DS Test 2 less...","url": "http://localhost:4000/categories/DS"
+    "excerpt":"DS Test 1 less than 1 minute read For Test int main() { cout&lt;&lt;\"Hello\"; } 1 This post is for testing. And and and and 111 222 111 222 자료 구조 - 시작 3 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 DS Test 2 less than 1...","url": "http://localhost:4000/categories/DS"
   },{
     "title": "Category",
     "excerpt":" ","url": "http://localhost:4000/categories/"

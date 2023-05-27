@@ -290,4 +290,5 @@ defaults:
       comments: true # true
       share: false
       related: true
+      mathjax: true
       sidebar_main: true
