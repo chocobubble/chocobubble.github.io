@@ -15,6 +15,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Bold.woff2">
     {% include head.html %}
     {% include head/custom.html %}
+    {% if page.mathjax %}
+	    {% include mathjax_support.html %}
+    {% endif %}
   </head>
 
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">

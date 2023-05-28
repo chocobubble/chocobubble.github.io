@@ -1,25 +1,294 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-05-27T18:34:40+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Take responsibility for our dreams</title><subtitle>SITE DESCRIPTION.</subtitle><author><name>Chocobubble</name></author><entry><title type="html">DS Test 1</title><link href="http://localhost:4000/ds/ds-test/" rel="alternate" type="text/html" title="DS Test 1" /><published>2023-05-26T00:00:00+09:00</published><updated>2023-05-26T00:00:00+09:00</updated><id>http://localhost:4000/ds/ds-test-</id><content type="html" xml:base="http://localhost:4000/ds/ds-test/"><![CDATA[<h1 id="for-test">For Test</h1>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"Hello"</span><span class="p">;</span>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-05-28T14:36:15+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Take responsibility for our dreams</title><subtitle>SITE DESCRIPTION.</subtitle><author><name>Chocobubble</name></author><entry><title type="html">자료 구조 - 큐</title><link href="http://localhost:4000/ds/ds-4/" rel="alternate" type="text/html" title="자료 구조 - 큐" /><published>2023-05-27T00:00:00+09:00</published><updated>2023-05-27T00:00:00+09:00</updated><id>http://localhost:4000/ds/ds-4</id><content type="html" xml:base="http://localhost:4000/ds/ds-4/"><![CDATA[<blockquote>
+  <p>‘c++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규’ 책을 참고하여 작성한 포스트입니다.</p>
+</blockquote>
+
+<h1 id="큐queue">큐(Queue)</h1>
+<ul>
+  <li>큐는 자료의 입출력이 선입선출(FIFO: First-In First-Out)의 형태로 일어나는 자료구조를 말한다.</li>
+  <li>큐에서 삽입이 일어나는 곳을 후단(rear)이라고 하고 삭제가 일어나는 곳을 전단(front)라고 한다.</li>
+</ul>
+
+<h2 id="큐의-추상-자료형">큐의 추상 자료형</h2>
+<p>스택과 유사하다</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>데이터: 선입선출의 접근 방법을 유지하는 요소들의 모음
+연산
+ - enqueue(e): 주어진 요소 e를 큐의 맨 뒤에 추가
+ - dequeue(): 큐가 비어 있지 않으면 맨 앞에 있는 요소를 삭제하고 반환
+ - isEmpty(): 큐가 비어 있으면 true, 그렇지 않으면 false 반환
+ - peek(): 큐가 비어있지 않으면 맨 앞에 있는 요소를 삭제하지 않고 반환
+ - isFull(): 큐가 가득 차 있으면 true, 그렇지 않으면 false 반환
+ - size(): 큐 내의 모든 요소들의 개수를 반환
+ - display(): 큐 내의 모든 요소들을 출력함
+</code></pre></div></div>
+
+<h2 id="큐의-활용">큐의 활용</h2>
+<p>컴퓨터 장치들 사이에서 데이터를 주고받을 때 각 장치들 사이에 존재하는 속도의 차이나 시간 차이를 극복하기 위한 임시 기억 장치로 큐가 사용되는데, 이것을 보통 버퍼(buffer)라고 부른다.</p>
+
+<h2 id="큐의-구현">큐의 구현</h2>
+<ul>
+  <li>선형 큐 : front와 rear의 값이 계속 증가하므로 언젠가는 배열의 끝에 도달하게 되어 더 이상 삽입하지 못하게 된다. 이 때 모든 요소들을 왼쪽으로 이동시켜야 하는데 그러면 삽입 연산의 시간 복잡도가 $O(n)$이 된다.</li>
+  <li>원형 큐 : 배열이 원형처럼 처음과 끝이 연결되어 있다고 가정한 큐이다. 배열의 끝에 도달하면 가리키는 인덱스를 0으로 바꾸어주면 된다. 그러면 배열이 포화되지 않는 이상 삽입과 큐는 끝없이 이루어질 수 있다.</li>
+</ul>
+
+<hr />
+
+<h3 id="원형-큐의-구현">원형 큐의 구현</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp">
+#define MAX_QUEUE_SIZE 100
+</span><span class="kr">inline</span> <span class="kt">void</span> <span class="nf">printErrorMSG</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">CircularQueue</span> <span class="p">{</span>
+<span class="nl">protected:</span>
+    <span class="kt">int</span> <span class="n">front</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">rear</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">queue</span><span class="p">[</span><span class="n">MAX_QUEUE_SIZE</span><span class="p">];</span>
+<span class="nl">public:</span>
+    <span class="n">CircularQueue</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">front</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">rear</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="nf">isEmpty</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">front</span> <span class="o">==</span> <span class="n">rear</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="nf">isFull</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">front</span> <span class="o">==</span> <span class="p">(</span><span class="n">rear</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">MAX_QUEUE_SIZE</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="nf">enqueue</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">isFull</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">printErrorMSG</span><span class="p">(</span><span class="s">"queue is full"</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">queue</span><span class="p">[</span><span class="n">rear</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">;</span>
+            <span class="n">rear</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="nf">dequeue</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">printErrorMSG</span><span class="p">(</span><span class="s">"queue is empty"</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">queue</span><span class="p">[</span><span class="n">front</span><span class="p">];</span>
+            <span class="n">front</span> <span class="o">=</span> <span class="p">(</span><span class="n">front</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">MAX_QUEUE_SIZE</span><span class="p">;</span>
+            <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="nf">peek</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">printErrorMSG</span><span class="p">(</span><span class="s">"queue is empty"</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">queue</span><span class="p">[</span><span class="n">front</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="nf">size</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">front</span> <span class="o">&gt;</span> <span class="n">rear</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">8</span> <span class="o">-</span> <span class="n">front</span> <span class="o">+</span> <span class="n">rear</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">rear</span> <span class="o">-</span> <span class="n">front</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="nf">display</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">front</span> <span class="o">&gt;</span> <span class="n">rear</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">front</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">MAX_QUEUE_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d, "</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">rear</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d, "</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">front</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">rear</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d, "</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>]]></content><author><name>Chocobubble</name></author><category term="DS" /><category term="DS, Queue" /><summary type="html"><![CDATA[C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규]]></summary></entry><entry><title type="html">자료 구조 - 스택</title><link href="http://localhost:4000/ds/ds-3/" rel="alternate" type="text/html" title="자료 구조 - 스택" /><published>2023-05-27T00:00:00+09:00</published><updated>2023-05-27T00:00:00+09:00</updated><id>http://localhost:4000/ds/ds-3</id><content type="html" xml:base="http://localhost:4000/ds/ds-3/"><![CDATA[<blockquote>
+  <p>‘c++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규’ 책을 참고하여 작성한 포스트입니다.</p>
+</blockquote>
+
+<h1 id="스택">스택</h1>
+<blockquote>
+  <p>스택이란 자료의 입출력이 후입선출(LIFO:Last-In First-Out)의 형태로 일어나는 자료구조를 말한다.</p>
+</blockquote>
+
+<ul>
+  <li>스택 상단(stack top): 스택에서 입출력이 이루어지는 부분</li>
+  <li>스택 하단(stack bottom): top의 반대 부분</li>
+  <li>요소(element): 스택에 저장되는 것, 항목</li>
+  <li>공백(empty)상태: 스택에 요소가 하나도 없는 상태</li>
+  <li>포화(full)상태: 스택에 더 이상 요소를 넣을 수 없는 상태</li>
+</ul>
+
+<h3 id="스택의-추상-자료형">스택의 추상 자료형</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>데이터: 후입선출의 접근 방법을 유지하는 요소들의 모음
+연산
+ - push(x): 주어진 요소x를 스택의 맨 위에 추가
+ - pop(): 스택이 비어있지 않으면 맨 위에 있는 요소를 삭제하고 반환
+ - isEmpty(): 스택이 비어있으면 true, 그렇지 않으면 false 반환
+ - peek(): 스택이 비어있지 않으면 맨 위에 있는 요소를 삭제하지 않고 반환
+ - isFull(): 스택이 가득 차 있으면 true, 그렇지 않으면 false 반환
+ - size(): 스택 내의 모든 요소들의 개수를 반환
+ - display(): 스택 내의 모든 요소들을 출력함
+</code></pre></div></div>
+
+<hr />
+<h1 id="스택의-구현">스택의 구현</h1>
+<ul>
+  <li>스택의 구현 방법으로 배열 혹은 연결 리스트를 사용할 수 있다.</li>
+  <li>여기선 배열로 구현하고 연결 리스트는 나중에!
+    <h2 id="배열을-이용한-스택의-표현">배열을 이용한 스택의 표현</h2>
+    <p>배열은 순차적인 메모리 공간에 할당된다고 해서 순차적 표현(sequential representation)이라고도 한다. 배열은 같은 자료형의 변수를 여러 개 만드는 경우에 특히 유용하고, 항목을 저장할 수 있는 여러 개의 공간을 제공한다. 각 공간은 정확히 하나의 항목만을 담으며 각 항목들은 인덱스 번호를 통해 직접 접근이 가능하다. 인덱스 번호는 0부터 시작한다.</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>직접 구현해서 책과 내용이 다를 수 있습니다</p>
+</blockquote>
+
+<h3 id="구현-전">구현 전!</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 스택의 상단을 나타내는 인덱스</span>
+<span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="c1">// 스택을 구현할 배열의 사이즈</span>
+<span class="kt">int</span> <span class="n">MAX_STACK_SIZE</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="c1">// 스택을 구현할 배열</span>
+<span class="kt">int</span> <span class="n">stack</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="c1">// 에러 처리를 메세지 출력으로 대신함</span>
+<span class="kt">void</span> <span class="nf">printErrorMSG</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h3 id="pushx-연산">push(x) 연산</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">top</span> <span class="o">==</span> <span class="n">MAX_STACK_SIZE</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printErrorMSG</span><span class="p">(</span><span class="s">"overflow"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">//비어 있는 배열의 자리로 top 인덱스를 옮기고</span>
+        <span class="c1">//그 위치에 x를 대입</span>
+        <span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="p">}</span> 
 <span class="p">}</span>
 </code></pre></div></div>
 
-<blockquote>
-  <p>1</p>
+<h3 id="pop-연산">pop() 연산</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">pop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">top</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 스택이 비어 있는 경우</span>
+        <span class="n">printErrorMSG</span><span class="p">(</span><span class="s">"Stack is empty!"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">//스택의 상단을 가리키는 원소 반환 후</span>
+        <span class="c1">//top 인덱스를 1만큼 감소</span>
+        <span class="k">return</span> <span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="o">--</span><span class="p">];</span> 
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="isempty-연산">isEmpty() 연산</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">isEmpty</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 비어 있을 때(초기화한 경우도 마찬가지)</span>
+    <span class="c1">// 스택 상단의 인덱스는 -1로 정의했다</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">top</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="peek-연산">peek() 연산</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">peek</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">top</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 스택이 비어 있는 경우</span>
+        <span class="n">printErrorMSG</span><span class="p">(</span><span class="s">"Stack is empty!"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// 스택 상단의 원소 반환</span>
+        <span class="k">return</span> <span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="isfull-연산">isFull() 연산</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">isFull</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">top</span> <span class="o">==</span> <span class="n">MAX_STACK_SIZE</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="size-연산">size() 연산</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">size</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 배열의 인덱스는 0에서 시작하므로</span>
+    <span class="k">return</span> <span class="n">top</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="display-연산">display() 연산</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">display</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"stack의 %d번째 요소는 %d입니다.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">stack</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>]]></content><author><name>Chocobubble</name></author><category term="DS" /><category term="DS, Stack" /><summary type="html"><![CDATA[C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규]]></summary></entry><entry><title type="html">자료 구조 - 배열</title><link href="http://localhost:4000/ds/ds-2/" rel="alternate" type="text/html" title="자료 구조 - 배열" /><published>2023-05-27T00:00:00+09:00</published><updated>2023-05-27T00:00:00+09:00</updated><id>http://localhost:4000/ds/ds-2</id><content type="html" xml:base="http://localhost:4000/ds/ds-2/"><![CDATA[<blockquote>
+  <p>‘c++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규’ 책을 참고하여 작성한 포스트입니다.</p>
 </blockquote>
 
-<p>This <strong>post</strong> is <em>for</em> testing.</p>
-
-<p>And and and <u>and</u></p>
+<h1 id="배열array">배열(array)</h1>
 <ul>
-  <li>111</li>
-  <li>222</li>
+  <li>배열은 하나의 변수에 여러 개의 값을 순차적으로 저장할 수 있는 자료 구조이다.</li>
+  <li>가장 기본적인 특징은 &lt;인덱스, 요소&gt; 쌍의 집합이라는 것이다. 즉, 인덱스가 주어지면 해당하는 요소가 대응되는 자료구조이다.</li>
+  <li>C++의 배열에서는 모든 요소가 동일한 자료형이며, 인덱스를 사용하여 요소를 직접 접근(direct access)할 수 있다.</li>
+  <li>대응되는 개념으로 연결 리스트가 있다. 순차 접근(sequential access) 방식으로 요소에 하나씩 순서적으로 찾아간다.
+    <h2 id="배열의-추상-자료형">배열의 추상 자료형</h2>
+    <p>```
+데이터: &lt;인덱스, 요소&gt; 쌍의 집합
+연산</p>
+  </li>
+  <li>craete(n): n개의 요소를 가진 배열을 생성</li>
+  <li>retrieve(i): 배열의 i번째 요소를 반환</li>
+  <li>store(i, item): 배열의 i번째 위치에 item을 저장
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## 1차원 배열
+선언하는 방법은 다음과 같다
+</code></pre></div>    </div>
+    <p>자료형 배열이름[배열의_크기];
+```</p>
+    <blockquote>
+      <p>배열에서 핵심은 요소들이 모두 메모리의 연속된 공간에 저장된다는 것이다</p>
+      <h3 id="문자열">문자열</h3>
+      <p>문자열은 1차원 배열의 한 종류로 char 형의 요소를 갖는 배열이다. 문자열의 끝에는 끝을 나타내는 NULL 문자 ‘\0’이 있어야 한다.</p>
+    </blockquote>
+  </li>
 </ul>
 
-<ol>
-  <li>111</li>
-  <li>222</li>
-</ol>]]></content><author><name>Chocobubble</name></author><category term="DS" /><category term="ds" /><summary type="html"><![CDATA[For Test int main() { cout&lt;&lt;"Hello"; } 1 This post is for testing. And and and and 111 222 111 222]]></summary></entry><entry><title type="html">자료 구조 - 시작</title><link href="http://localhost:4000/ds/ds-1/" rel="alternate" type="text/html" title="자료 구조 - 시작" /><published>2023-05-26T00:00:00+09:00</published><updated>2023-05-27T00:00:00+09:00</updated><id>http://localhost:4000/ds/ds-1</id><content type="html" xml:base="http://localhost:4000/ds/ds-1/"><![CDATA[<blockquote>
+<h2 id="2차원-배열">2차원 배열</h2>
+<p>1차원 배열이 여러 개 모여 이루어진다. 가로줄을 행(row), 세로줄을 열(column) 이라고 한다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>자료형 배열이름[행의_크기][열의_크기];
+</code></pre></div></div>
+
+<h2 id="함수의-파라미터로서의-배열">함수의 파라미터로서의 배열</h2>
+<p><u>배열의이름은 포인터의 역할을 한다!</u><br />
+따라서 함수 안에서 파라미터로 배열을 받아 배열의 내용을 수정하면 원래의 배열이 수정된다.<br />
+배열을 매개변수로 전달할 때 배열의 길이도 전달해주어야 좋다.</p>
+
+<p>2차워 배열을 매개변수로 보낼 때 <code class="language-plaintext highlighter-rouge">a[][5]</code>처럼 반드시 가로 값을 지정해 주어야 한다. ??
+동적 할당과 이중 포인터에서 답을 찾을 수 있다!</p>]]></content><author><name>Chocobubble</name></author><category term="DS" /><category term="DS, Array" /><summary type="html"><![CDATA[C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규]]></summary></entry><entry><title type="html">자료 구조 - 시작</title><link href="http://localhost:4000/ds/ds-1/" rel="alternate" type="text/html" title="자료 구조 - 시작" /><published>2023-05-26T00:00:00+09:00</published><updated>2023-05-27T00:00:00+09:00</updated><id>http://localhost:4000/ds/ds-1</id><content type="html" xml:base="http://localhost:4000/ds/ds-1/"><![CDATA[<blockquote>
   <p>‘c++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규’ 책을 참고하여 작성한 포스트입니다.</p>
 </blockquote>
 
@@ -100,9 +369,9 @@
 <p>일반적으로 알고리즘의 복잡도는 대개 시간 복잡도를 얘기하므로 시간 복잡도에 집중하여 정리하겠다.</p>
 
 <h3 id="빅오-표기법">빅오 표기법</h3>
-<p>일반적으로 시간 복잡도 함수 \(T(n)\)은 입력의 개수 \[ n\] 에 대한 상당한 복잡한 수식으로 나타날 수 있다. 그러나 n이 커질수록 차수가 가장 큰 영향이 절대적이 되고 다른 항들은 무시될 수 있을 정도로 작아진다.</p>
+<p>일반적으로 시간 복잡도 함수 $T(n)$은 입력의 개수 $ n$ 에 대한 상당한 복잡한 수식으로 나타날 수 있다. 그러나 n이 커질수록 차수가 가장 큰 영향이 절대적이 되고 다른 항들은 무시될 수 있을 정도로 작아진다.</p>
 
-<p>시간 복잡도 함수에서 중요한 것은 \[ n\]이 증가함에 따라 무엇에 비례하는 수의 연산이 필요한가 이다.</p>
+<p>시간 복잡도 함수에서 중요한 것은 $ n$이 증가함에 따라 무엇에 비례하는 수의 연산이 필요한가 이다.</p>
 
 <p>시간 복잡도 함수에서 불필요한 정보를 제거하여 알고리즘 분석을 쉽게 할 목적으로 시간 복잡도를 표시하는 방법을 빅오 표기법이라 한다.</p>
 
@@ -112,11 +381,11 @@
     <table>
       <tbody>
         <tr>
-          <td>두 개의 함수 \[ f(n)\]과 \[ g(n)\]이 주어졌을 때 모든 \[ n &gt; n_0\]에 대하여 \[</td>
+          <td>두 개의 함수 $ f(n) $과 $ g(n) $이 주어졌을 때 모든 $ n &gt; n_0 $ 대하여 $</td>
           <td>f(n)</td>
           <td>&lt;=c</td>
           <td>g(n)</td>
-          <td>\]을 만족하는 상수\[ c\]와 \[ n_0\]가 존재하면 \[ f(n) = O(g(n))\]이다.</td>
+          <td>$을 만족하는 상수$ c$와 $ n_0$가 존재하면 $ f(n) = O(g(n))$이다.</td>
         </tr>
       </tbody>
     </table>
@@ -130,7 +399,28 @@
 <p>평균적인 실행시간이 가장 좋아 보이지만 계산하기 어려운 경우가 많으며, 최악의 상황에 대한 시간을 보장하지 못한다는 점에서 문제가 있어 빅오 표기법을 주로 사용한다.</p>
 
 <hr />
-<p># 문제</p>]]></content><author><name>Chocobubble</name></author><category term="DS" /><category term="DS" /><summary type="html"><![CDATA[C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규]]></summary></entry><entry><title type="html">Post:Sample Test</title><link href="http://localhost:4000/test/test-post/" rel="alternate" type="text/html" title="Post:Sample Test" /><published>2023-05-25T00:00:00+09:00</published><updated>2023-05-25T00:00:00+09:00</updated><id>http://localhost:4000/test/test-post</id><content type="html" xml:base="http://localhost:4000/test/test-post/"><![CDATA[<h1 id="for-test">For Test</h1>
+<p># 문제</p>]]></content><author><name>Chocobubble</name></author><category term="DS" /><category term="DS" /><summary type="html"><![CDATA[C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규]]></summary></entry><entry><title type="html">DS Test 1</title><link href="http://localhost:4000/ds/ds-test/" rel="alternate" type="text/html" title="DS Test 1" /><published>2023-05-26T00:00:00+09:00</published><updated>2023-05-26T00:00:00+09:00</updated><id>http://localhost:4000/ds/ds-test-</id><content type="html" xml:base="http://localhost:4000/ds/ds-test/"><![CDATA[<h1 id="for-test">For Test</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"Hello"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>1</p>
+</blockquote>
+
+<p>This <strong>post</strong> is <em>for</em> testing.</p>
+
+<p>And and and <u>and</u></p>
+<ul>
+  <li>111</li>
+  <li>222</li>
+</ul>
+
+<ol>
+  <li>111</li>
+  <li>222</li>
+</ol>]]></content><author><name>Chocobubble</name></author><category term="DS" /><category term="ds" /><summary type="html"><![CDATA[For Test int main() { cout&lt;&lt;"Hello"; } 1 This post is for testing. And and and and 111 222 111 222]]></summary></entry><entry><title type="html">Post:Sample Test</title><link href="http://localhost:4000/test/test-post/" rel="alternate" type="text/html" title="Post:Sample Test" /><published>2023-05-25T00:00:00+09:00</published><updated>2023-05-25T00:00:00+09:00</updated><id>http://localhost:4000/test/test-post</id><content type="html" xml:base="http://localhost:4000/test/test-post/"><![CDATA[<h1 id="for-test">For Test</h1>
 
 <blockquote>
   <p>1</p>

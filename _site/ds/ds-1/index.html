@@ -99,6 +99,31 @@
 
 <!-- end custom head snippets -->
 
+    
+	    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
   </head>
 
   <body class="layout--single">
@@ -314,7 +339,7 @@
   <ul class="nav__items" id="category_tag_menu">
       <!--전체 글 수-->
       <li>
-            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 </style><span style="font-family:'Coming Soon';">4</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 </style><span style="font-family:'Coming Soon';">7</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
       </li>
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
@@ -325,7 +350,7 @@
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
                 
                     
-                        <li><a href="/categories/DS" class="">Data Structures(3)</a></li>
+                        <li><a href="/categories/DS" class="">Data Structures(6)</a></li>
                     
                 
                     
@@ -469,9 +494,9 @@
 <p>일반적으로 알고리즘의 복잡도는 대개 시간 복잡도를 얘기하므로 시간 복잡도에 집중하여 정리하겠다.</p>
 
 <h3 id="빅오-표기법">빅오 표기법</h3>
-<p>일반적으로 시간 복잡도 함수 \(T(n)\)은 입력의 개수 \[ n\] 에 대한 상당한 복잡한 수식으로 나타날 수 있다. 그러나 n이 커질수록 차수가 가장 큰 영향이 절대적이 되고 다른 항들은 무시될 수 있을 정도로 작아진다.</p>
+<p>일반적으로 시간 복잡도 함수 $T(n)$은 입력의 개수 $ n$ 에 대한 상당한 복잡한 수식으로 나타날 수 있다. 그러나 n이 커질수록 차수가 가장 큰 영향이 절대적이 되고 다른 항들은 무시될 수 있을 정도로 작아진다.</p>
 
-<p>시간 복잡도 함수에서 중요한 것은 \[ n\]이 증가함에 따라 무엇에 비례하는 수의 연산이 필요한가 이다.</p>
+<p>시간 복잡도 함수에서 중요한 것은 $ n$이 증가함에 따라 무엇에 비례하는 수의 연산이 필요한가 이다.</p>
 
 <p>시간 복잡도 함수에서 불필요한 정보를 제거하여 알고리즘 분석을 쉽게 할 목적으로 시간 복잡도를 표시하는 방법을 빅오 표기법이라 한다.</p>
 
@@ -481,11 +506,11 @@
     <table>
       <tbody>
         <tr>
-          <td>두 개의 함수 \[ f(n)\]과 \[ g(n)\]이 주어졌을 때 모든 \[ n &gt; n_0\]에 대하여 \[</td>
+          <td>두 개의 함수 $ f(n) $과 $ g(n) $이 주어졌을 때 모든 $ n &gt; n_0 $ 대하여 $</td>
           <td>f(n)</td>
           <td>&lt;=c</td>
           <td>g(n)</td>
-          <td>\]을 만족하는 상수\[ c\]와 \[ n_0\]가 존재하면 \[ f(n) = O(g(n))\]이다.</td>
+          <td>$을 만족하는 상수$ c$와 $ n_0$가 존재하면 $ f(n) = O(g(n))$이다.</td>
         </tr>
       </tbody>
     </table>
@@ -500,7 +525,6 @@
 
 <hr />
 <p># 문제</p>
-
 
         
       </section>
@@ -584,6 +608,138 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/ds/ds-4/" rel="permalink">자료 구조 - 큐
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ds/ds-3/" rel="permalink">자료 구조 - 스택
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ds/ds-2/" rel="permalink">자료 구조 - 배열
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/ds/ds-test/" rel="permalink">DS Test 1
 </a>
       
@@ -631,100 +787,6 @@ And and and and
   111
   222
 
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/teaser.jpg" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/test/test-post/" rel="permalink">Post:Sample Test
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">For Test
-
-
-  1
-
-
-This post is for testing.
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/teaser.jpg" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-test-2/" rel="permalink">DS Test 2
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">md 파일에 마크다운 문법으로 작성하여 Github 원격 저장소에 업로드 해보자. 에디터는 Visual Studio code 사용! 로컬 서버에서 확인도 해보자.
 </p>
   </article>
 </div>
@@ -829,6 +891,11 @@ This post is for testing.
 
 
 
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 
 
   </body>

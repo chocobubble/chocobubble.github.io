@@ -12,30 +12,36 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Bold.woff2">
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Data Structure - Take responsibility for our dreams</title>
-<meta name="description" content="SITE DESCRIPTION.">
+<!-- begin _includes/seo.html --><title>자료 구조 - 배열 - Take responsibility for our dreams</title>
+<meta name="description" content="C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규">
 
 
   <meta name="author" content="Chocobubble">
   
+  <meta property="article:author" content="Chocobubble">
+  
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Take responsibility for our dreams">
-<meta property="og:title" content="Data Structure">
-<meta property="og:url" content="http://localhost:4000/categories/DS">
+<meta property="og:title" content="자료 구조 - 배열">
+<meta property="og:url" content="http://localhost:4000/ds/ds-2/">
 
 
-  <meta property="og:description" content="SITE DESCRIPTION.">
-
-
-
+  <meta property="og:description" content="C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규">
 
 
 
 
 
+
+
+  <meta property="article:published_time" content="2023-05-27T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2023-05-27T00:00:00+09:00">
 
 
 
@@ -44,7 +50,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/categories/DS">
+<link rel="canonical" href="http://localhost:4000/ds/ds-2/">
 
 
 
@@ -94,9 +100,33 @@
 <!-- end custom head snippets -->
 
     
+	    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
   </head>
 
-  <body class="layout--archive">
+  <body class="layout--single">
     <nav class="skip-links">
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
@@ -142,6 +172,8 @@
       
 
 
+
+
   
     
 
@@ -163,7 +195,7 @@
       
         
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/categories" itemprop="item"><span itemprop="name">Categories</span></a>
+          <a href="/categories/#ds" itemprop="item"><span itemprop="name">Ds</span></a>
           <meta itemprop="position" content="2" />
         </li>
         <span class="sep">/</span>
@@ -171,7 +203,7 @@
     
       
       
-        <li class="current">Data Structure</li>
+        <li class="current">자료 구조 - 배열</li>
       
     
   </ol>
@@ -334,13 +366,177 @@
 
 
 
-  <div class="archive">
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="자료 구조 - 배열">
+    <meta itemprop="description" content="C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규">
+    <meta itemprop="datePublished" content="2023-05-27T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2023-05-27T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/ds/ds-2/" class="u-url" itemprop="url">자료 구조 - 배열
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
     
-      <h1 id="page-title" class="page__title">Data Structure</h1>
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#배열array">배열(array)</a><ul><li><a href="#배열의-추상-자료형">배열의 추상 자료형</a><ul><li><a href="#문자열">문자열</a></li></ul></li><li><a href="#2차원-배열">2차원 배열</a></li><li><a href="#함수의-파라미터로서의-배열">함수의 파라미터로서의 배열</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <blockquote>
+  <p>‘c++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규’ 책을 참고하여 작성한 포스트입니다.</p>
+</blockquote>
+
+<h1 id="배열array">배열(array)</h1>
+<ul>
+  <li>배열은 하나의 변수에 여러 개의 값을 순차적으로 저장할 수 있는 자료 구조이다.</li>
+  <li>가장 기본적인 특징은 &lt;인덱스, 요소&gt; 쌍의 집합이라는 것이다. 즉, 인덱스가 주어지면 해당하는 요소가 대응되는 자료구조이다.</li>
+  <li>C++의 배열에서는 모든 요소가 동일한 자료형이며, 인덱스를 사용하여 요소를 직접 접근(direct access)할 수 있다.</li>
+  <li>대응되는 개념으로 연결 리스트가 있다. 순차 접근(sequential access) 방식으로 요소에 하나씩 순서적으로 찾아간다.
+    <h2 id="배열의-추상-자료형">배열의 추상 자료형</h2>
+    <p>```
+데이터: &lt;인덱스, 요소&gt; 쌍의 집합
+연산</p>
+  </li>
+  <li>craete(n): n개의 요소를 가진 배열을 생성</li>
+  <li>retrieve(i): 배열의 i번째 요소를 반환</li>
+  <li>store(i, item): 배열의 i번째 위치에 item을 저장
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## 1차원 배열
+선언하는 방법은 다음과 같다
+</code></pre></div>    </div>
+    <p>자료형 배열이름[배열의_크기];
+```</p>
+    <blockquote>
+      <p>배열에서 핵심은 요소들이 모두 메모리의 연속된 공간에 저장된다는 것이다</p>
+      <h3 id="문자열">문자열</h3>
+      <p>문자열은 1차원 배열의 한 종류로 char 형의 요소를 갖는 배열이다. 문자열의 끝에는 끝을 나타내는 NULL 문자 ‘\0’이 있어야 한다.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h2 id="2차원-배열">2차원 배열</h2>
+<p>1차원 배열이 여러 개 모여 이루어진다. 가로줄을 행(row), 세로줄을 열(column) 이라고 한다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>자료형 배열이름[행의_크기][열의_크기];
+</code></pre></div></div>
+
+<h2 id="함수의-파라미터로서의-배열">함수의 파라미터로서의 배열</h2>
+<p><u>배열의이름은 포인터의 역할을 한다!</u><br />
+따라서 함수 안에서 파라미터로 배열을 받아 배열의 내용을 수정하면 원래의 배열이 수정된다.<br />
+배열을 매개변수로 전달할 때 배열의 길이도 전달해주어야 좋다.</p>
+
+<p>2차워 배열을 매개변수로 보낼 때 <code class="language-plaintext highlighter-rouge">a[][5]</code>처럼 반드시 가로 값을 지정해 주어야 한다. ??
+동적 할당과 이중 포인터에서 답을 찾을 수 있다!</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ds-array" class="page__taxonomy-item p-category" rel="tag">DS, Array</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#ds" class="page__taxonomy-item p-category" rel="tag">DS</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-05-27">May 27, 2023</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/ds/ds-test/" class="pagination--pager" title="DS Test 1
+">Previous</a>
     
     
-<div class="list__item">
-  <article class="archive__item" itemscope="" itemtype="https://schema.org/CreativeWork">
+      <a href="/ds/ds-3/" class="pagination--pager" title="자료 구조 - 스택
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -362,7 +558,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          1 minute read
+          2 minute read
         
       </span>
     
@@ -374,8 +570,17 @@
   </article>
 </div>
 
-<div class="list__item">
-  <article class="archive__item" itemscope="" itemtype="https://schema.org/CreativeWork">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -409,43 +614,17 @@
   </article>
 </div>
 
-<div class="list__item">
-  <article class="archive__item" itemscope="" itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-2/" rel="permalink">자료 구조 - 배열
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
         
-          less than 1 minute read
-        
-      </span>
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
-</p>
-  </article>
-</div>
-
-<div class="list__item">
-  <article class="archive__item" itemscope="" itemtype="https://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -500,8 +679,17 @@ And and and and
   </article>
 </div>
 
-<div class="list__item">
-  <article class="archive__item" itemscope="" itemtype="https://schema.org/CreativeWork">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -535,44 +723,13 @@ And and and and
   </article>
 </div>
 
-<div class="list__item">
-  <article class="archive__item" itemscope="" itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-test-2/" rel="permalink">DS Test 2
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
         
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">md 파일에 마크다운 문법으로 작성하여 Github 원격 저장소에 업로드 해보자. 에디터는 Visual Studio code 사용! 로컬 서버에서 확인도 해보자.
-</p>
-  </article>
+      </div>
+    </div>
+  
+  
 </div>
 
-
-  </div>
-</div>
     </div>
 
     
@@ -639,8 +796,38 @@ And and and and
 
 
 
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'chocobubble/chocobubble.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    
+    script.setAttribute('theme', 'photon-dark');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
 
 
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 
 
   </body>
