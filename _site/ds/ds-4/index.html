@@ -124,6 +124,7 @@
       src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
     
+    
   </head>
 
   <body class="layout--single">
@@ -393,7 +394,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          1 minute read
+          2 minute read
         
       </span>
     
@@ -408,7 +409,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#큐queue">큐(Queue)</a><ul><li><a href="#큐의-추상-자료형">큐의 추상 자료형</a></li><li><a href="#큐의-활용">큐의 활용</a></li><li><a href="#큐의-구현">큐의 구현</a><ul><li><a href="#원형-큐의-구현">원형 큐의 구현</a></li></ul></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#큐queue">큐(Queue)</a><ul><li><a href="#큐의-추상-자료형">큐의 추상 자료형</a></li><li><a href="#큐의-활용">큐의 활용</a></li><li><a href="#큐의-구현">큐의 구현</a><ul><li><a href="#원형-큐의-구현">원형 큐의 구현</a></li><li><a href="#연결리스트로-구현한-큐">연결리스트로 구현한 큐</a></li></ul></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -448,7 +449,11 @@
 <hr />
 
 <h3 id="원형-큐의-구현">원형 큐의 구현</h3>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp">
+
+<details>
+<summary>큐 구현 코드</summary>
+<div>
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp">
 #include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp">
 #define MAX_QUEUE_SIZE 100
 </span><span class="kr">inline</span> <span class="kt">void</span> <span class="nf">printErrorMSG</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">message</span><span class="p">)</span> <span class="p">{</span>
@@ -534,7 +539,11 @@
         <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
+  </div>
+</details>
+
+<h3 id="연결리스트로-구현한-큐">연결리스트로 구현한 큐</h3>
 
         
       </section>

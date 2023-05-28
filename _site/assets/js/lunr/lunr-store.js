@@ -42,7 +42,7 @@ var store = [{
         "teaser": "/assets/images/teaser.jpg"
       },{
     "title": "Data Structure",
-    "excerpt":"자료 구조 - 큐 1 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 자료 구조 - 스택 2 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 자료 구조 - 배열 less than 1 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 DS Test 1...","url": "http://localhost:4000/categories/DS"
+    "excerpt":"자료 구조 - 큐 2 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 자료 구조 - 스택 2 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 자료 구조 - 배열 less than 1 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 DS Test 1...","url": "http://localhost:4000/categories/DS"
   },{
     "title": "Category",
     "excerpt":" ","url": "http://localhost:4000/categories/"
