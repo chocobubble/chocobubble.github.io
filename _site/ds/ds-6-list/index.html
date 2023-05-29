@@ -12,30 +12,36 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Bold.woff2">
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Category - Take responsibility for our dreams</title>
-<meta name="description" content="SITE DESCRIPTION.">
+<!-- begin _includes/seo.html --><title>자료 구조 - 리스트 - Take responsibility for our dreams</title>
+<meta name="description" content="C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규">
 
 
   <meta name="author" content="Chocobubble">
   
+  <meta property="article:author" content="Chocobubble">
+  
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Take responsibility for our dreams">
-<meta property="og:title" content="Category">
-<meta property="og:url" content="http://localhost:4000/categories/">
+<meta property="og:title" content="자료 구조 - 리스트">
+<meta property="og:url" content="http://localhost:4000/ds/ds-6-list/">
 
 
-  <meta property="og:description" content="SITE DESCRIPTION.">
-
-
-
+  <meta property="og:description" content="C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규">
 
 
 
 
 
+
+
+  <meta property="article:published_time" content="2023-05-29T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2023-05-29T00:00:00+09:00">
 
 
 
@@ -44,7 +50,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/categories/">
+<link rel="canonical" href="http://localhost:4000/ds/ds-6-list/">
 
 
 
@@ -94,10 +100,58 @@
 <!-- end custom head snippets -->
 
     
+	    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+    
+	    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     
   </head>
 
-  <body class="layout--categories">
+  <body class="layout--single">
     <nav class="skip-links">
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
@@ -143,6 +197,8 @@
       
 
 
+
+
   
     
 
@@ -162,7 +218,17 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Category</li>
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#ds" itemprop="item"><span itemprop="name">Ds</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">자료 구조 - 리스트</li>
       
     
   </ol>
@@ -360,665 +426,162 @@
 
 
 
-  <div class="archive">
-    
-      <h1 id="page-title" class="page__title">Category</h1>
-    
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="자료 구조 - 리스트">
+    <meta itemprop="description" content="C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규">
+    <meta itemprop="datePublished" content="2023-05-29T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2023-05-29T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/ds/ds-6-list/" class="u-url" itemprop="url">자료 구조 - 리스트
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
     
 
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
 
 
+        </header>
+      
 
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#리스트">리스트</a><ul><li><a href="#리스트란">리스트란?</a><ul><li><a href="#연결-리스트와의-차이">연결 리스트와의 차이</a></li></ul></li><li><a href="#리스트의-추상-자료형">리스트의 추상 자료형</a></li></ul></li></ul>
 
-<ul class="taxonomy__index">
-  
-    
-      
-        <li>
-          <a href="#ds">
-            <strong>DS</strong> <span class="taxonomy__count">8</span>
-          </a>
-        </li>
-      
-    
-      
-    
-      
-    
-      
-    
-  
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-    
-      
-    
-      
-        <li>
-          <a href="#test">
-            <strong>Test</strong> <span class="taxonomy__count">1</span>
-          </a>
-        </li>
-      
-    
-      
-        <li>
-          <a href="#self-implement">
-            <strong>self_implement</strong> <span class="taxonomy__count">1</span>
-          </a>
-        </li>
-      
-    
-      
-        <li>
-          <a href="#job">
-            <strong>job</strong> <span class="taxonomy__count">1</span>
-          </a>
-        </li>
-      
-    
-  
+            </nav>
+          </aside>
+        
+        <blockquote>
+  <p>‘c++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규’ 책을 참고하여 작성한 포스트입니다.</p>
+</blockquote>
+
+<h1 id="리스트">리스트</h1>
+<h2 id="리스트란">리스트란?</h2>
+<blockquote>
+  <p>리스트(list) 또는 선형 리스트(linear list)는 항목들 사이에 순서가 있는 선형 자료구조이다. 리스트의 특징은 <u> 임의의 위치에 있는 항목에 대한 연산을 허용하는 것이다. </u></p>
+</blockquote>
+
+<h3 id="연결-리스트와의-차이">연결 리스트와의 차이</h3>
+<ul>
+  <li><strong>리스트</strong>는 특정한 자료 구조를 말하며, <strong>연결 리스트</strong>는 어떤 자료 구조를 구현하는 <strong>프로그래밍 기법</strong>이다.</li>
 </ul>
 
+<h2 id="리스트의-추상-자료형">리스트의 추상 자료형</h2>
 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>데이터: 임의의 접근 방법을 제공하는 같은 타입 요소들의 순서 있는 모임  
+연산
+ - insert(pos, item): 리스트의 pos 위치에 새로운 요소 item을 삽입
+ - delete(pop): 리스트의 pos 위치에 있는 요소를 삭제한다.
+ - getEntry(pos): 리스트의 pos 위치에 있는 요소를 반환한다.
+ - isEmpty(): 리스트가 비어 있는지를 검사한다.
+ - isFull(): 리스트가 가득 차 있는지를 검사한다.
+ - find(item): 리스트에 요소 item이 있는지를 검사한다.
+ - replace(pos, item): 리스트의 pos 위치에 있는 요소를 새로운 요소 item으로 바꾼다.
+ - size(): 리스트 안의 요소의 개수를 반환한다.
+ - display(): 리스트 안의 모든 요소들을 출력한다. 
+</code></pre></div></div>
 
-  
-    
-      <section id="ds" class="taxonomy__section">
-        <h2 class="archive__subtitle">DS</h2>
-        <div class="entries-list">
-          
-            
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-linkedlist/" rel="permalink">자료 구조 - 연결 리스트
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
         
-          3 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
-</p>
-  </article>
-</div>
-
-          
-            
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-6-list/" rel="permalink">자료 구조 - 리스트
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
-</p>
-  </article>
-</div>
-
-          
-            
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-4/" rel="permalink">자료 구조 - 큐
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          3 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
-</p>
-  </article>
-</div>
-
-          
-            
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-3/" rel="permalink">자료 구조 - 스택
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          2 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
-</p>
-  </article>
-</div>
-
-          
-            
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-2/" rel="permalink">자료 구조 - 배열
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
-</p>
-  </article>
-</div>
-
-          
-            
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-test/" rel="permalink">DS Test 1
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">For Test
-int main() {
-    cout&lt;&lt;"Hello";
-}
-
-
-
-  1
-
-
-This post is for testing.
-
-And and and and
-
-  111
-  222
-
-
-
-  111
-  222
-
-</p>
-  </article>
-</div>
-
-          
-            
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-1/" rel="permalink">자료 구조 - 시작
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          3 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
-</p>
-  </article>
-</div>
-
-          
-            
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-test-2/" rel="permalink">DS Test 2
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">md 파일에 마크다운 문법으로 작성하여 Github 원격 저장소에 업로드 해보자. 에디터는 Visual Studio code 사용! 로컬 서버에서 확인도 해보자.
-</p>
-  </article>
-</div>
-
-          
-        </div>
-        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
       </section>
-    
-  
-    
-  
-    
-  
-    
-  
 
-  
-    
-  
-    
-  
-    
-  
-    
-  
-
-  
-    
-  
-    
-  
-    
-  
-    
-  
-
-  
-    
-  
-    
-  
-    
-  
-    
-  
-
-  
-    
-  
-    
-  
-    
-  
-    
-  
-
-  
-    
-  
-    
-  
-    
-  
-    
-  
-
-  
-    
-  
-    
-  
-    
-  
-    
-  
-
-  
-    
-  
-    
-      <section id="test" class="taxonomy__section">
-        <h2 class="archive__subtitle">Test</h2>
-        <div class="entries-list">
-          
-            
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/test/test-post/" rel="permalink">Post:Sample Test
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
+      <footer class="page__meta">
         
-          less than 1 minute read
         
-      </span>
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
     
+      <a href="/tags/#ds-list" class="page__taxonomy-item p-category" rel="tag">DS, List</a>
+    
+    </span>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">For Test
 
 
-  1
-
-
-This post is for testing.
-</p>
-  </article>
-</div>
-
-          
-        </div>
-        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
-      </section>
-    
   
-    
-      <section id="self-implement" class="taxonomy__section">
-        <h2 class="archive__subtitle">self_implement</h2>
-        <div class="entries-list">
-          
-            
 
 
+  
 
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
     
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/self_implement/lecture-3-todo/" rel="permalink">c++ vector 구현
-</a>
-      
-    </h2>
+      <a href="/categories/#ds" class="page__taxonomy-item p-category" rel="tag">DS</a>
     
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          1 minute read
-        
-      </span>
-    
+    </span>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-05-29">May 29, 2023</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/ds/ds-4/" class="pagination--pager" title="자료 구조 - 큐
+">Previous</a>
+    
+    
+      <a href="/ds/ds-linkedlist/" class="pagination--pager" title="자료 구조 - 연결 리스트
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
   </article>
-</div>
 
-          
-        </div>
-        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
-      </section>
-    
   
-    
-      <section id="job" class="taxonomy__section">
-        <h2 class="archive__subtitle">job</h2>
-        <div class="entries-list">
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
           
-            
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -1052,16 +615,145 @@ This post is for testing.
   </article>
 </div>
 
+        
           
-        </div>
-        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
-      </section>
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-  
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/self_implement/lecture-3-todo/" rel="permalink">c++ vector 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
 
 
-  </div>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
 </div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ds/ds-linkedlist/" rel="permalink">자료 구조 - 연결 리스트
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ds/ds-4/" rel="permalink">자료 구조 - 큐
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
     </div>
 
     
@@ -1128,8 +820,38 @@ This post is for testing.
 
 
 
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'chocobubble/chocobubble.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    
+    script.setAttribute('theme', 'photon-dark');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
 
 
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 
 
   </body>

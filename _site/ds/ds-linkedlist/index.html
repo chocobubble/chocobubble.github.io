@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Bold.woff2">
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>자료 구조 - 링크드 리스트 - Take responsibility for our dreams</title>
+<!-- begin _includes/seo.html --><title>자료 구조 - 연결 리스트 - Take responsibility for our dreams</title>
 <meta name="description" content="C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규">
 
 
@@ -25,7 +25,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Take responsibility for our dreams">
-<meta property="og:title" content="자료 구조 - 링크드 리스트">
+<meta property="og:title" content="자료 구조 - 연결 리스트">
 <meta property="og:url" content="http://localhost:4000/ds/ds-linkedlist/">
 
 
@@ -228,7 +228,7 @@
     
       
       
-        <li class="current">자료 구조 - 링크드 리스트</li>
+        <li class="current">자료 구조 - 연결 리스트</li>
       
     
   </ol>
@@ -364,7 +364,7 @@
   <ul class="nav__items" id="category_tag_menu">
       <!--전체 글 수-->
       <li>
-            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 </style><span style="font-family:'Coming Soon';">8</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 </style><span style="font-family:'Coming Soon';">11</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
       </li>
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
@@ -375,7 +375,42 @@
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
                 
                     
-                        <li><a href="/categories/DS" class="">Data Structures(7)</a></li>
+                        <li><a href="/categories/DS" class="">Data Structures(8)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+      </li>
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">기타 내용 정리</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/categories/job" class="">정리 전 자료들 -> (1)</a></li>
+                    
+                
+                    
+                    
+                
+                    
+                
+                    
+                        <li><a href="/categories/self_implement" class="">직접 구현 | (1)</a></li>
                     
                 
                     
@@ -392,7 +427,7 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="자료 구조 - 링크드 리스트">
+    <meta itemprop="headline" content="자료 구조 - 연결 리스트">
     <meta itemprop="description" content="C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규">
     <meta itemprop="datePublished" content="2023-05-29T00:00:00+09:00">
     <meta itemprop="dateModified" content="2023-05-29T00:00:00+09:00">
@@ -401,7 +436,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/ds/ds-linkedlist/" class="u-url" itemprop="url">자료 구조 - 링크드 리스트
+            <a href="http://localhost:4000/ds/ds-linkedlist/" class="u-url" itemprop="url">자료 구조 - 연결 리스트
 </a>
           </h1>
           
@@ -418,7 +453,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          less than 1 minute read
+          3 minute read
         
       </span>
     
@@ -433,7 +468,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#연결리스트">연결리스트</a><ul><li><a href="#연결리스트란">연결리스트란?</a><ul><li><a href="#연결된-표현">연결된 표현</a></li><li><a href="#연결리스트linked-list">연결리스트(linked list)</a></li></ul></li><li><a href="#연결-리스트의-구조">연결 리스트의 구조</a><ul><li><a href="#노드node">노드(Node)</a></li></ul></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#연결리스트">연결리스트</a><ul><li><a href="#연결리스트란">연결리스트란?</a><ul><li><a href="#연결된-표현">연결된 표현</a></li><li><a href="#연결리스트linked-list">연결리스트(linked list)</a></li></ul></li><li><a href="#연결-리스트의-구조">연결 리스트의 구조</a><ul><li><a href="#노드node">노드(Node)</a></li><li><a href="#헤드-포인터head-pointer">헤드 포인터(head pointer)</a></li><li><a href="#연결-리스트의-단점">연결 리스트의 단점</a></li></ul></li><li><a href="#연결-리스트의-종류">연결 리스트의 종류</a><ul><li><a href="#단순-연결리스트">단순 연결리스트</a></li><li><a href="#이중-연결-리스트">이중 연결 리스트</a></li></ul></li></ul></li><li><a href="#연결-리스트로-구현한-스택">연결 리스트로 구현한 스택</a><ul><li><a href="#노드-구현">노드 구현</a></li><li><a href="#연산-구현">연산 구현</a></li></ul></li></ul></li><li><a href="#연결리스트로-구현한-큐">연결리스트로 구현한 큐</a></li></ul>
 
             </nav>
           </aside>
@@ -476,6 +511,171 @@
 <ul>
   <li>연결리스트는 노드들의 집합이며 이들은 데이터를 저장하고 있고 서로 연결되어 있다. 일반적인 노드는 데이터 필드(data field)와 링크 필드(link field)로 구성되어 있다. 데이터 필드에는 저장하고 싶은 자료가 저장되며, 링크 필드에는 다른 노드를 가리키는 포인터 변수가 있다. 이 포인트로 현재 노드에 연결된 다음 노드를 알 수 있다.</li>
 </ul>
+
+<h3 id="헤드-포인터head-pointer">헤드 포인터(head pointer)</h3>
+<ul>
+  <li>헤드 포인터란 연결 리스트에서 첫 번째 노드를 가리키는 포인터이다. 연결 리스트는 첫 번째 노드를 알면 링크로 매달려 있는 전체 노드에 모두 접근이 가능하다.</li>
+</ul>
+
+<h3 id="연결-리스트의-단점">연결 리스트의 단점</h3>
+<ol>
+  <li>링크 필드를 위한 추가 공간이 필요하고,</li>
+  <li>연산의 구현이나 사용 방법이 배열에 비해 복잡하다.</li>
+  <li>그에 따라 오류가 발생할 가능성도 많으며,</li>
+  <li><u>동적 할당과 해제가 너무 빈번하게 일어나는 경우 메모리 관리를 위한 처리 시간이 지나치게 길어져 프로그램이 느려질 수 있다.</u> (이유 추가하기.)</li>
+</ol>
+
+<h2 id="연결-리스트의-종류">연결 리스트의 종류</h2>
+<blockquote>
+  <p>연결 리스트에는 단순 연결 리스트(singly linked list)와 이중 연결 리스트(doubly linked list)가 있다.</p>
+</blockquote>
+
+<h3 id="단순-연결리스트">단순 연결리스트</h3>
+<ul>
+  <li>하나의 방향으로만 연결되어 있으며, 맨 마지막 노드의 링크 필드는 NULL 값을 가진다.</li>
+</ul>
+
+<h3 id="이중-연결-리스트">이중 연결 리스트</h3>
+<ul>
+  <li>다음 장에서 살펴 보겠음!!</li>
+</ul>
+
+<h1 id="연결-리스트로-구현한-스택">연결 리스트로 구현한 스택</h1>
+<p>저번에 스택을 배열로 구현하였다. 포인터를 이용한 연결 리스트로 구현해 보자.</p>
+<ul>
+  <li>
+    <p>추상 자료형은 이전의 스택과 동일하다.</p>
+  </li>
+  <li>
+    <p>핵심은 삽입, 삭제 등 연산 시 해당 노드를 가리키는 링크를 잃어버리지 않아야 한다는 것이다! {: .notice–primary}</p>
+  </li>
+</ul>
+
+<h3 id="노드-구현">노드 구현</h3>
+<ul>
+  <li>먼저 데이터를 담을 클래스를 구현한다.</li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;csdlib&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp">
+#define MAX_STRING 100
+</span><span class="c1">// 안의 내용은 중요하지 않음!</span>
+<span class="k">class</span> <span class="nc">Data</span> <span class="p">{</span>
+    <span class="c1">// 정수하면 가장 먼저 생각 나는 인덱스..</span>
+    <span class="kt">int</span> <span class="n">idx</span><span class="p">;</span>
+    <span class="c1">// 정수만 있으면 좀 그러니 문자열도</span>
+    <span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="n">MAX_STRING</span><span class="p">];</span>
+
+<span class="nl">public:</span>
+    <span class="n">Data</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="kt">char</span><span class="o">*</span> <span class="n">s</span><span class="o">=</span><span class="s">""</span><span class="p">)</span> <span class="p">{</span>  <span class="n">set</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">set</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span> <span class="c1">// 문자열 복사 함수</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="nf">display</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d인덱스의 문자열은 %s이다.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span> <span class="c1">// 빼먹지 말기</span>
+</code></pre></div></div>
+
+<ul>
+  <li>데이터 클래스에 링크를 포함시켜 노드를 구현한다.</li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 데이터 필드를 상속으로 처리</span>
+<span class="c1">// 상속없이 노드 클래스 내에 </span>
+<span class="c1">// Data data; 선언을 해주어도 됨</span>
+<span class="cp">#include</span> <span class="cpf">"Data.h"</span><span class="cp">
+</span>
+<span class="k">class</span> <span class="nc">Node</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Data</span> <span class="p">{</span>
+    <span class="n">Node</span><span class="o">*</span> <span class="n">link</span><span class="p">;</span> <span class="c1">// 링크 필드</span>
+<span class="nl">public:</span>
+    <span class="n">Node</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="kt">char</span><span class="o">*</span> <span class="n">s</span><span class="o">=</span><span class="s">""</span><span class="p">)</span> 
+        <span class="o">:</span> <span class="n">Data</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="n">link</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// 마지막 노드의 링크는 NULL을 가리켜야 한다.</span>
+    <span class="o">~</span><span class="n">Node</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{}</span>  <span class="c1">// ~Node() {} 와 동일?</span>
+
+    <span class="c1">// private으로 선언된 link에 접근하기 위한 메소드</span>
+    <span class="n">Node</span><span class="o">*</span> <span class="nf">getLink</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">link</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// private으로 선언된 link에 포인터(?)를 할당하기 위한 메소드</span>
+    <span class="kt">void</span> <span class="nf">setLink</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">link</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span> <span class="c1">// 빼먹지 말기</span>
+</code></pre></div></div>
+
+<h3 id="연산-구현">연산 구현</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"Node.h"</span><span class="cp">
+</span><span class="k">class</span> <span class="nc">LinkedStack</span> <span class="p">{</span>
+    <span class="n">Node</span><span class="o">*</span> <span class="n">top</span><span class="p">;</span> <span class="c1">// 헤드 포인터</span>
+<span class="nl">private:</span>
+    <span class="n">LinkedStack</span><span class="p">()</span> <span class="p">{</span> <span class="n">top</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="p">}</span>
+    <span class="c1">// 소멸자 유의 깊게 보기</span>
+    <span class="c1">// pop으로 노드를 반환 받아 삭제함</span>
+    <span class="o">~</span><span class="n">LinkedStack</span><span class="p">()</span> <span class="p">{</span> <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isEmpty</span><span class="p">())</span> <span class="k">delete</span> <span class="n">pop</span><span class="p">();</span> <span class="p">}</span>
+
+    <span class="c1">// 헤더 포인터가 NULL을 가리키면</span>
+    <span class="c1">// 링크드리스트는 빈 것이죠</span>
+    <span class="kt">bool</span> <span class="nf">isEmpty</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">top</span><span class="o">==</span><span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 삽입 메소드</span>
+    <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span> <span class="n">Node</span> <span class="o">*</span><span class="n">p</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// stack은 후입 선출이므로</span>
+            <span class="c1">// 헤드 포인터를 새로 들어온 p로</span>
+            <span class="c1">// 변경해 주어야 한다.</span>
+            <span class="n">p</span><span class="p">.</span><span class="n">setLink</span><span class="p">(</span><span class="n">top</span><span class="p">);</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 삭제 메소드</span>
+    <span class="n">Node</span><span class="o">*</span> <span class="nf">pop</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// 헤드 포인터를 다음 노드로 옮기고</span>
+            <span class="c1">// 맨 마지막 노드를 반환한다</span>
+            <span class="n">Node</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="n">top</span><span class="o">-&gt;</span><span class="n">getLink</span><span class="p">();</span>
+            <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">Node</span><span class="o">*</span> <span class="nf">peek</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 아래와 같이 empty일 때 NULL을 반환하는 경우</span>
+        <span class="c1">// empty 체크는 안해도 결과는 NULL로 같다. </span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// top-&gt;getLink() 가 아님!</span>
+            <span class="k">return</span> <span class="n">top</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 순회 해 보자!</span>
+    <span class="kt">void</span> <span class="nf">display</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 연결 리스트를 수정 하면 안되니까</span>
+        <span class="c1">// top이 아닌 새로운 포인터 p로 순회</span>
+        <span class="n">Node</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">p</span><span class="o">-&gt;</span><span class="n">display</span><span class="p">();</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">getLink</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h1 id="연결리스트로-구현한-큐">연결리스트로 구현한 큐</h1>
 
         
       </section>
@@ -526,11 +726,12 @@
       
   <nav class="pagination">
     
-      <a href="/ds/ds-4/" class="pagination--pager" title="자료 구조 - 큐
+      <a href="/ds/ds-6-list/" class="pagination--pager" title="자료 구조 - 리스트
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/self_implement/lecture-3-todo/" class="pagination--pager" title="c++ vector 구현
+">Next</a>
     
   </nav>
 
@@ -544,6 +745,138 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/job/lecture-3/" rel="permalink">개인 자료 3
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">정리 전 자료
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/self_implement/lecture-3-todo/" rel="permalink">c++ vector 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ds/ds-6-list/" rel="permalink">자료 구조 - 리스트
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
+</p>
+  </article>
+</div>
+
         
           
 
@@ -584,159 +917,6 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/teaser.jpg" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-3/" rel="permalink">자료 구조 - 스택
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          2 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/teaser.jpg" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-2/" rel="permalink">자료 구조 - 배열
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/teaser.jpg" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-test/" rel="permalink">DS Test 1
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">For Test
-int main() {
-    cout&lt;&lt;"Hello";
-}
-
-
-
-  1
-
-
-This post is for testing.
-
-And and and and
-
-  111
-  222
-
-
-
-  111
-  222
-
 </p>
   </article>
 </div>
