@@ -340,7 +340,7 @@
   <ul class="nav__items" id="category_tag_menu">
       <!--전체 글 수-->
       <li>
-            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 </style><span style="font-family:'Coming Soon';">7</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 </style><span style="font-family:'Coming Soon';">8</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
       </li>
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
@@ -351,7 +351,7 @@
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
                 
                     
-                        <li><a href="/categories/DS" class="">Data Structures(6)</a></li>
+                        <li><a href="/categories/DS" class="">Data Structures(7)</a></li>
                     
                 
                     
@@ -409,7 +409,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#배열array">배열(array)</a><ul><li><a href="#배열의-추상-자료형">배열의 추상 자료형</a><ul><li><a href="#문자열">문자열</a></li></ul></li><li><a href="#2차원-배열">2차원 배열</a></li><li><a href="#함수의-파라미터로서의-배열">함수의 파라미터로서의 배열</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#배열array">배열(array)</a><ul><li><a href="#배열의-추상-자료형">배열의 추상 자료형</a></li><li><a href="#1차원-배열">1차원 배열</a><ul><li><a href="#문자열">문자열</a></li></ul></li><li><a href="#2차원-배열">2차원 배열</a></li><li><a href="#함수의-파라미터로서의-배열">함수의 파라미터로서의 배열</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -423,27 +423,26 @@
   <li>배열은 하나의 변수에 여러 개의 값을 순차적으로 저장할 수 있는 자료 구조이다.</li>
   <li>가장 기본적인 특징은 &lt;인덱스, 요소&gt; 쌍의 집합이라는 것이다. 즉, 인덱스가 주어지면 해당하는 요소가 대응되는 자료구조이다.</li>
   <li>C++의 배열에서는 모든 요소가 동일한 자료형이며, 인덱스를 사용하여 요소를 직접 접근(direct access)할 수 있다.</li>
-  <li>대응되는 개념으로 연결 리스트가 있다. 순차 접근(sequential access) 방식으로 요소에 하나씩 순서적으로 찾아간다.
-    <h2 id="배열의-추상-자료형">배열의 추상 자료형</h2>
-    <p>```
-데이터: &lt;인덱스, 요소&gt; 쌍의 집합
-연산</p>
-  </li>
-  <li>craete(n): n개의 요소를 가진 배열을 생성</li>
-  <li>retrieve(i): 배열의 i번째 요소를 반환</li>
-  <li>store(i, item): 배열의 i번째 위치에 item을 저장
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## 1차원 배열
-선언하는 방법은 다음과 같다
-</code></pre></div>    </div>
-    <p>자료형 배열이름[배열의_크기];
-```</p>
-    <blockquote>
-      <p>배열에서 핵심은 요소들이 모두 메모리의 연속된 공간에 저장된다는 것이다</p>
-      <h3 id="문자열">문자열</h3>
-      <p>문자열은 1차원 배열의 한 종류로 char 형의 요소를 갖는 배열이다. 문자열의 끝에는 끝을 나타내는 NULL 문자 ‘\0’이 있어야 한다.</p>
-    </blockquote>
-  </li>
+  <li>대응되는 개념으로 연결 리스트가 있다. 순차 접근(sequential access) 방식으로 요소에 하나씩 순서적으로 찾아간다.</li>
 </ul>
+
+<h2 id="배열의-추상-자료형">배열의 추상 자료형</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>데이터: &lt;인덱스, 요소&gt; 쌍의 집합
+연산
+ - craete(n): n개의 요소를 가진 배열을 생성
+ - retrieve(i): 배열의 i번째 요소를 반환
+ - store(i, item): 배열의 i번째 위치에 item을 저장 
+</code></pre></div></div>
+<h2 id="1차원-배열">1차원 배열</h2>
+<p>선언하는 방법은 다음과 같다</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>자료형 배열이름[배열의_크기];
+</code></pre></div></div>
+<blockquote>
+  <p>배열에서 핵심은 요소들이 모두 메모리의 연속된 공간에 저장된다는 것이다</p>
+  <h3 id="문자열">문자열</h3>
+  <p>문자열은 1차원 배열의 한 종류로 char 형의 요소를 갖는 배열이다. 문자열의 끝에는 끝을 나타내는 NULL 문자 ‘\0’이 있어야 한다.</p>
+</blockquote>
 
 <h2 id="2차원-배열">2차원 배열</h2>
 <p>1차원 배열이 여러 개 모여 이루어진다. 가로줄을 행(row), 세로줄을 열(column) 이라고 한다.</p>
@@ -541,7 +540,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/ds/ds-4/" rel="permalink">자료 구조 - 큐
+        <a href="/ds/ds-linkedlist/" rel="permalink">자료 구조 - 링크드 리스트
 </a>
       
     </h2>
@@ -560,6 +559,50 @@
         <i class="far fa-clock" aria-hidden="true"></i>
         
           1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ds/ds-4/" rel="permalink">자료 구조 - 큐
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
         
       </span>
     
@@ -676,50 +719,6 @@ And and and and
   111
   222
 
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/teaser.jpg" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ds/ds-1/" rel="permalink">자료 구조 - 시작
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          3 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
 </p>
   </article>
 </div>

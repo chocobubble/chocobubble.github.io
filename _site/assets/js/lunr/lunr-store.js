@@ -41,8 +41,14 @@ var store = [{
         "url": "/ds/ds-4/",
         "teaser": "/assets/images/teaser.jpg"
       },{
+        "title": "자료 구조 - 링크드 리스트",
+        "excerpt":"‘c++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규’ 책을 참고하여 작성한 포스트입니다. 연결리스트 연결리스트란? 앞서 배열로 자료구조를 구현하였을 때, 크기가 고정된다는 단점이 있었다. 동적으로 크기가 변할 수 있는 보다 자유로운 방법으로 연결된 표현(linked representation)을 사용하면 된다. 연결된 표현 데이터와 링크로 구성되어 있고, 링크가 노드들을 연결하는 역할을 한다. 특징은 다음과 같다....","categories": ["DS"],
+        "tags": ["DS, LinkedList"],
+        "url": "/ds/ds-linkedlist/",
+        "teaser": "/assets/images/teaser.jpg"
+      },{
     "title": "Data Structure",
-    "excerpt":"자료 구조 - 큐 2 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 자료 구조 - 스택 2 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 자료 구조 - 배열 less than 1 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 DS Test 1...","url": "http://localhost:4000/categories/DS"
+    "excerpt":"자료 구조 - 링크드 리스트 less than 1 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 자료 구조 - 큐 3 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 자료 구조 - 스택 2 minute read C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규 자료 구조...","url": "http://localhost:4000/categories/DS"
   },{
     "title": "Category",
     "excerpt":" ","url": "http://localhost:4000/categories/"
