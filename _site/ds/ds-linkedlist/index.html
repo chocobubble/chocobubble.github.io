@@ -1,0 +1,1032 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+        <!--폰트 : "Nanum Gothic Coding", "Coming Soon"-->
+        <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Bold.woff2">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Bold.woff2">
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>자료 구조 - 연결 리스트 - Take responsibility for our dreams</title>
+<meta name="description" content="C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규">
+
+
+  <meta name="author" content="Chocobubble">
+  
+  <meta property="article:author" content="Chocobubble">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Take responsibility for our dreams">
+<meta property="og:title" content="자료 구조 - 연결 리스트">
+<meta property="og:url" content="http://localhost:4000/ds/ds-linkedlist/">
+
+
+  <meta property="og:description" content="C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-05-29T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2023-05-29T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/ds/ds-linkedlist/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Moon",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Take responsibility for our dreams Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+    
+	    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+    
+	    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.jpg" alt="masthead_title"></a>
+        
+        <a class="site-title" href="/">
+          masthead_title
+          <span class="site-subtitle">subtitle</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#ds" itemprop="item"><span itemprop="name">Ds</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">자료 구조 - 연결 리스트</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/avatar.jpg" alt="Chocobubble" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Chocobubble</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Game programmer</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Seoul, South Korea</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="kyaya12345@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+
+  
+    <!--전체 글 수를 세기 위한 연산. sum 변수에 전체 글 수 저장-->
+
+
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      <li>
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 </style><span style="font-family:'Coming Soon';">11</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+      </li>
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">CS</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                        <li><a href="/categories/DS" class="">Data Structures(8)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+      </li>
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">기타 내용 정리</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/categories/job" class="">정리 전 자료들 -> (1)</a></li>
+                    
+                
+                    
+                    
+                
+                    
+                
+                    
+                        <li><a href="/categories/self_implement" class="">직접 구현 | (1)</a></li>
+                    
+                
+                    
+                
+            </ul>
+      </li>
+  </ul>
+</nav>
+  
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="자료 구조 - 연결 리스트">
+    <meta itemprop="description" content="C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규">
+    <meta itemprop="datePublished" content="2023-05-29T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2023-05-29T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/ds/ds-linkedlist/" class="u-url" itemprop="url">자료 구조 - 연결 리스트
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#연결리스트">연결리스트</a><ul><li><a href="#연결리스트란">연결리스트란?</a><ul><li><a href="#연결된-표현">연결된 표현</a></li><li><a href="#연결리스트linked-list">연결리스트(linked list)</a></li></ul></li><li><a href="#연결-리스트의-구조">연결 리스트의 구조</a><ul><li><a href="#노드node">노드(Node)</a></li><li><a href="#헤드-포인터head-pointer">헤드 포인터(head pointer)</a></li><li><a href="#연결-리스트의-단점">연결 리스트의 단점</a></li></ul></li><li><a href="#연결-리스트의-종류">연결 리스트의 종류</a><ul><li><a href="#단순-연결리스트">단순 연결리스트</a></li><li><a href="#이중-연결-리스트">이중 연결 리스트</a></li></ul></li></ul></li><li><a href="#연결-리스트로-구현한-스택">연결 리스트로 구현한 스택</a><ul><li><a href="#노드-구현">노드 구현</a></li><li><a href="#연산-구현">연산 구현</a></li></ul></li></ul></li><li><a href="#연결리스트로-구현한-큐">연결리스트로 구현한 큐</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <blockquote>
+  <p>‘c++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규’ 책을 참고하여 작성한 포스트입니다.</p>
+</blockquote>
+
+<h1 id="연결리스트">연결리스트</h1>
+<h2 id="연결리스트란">연결리스트란?</h2>
+<p>앞서 배열로 자료구조를 구현하였을 때, 크기가 고정된다는 단점이 있었다. 동적으로 크기가 변할 수 있는 보다 자유로운 방법으로 <strong>연결된 표현(linked representation)</strong>을 사용하면 된다.</p>
+<blockquote>
+  <h3 id="연결된-표현">연결된 표현</h3>
+  <p>데이터와 링크로 구성되어 있고, 링크가 노드들을 연결하는 역할을 한다.
+특징은 다음과 같다.</p>
+  <ul>
+    <li>데이터를 한군데 모아두는 것을 포기한다</li>
+    <li>데이터들은 메인 메모리상의 어디에나 흩어져서 존재할 수 있다.</li>
+    <li>순서를 유지하기 위해 각각의 데이터는 다음 데이터를 가리키는 줄(링크)을 가진다.</li>
+    <li>첫 데이터에서부터 순서대로 줄을 따라가면 모든 데이터를 방문할 수 있다.</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <h3 id="연결리스트linked-list">연결리스트(linked list)</h3>
+  <p>물리적으로 흩어져 있는 자료들을 서로 연결하여 하나로 묶는 방법. 
+배열과 대응되는 의미로 다음과 같은 장점들이 있다.</p>
+  <ul>
+    <li>크기가 고정되지 않아 메모리를 할당할 수 있는 한 계속 자료를 넣을 수 있다. 배열의 경우 사용하지 않더라도 한꺼번에 많은 공간을 할당해야 한다.</li>
+    <li>중간에 자료를 삽입 혹은 삭제가 용이하다. ($O(1)$)</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <p>그러나 연결 리스트는 배열에 비해 상대적으로 구현이 어렵고 데이터 탐색 시 순차적으로 접근해야 한다는 단점이 있다.</p>
+</blockquote>
+
+<h2 id="연결-리스트의-구조">연결 리스트의 구조</h2>
+<h3 id="노드node">노드(Node)</h3>
+<ul>
+  <li>연결리스트는 노드들의 집합이며 이들은 데이터를 저장하고 있고 서로 연결되어 있다. 일반적인 노드는 데이터 필드(data field)와 링크 필드(link field)로 구성되어 있다. 데이터 필드에는 저장하고 싶은 자료가 저장되며, 링크 필드에는 다른 노드를 가리키는 포인터 변수가 있다. 이 포인트로 현재 노드에 연결된 다음 노드를 알 수 있다.</li>
+</ul>
+
+<h3 id="헤드-포인터head-pointer">헤드 포인터(head pointer)</h3>
+<ul>
+  <li>헤드 포인터란 연결 리스트에서 첫 번째 노드를 가리키는 포인터이다. 연결 리스트는 첫 번째 노드를 알면 링크로 매달려 있는 전체 노드에 모두 접근이 가능하다.</li>
+</ul>
+
+<h3 id="연결-리스트의-단점">연결 리스트의 단점</h3>
+<ol>
+  <li>링크 필드를 위한 추가 공간이 필요하고,</li>
+  <li>연산의 구현이나 사용 방법이 배열에 비해 복잡하다.</li>
+  <li>그에 따라 오류가 발생할 가능성도 많으며,</li>
+  <li><u>동적 할당과 해제가 너무 빈번하게 일어나는 경우 메모리 관리를 위한 처리 시간이 지나치게 길어져 프로그램이 느려질 수 있다.</u> (이유 추가하기.)</li>
+</ol>
+
+<h2 id="연결-리스트의-종류">연결 리스트의 종류</h2>
+<blockquote>
+  <p>연결 리스트에는 단순 연결 리스트(singly linked list)와 이중 연결 리스트(doubly linked list)가 있다.</p>
+</blockquote>
+
+<h3 id="단순-연결리스트">단순 연결리스트</h3>
+<ul>
+  <li>하나의 방향으로만 연결되어 있으며, 맨 마지막 노드의 링크 필드는 NULL 값을 가진다.</li>
+</ul>
+
+<h3 id="이중-연결-리스트">이중 연결 리스트</h3>
+<ul>
+  <li>다음 장에서 살펴 보겠음!!</li>
+</ul>
+
+<h1 id="연결-리스트로-구현한-스택">연결 리스트로 구현한 스택</h1>
+<p>저번에 스택을 배열로 구현하였다. 포인터를 이용한 연결 리스트로 구현해 보자.</p>
+<ul>
+  <li>
+    <p>추상 자료형은 이전의 스택과 동일하다.</p>
+  </li>
+  <li>
+    <p>핵심은 삽입, 삭제 등 연산 시 해당 노드를 가리키는 링크를 잃어버리지 않아야 한다는 것이다! {: .notice–primary}</p>
+  </li>
+</ul>
+
+<h3 id="노드-구현">노드 구현</h3>
+<ul>
+  <li>먼저 데이터를 담을 클래스를 구현한다.</li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;csdlib&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp">
+#define MAX_STRING 100
+</span><span class="c1">// 안의 내용은 중요하지 않음!</span>
+<span class="k">class</span> <span class="nc">Data</span> <span class="p">{</span>
+    <span class="c1">// 정수하면 가장 먼저 생각 나는 인덱스..</span>
+    <span class="kt">int</span> <span class="n">idx</span><span class="p">;</span>
+    <span class="c1">// 정수만 있으면 좀 그러니 문자열도</span>
+    <span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="n">MAX_STRING</span><span class="p">];</span>
+
+<span class="nl">public:</span>
+    <span class="n">Data</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="kt">char</span><span class="o">*</span> <span class="n">s</span><span class="o">=</span><span class="s">""</span><span class="p">)</span> <span class="p">{</span>  <span class="n">set</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">set</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span> <span class="c1">// 문자열 복사 함수</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="nf">display</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d인덱스의 문자열은 %s이다.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span> <span class="c1">// 빼먹지 말기</span>
+</code></pre></div></div>
+
+<ul>
+  <li>데이터 클래스에 링크를 포함시켜 노드를 구현한다.</li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 데이터 필드를 상속으로 처리</span>
+<span class="c1">// 상속없이 노드 클래스 내에 </span>
+<span class="c1">// Data data; 선언을 해주어도 됨</span>
+<span class="cp">#include</span> <span class="cpf">"Data.h"</span><span class="cp">
+</span>
+<span class="k">class</span> <span class="nc">Node</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Data</span> <span class="p">{</span>
+    <span class="n">Node</span><span class="o">*</span> <span class="n">link</span><span class="p">;</span> <span class="c1">// 링크 필드</span>
+<span class="nl">public:</span>
+    <span class="n">Node</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="kt">char</span><span class="o">*</span> <span class="n">s</span><span class="o">=</span><span class="s">""</span><span class="p">)</span> 
+        <span class="o">:</span> <span class="n">Data</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="n">link</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// 마지막 노드의 링크는 NULL을 가리켜야 한다.</span>
+    <span class="o">~</span><span class="n">Node</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{}</span>  <span class="c1">// ~Node() {} 와 동일?</span>
+
+    <span class="c1">// private으로 선언된 link에 접근하기 위한 메소드</span>
+    <span class="n">Node</span><span class="o">*</span> <span class="nf">getLink</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">link</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// private으로 선언된 link에 포인터(?)를 할당하기 위한 메소드</span>
+    <span class="kt">void</span> <span class="nf">setLink</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">link</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span> <span class="c1">// 빼먹지 말기</span>
+</code></pre></div></div>
+
+<h3 id="연산-구현">연산 구현</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"Node.h"</span><span class="cp">
+</span><span class="k">class</span> <span class="nc">LinkedStack</span> <span class="p">{</span>
+    <span class="n">Node</span><span class="o">*</span> <span class="n">top</span><span class="p">;</span> <span class="c1">// 헤드 포인터</span>
+<span class="nl">private:</span>
+    <span class="n">LinkedStack</span><span class="p">()</span> <span class="p">{</span> <span class="n">top</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="p">}</span>
+    <span class="c1">// 소멸자 유의 깊게 보기</span>
+    <span class="c1">// pop으로 노드를 반환 받아 삭제함</span>
+    <span class="o">~</span><span class="n">LinkedStack</span><span class="p">()</span> <span class="p">{</span> <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isEmpty</span><span class="p">())</span> <span class="k">delete</span> <span class="n">pop</span><span class="p">();</span> <span class="p">}</span>
+
+    <span class="c1">// 헤더 포인터가 NULL을 가리키면</span>
+    <span class="c1">// 링크드리스트는 빈 것이죠</span>
+    <span class="kt">bool</span> <span class="nf">isEmpty</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">top</span><span class="o">==</span><span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 삽입 메소드</span>
+    <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span> <span class="n">Node</span> <span class="o">*</span><span class="n">p</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// stack은 후입 선출이므로</span>
+            <span class="c1">// 헤드 포인터를 새로 들어온 p로</span>
+            <span class="c1">// 변경해 주어야 한다.</span>
+            <span class="n">p</span><span class="p">.</span><span class="n">setLink</span><span class="p">(</span><span class="n">top</span><span class="p">);</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 삭제 메소드</span>
+    <span class="n">Node</span><span class="o">*</span> <span class="nf">pop</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// 헤드 포인터를 다음 노드로 옮기고</span>
+            <span class="c1">// 맨 마지막 노드를 반환한다</span>
+            <span class="n">Node</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="n">top</span><span class="o">-&gt;</span><span class="n">getLink</span><span class="p">();</span>
+            <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">Node</span><span class="o">*</span> <span class="nf">peek</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 아래와 같이 empty일 때 NULL을 반환하는 경우</span>
+        <span class="c1">// empty 체크는 안해도 결과는 NULL로 같다. </span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// top-&gt;getLink() 가 아님!</span>
+            <span class="k">return</span> <span class="n">top</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 순회 해 보자!</span>
+    <span class="kt">void</span> <span class="nf">display</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 연결 리스트를 수정 하면 안되니까</span>
+        <span class="c1">// top이 아닌 새로운 포인터 p로 순회</span>
+        <span class="n">Node</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">p</span><span class="o">-&gt;</span><span class="n">display</span><span class="p">();</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">getLink</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h1 id="연결리스트로-구현한-큐">연결리스트로 구현한 큐</h1>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ds-linkedlist" class="page__taxonomy-item p-category" rel="tag">DS, LinkedList</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#ds" class="page__taxonomy-item p-category" rel="tag">DS</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-05-29">May 29, 2023</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/ds/ds-6-list/" class="pagination--pager" title="자료 구조 - 리스트
+">Previous</a>
+    
+    
+      <a href="/self_implement/lecture-3-todo/" class="pagination--pager" title="c++ vector 구현
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/job/lecture-3/" rel="permalink">개인 자료 3
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">정리 전 자료
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/self_implement/lecture-3-todo/" rel="permalink">c++ vector 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ds/ds-6-list/" rel="permalink">자료 구조 - 리스트
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ds/ds-4/" rel="permalink">자료 구조 - 큐
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">C++로 쉽게 풀어쓴 자료구조 1판 - 천인국, 최영규
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Moon. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'chocobubble/chocobubble.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    
+    script.setAttribute('theme', 'photon-dark');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+  </body>
+</html>

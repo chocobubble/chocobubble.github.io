@@ -7,3 +7,22 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+@font-face {
+    font-family: 'Happiness-Sans-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Happiness-Sans-Regular";
+    font-weight: normal;
+    src: url(/assets/css/fonts/Happiness-Sans-Regular.otf);
+}
+
+@font-face {
+    font-family: "Happiness-Sans-Title";
+    font-weight: normal;
+    src: url(/assets/css/fonts/Happiness-Sans-Title.otf);
+}

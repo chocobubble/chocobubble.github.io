@@ -10,3 +10,8 @@ main:
   #   url: /collection-archive/
   # - title: "Sitemap"
   #   url: /sitemap/
+sidebar-category:
+  - title: "CS"
+    children:
+      - title: "Data Structure"
+        url: "/categories/DS"
