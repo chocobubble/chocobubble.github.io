@@ -28,6 +28,13 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Architecture" %}
+                        <li><a href="/categories/architecture" class="">Computer Architecture({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
       </li>
       <li>
       <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
