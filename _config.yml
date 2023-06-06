@@ -16,9 +16,9 @@ minimal_mistakes_skin    : "mint" # "air", "aqua", "contrast", "dark", "dirt", "
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Take responsibility for our dreams"
+title                    : "wanna be a game developer"
 title_separator          : "-"
-subtitle                 : "subtitle"# site tagline that appears below site title in masthead
+subtitle                 : "for our dreams" #  site tagline that appears below site title in masthead
 name                     : "Moon"
 description              : "SITE DESCRIPTION."
 url                      : #"https://chocobubble.github.io"
@@ -26,7 +26,7 @@ baseurl                  : #"/blog"
 repository               : "chocobubble/chocobubble.github.io"
 teaser                   : "/assets/images/teaser.jpg"
 logo                     : "/assets/images/logo.jpg"
-masthead_title           : "masthead_title"# overrides the website title displayed in the masthead, use " " for no title
+masthead_title           : "Take Responsibility" # overrides the website title displayed in the masthead, use " " for no title
 breadcrumbs              : true # true, false (default)
 words_per_minute         : 200
 comments:
@@ -105,7 +105,7 @@ analytics:
 # Site Author
 author:
   name             : "Chocobubble"
-  avatar           : "/assets/images/avatar.jpg"# path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/avatar_.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Game programmer"
   location         : "Seoul, South Korea"
   email            :
