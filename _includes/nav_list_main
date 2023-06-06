@@ -70,8 +70,8 @@
                     {% endif %}
                 {% endfor %}
                 {% for category in site.categories %}
-                    {% if category[0] == "job" %}
-                        <li><a href="/categories/job" class="">정리 전 자료들 -> ({{category[1].size}})</a></li>
+                    {% if category[0] == "ing" %}
+                        <li><a href="/categories/ing" class="">작성중 포스트들 -> ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
                     {% for category in site.categories %}

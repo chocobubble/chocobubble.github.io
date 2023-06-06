@@ -5,7 +5,8 @@ excerpt_separator: "<!--more-->"
 categories:
   - self_implement
 tags:
-  - DS, BST
+  - DS
+  - BST
 
 toc: true
 toc_sticky: true

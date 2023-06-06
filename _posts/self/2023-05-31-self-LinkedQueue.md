@@ -31,74 +31,112 @@ last_modified_at: 2023-05-31
 ### 노드 클래스
 
 ```cpp
+// Node.h
+#include <cstdio>
+
 class Node {
     int data;
     Node* link;
 public:
-    Node (data_ = 0) : data(data_) { link = NULL; }
+    Node (int data_ = 0) : data(data_) { link = NULL; }
     int getData() {
         return data;
     }
     Node* getLink() {
         return link;
     }
-    Node* setLink(Node* p) {
+    void setLink(Node* p) {
         link = p;
     }
-}
+};
 ```
 
 ### LinkedQueue 클래스
 
 ```cpp
+// LinkedQueue.h
+#include "Node.h"
+
 class LinkedQueue {
     Node *head, *tail;
 public:
     LinkedQueue() {
-        head = new Node*; //??
-        tail = new Node*; //??
+        head = new Node; //??
+        tail = new Node; //??
     }
     ~LinkedQueue() {
         delete head;
         delete tail;
     }
     bool isEmpty() {
-        head.getLink() == NULL ? true : false;
+        if( head->getLink() == NULL) return true;
+        else return false;
     }
     
     void enqueue(Node* p) {
         if(isEmpty()) {
-            head = tail = p;
+            head -> setLink(p);
+            tail = p;
         } else {
             tail->setLink(p);
             tail = p;
         }
     }
-    Node* dequeue(Node* p) {
-        if(isEmpyt()) {
+    Node* dequeue() {
+        if(isEmpty()) {
             printf("queue is empty");
-            return;
+            return NULL;
         }
-        Node* p = head;
-        head = head->head.getLink();
+        Node* p = head->getLink();
+        head = head->getLink();
         return p;
     }
     Node* peek() {
         if(isEmpty()) {
             printf("queue is empty");
-            return;
+            return NULL;
         }
-        return head;
+        return head->getLink();
     }
     void display() {
-        Node* p = head;
+        Node* p = head->getLink();
         while(p != NULL) {
             printf("%d ", p->getData());
             p = p->getLink();
         }
         printf("\n");
     }
+};
+```
 
+### main.cpp
 
+```cpp
+#include "LinkedQueue.h"
+#include <iostream>
+
+int main() {
+    LinkedQueue lq;
+    lq.enqueue(new Node(4));
+    lq.enqueue(new Node(5));
+    lq.display();
+    Node* temp = lq.dequeue();
+    lq.display();
+    temp = lq.dequeue();
+    lq.display();
+    lq.enqueue(new Node());
+
+    Node* n = lq.peek();
+    std::cout<<n->getData()<<std::endl;
+
+    return 1;
 }
+```
+
+### 실행 결과
+```
+4 5 
+5 
+
+0
 ```
