@@ -1,11 +1,12 @@
 ---
-title:  "프로세스 동기화 (운영체제)"
+title:  "[운영체제] 교착 상태"
 excerpt: "혼공컴운"
 excerpt_separator: "<!--more-->"
 categories:
   - OS
 tags:
-  - OS, Synchronization, Process, Thread
+  - OS
+  - Deadlock
 
 toc: true
 toc_sticky: true
@@ -123,6 +124,7 @@ last_modified_at: 2023-06-06
 
 
 <br><br>
+
 
 # 교착 상태 검출 후 회복
 
