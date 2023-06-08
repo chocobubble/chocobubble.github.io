@@ -11,14 +11,12 @@ tags:
 
 toc: true
 toc_sticky: true
- 
-font-family: $happiness
 
 date: 2023-06-08
 last_modified_at: 2023-06-08
 ---
 
-> 언리얼엔진 코딩 표준에 따라 작성하였습니다.
+> 언리얼엔진 코딩 표준을 참고하여 작성하였습니다.
 
 ---
 
@@ -82,9 +80,9 @@ public:
     bool IsEmpty() const;
 
     void InsertItem(const int Index, const Node* Item); // 리스트의 Index 위치에 새로운 요소 Item을 삽입
-    void Delete(const int Index); //리스트의 Index 위치에 있는 요소를 삭제한다.
+    void DeleteItem(const int Index); //리스트의 Index 위치에 있는 요소를 삭제한다.
     Node* GetEntry(const int Index) const; // 리스트의 Index 위치에 있는 요소를 반환한다.
-    bool Find(const Node* Item) const; // 리스트에 요소 Item이 있는지를 검사한다.
+    bool FindItem(const Node* Item) const; // 리스트에 요소 Item이 있는지를 검사한다.
     void Replace(const Int Index, const Node* Item); // 리스트의 index 위치에 있는 요소를 새로운 요소 item으로 바꾼다.
     int Size() const; // 리스트 안의 요소의 개수를 반환한다.
     void Display() const; // 리스트 안의 모든 요소들을 출력한다. 
@@ -115,9 +113,106 @@ Node* LinkedList::GetEntry(const int Index) {
     }
 }
 
-void LinkedList::InsertItem(int Index, Node* Item) {
-    Ind
-    Length++;
+void LinkedList::InsertItem(int Index, Node* Item) 
+{
+    if(Index < 0 || Index >= Length) 
+    {
+        cout<<"Invalid Index"<<endl;
+        exit(1);
+    }
+    else
+    {
+        if(Index == 0)
+        {
+            Node* P = HeadNode;
+        }
+        else
+        {
+            Node* P = GetEntry(Index-1);
+        }
+        Item->SetLink(P->GetLink());
+        P->SetLink(Item);
+        ++Length;
+    }
+}
+
+void LinkedList::DeleteItem(const Int Index)
+{
+    if(Index < 0 || Index >= Length)
+    {
+        cout<<"Invalid Index"<<endl;
+        exit(1);
+    }
+    else
+    {
+        if(Index == 0)
+        {
+            Node* P = HeadNode;
+        }
+        else
+        {
+            Node* P = GetEntry(Index-1);
+        }
+        Node* D = P->GetLink(); // 삭제 과정 필요하겠지?_1
+        P->SetLink(P->GetLink()->GetLink());
+        --Length;
+        D->SetLink(nullptr); // 이렇게?_2_1
+        delete D; // 이렇게?_2_2
+    }
+}
+
+bool LinkedList::FindItem(const Node* P)
+{
+    Node* T = HeadNode;
+    while(T->GetLink() != nullptr)
+    {
+        if(T->GetLink() == P)
+        {
+            return true;
+        }
+        T = T->GetLink();
+    }
+    return false;
+}
+
+int LinkedList::Size()
+{
+    return Length;
+}
+
+void LinkedList::Replace(const int Index, const Node* P)
+{
+    if(Index < 0 || Index >= Length)
+    {
+        cout<<"Invalid Index"<<endl;
+        exit(1);
+    }
+    else
+    {
+        if(Index == 0)
+        {
+            Node* T = HeadNode;
+        }
+        else
+        {
+            Node* T = GetEntry(Index-1);
+        }
+        Node* D = T->GetLink(); // 필요?
+        P->SetLink(T->GetLink()->GetLink());
+        T->SetLink(P);
+        D->SetLink(nullptr); //필요?
+    }   
+}
+
+void LinkedList::Display()
+{
+    Node* T = HeadNode;
+    while(T->GetLink() != nullptr)
+    {
+        T = T->GetLink();
+        cout<<T->GetData()<<" ";
+    }
+    cout<<endl;
 }
 ```
 
