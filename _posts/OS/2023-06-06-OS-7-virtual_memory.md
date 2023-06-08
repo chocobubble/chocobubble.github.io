@@ -10,8 +10,6 @@ tags:
 
 toc: true
 toc_sticky: true
- 
-font-family: $happiness
 
 use_math: true
 
