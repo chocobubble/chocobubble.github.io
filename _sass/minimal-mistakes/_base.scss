@@ -158,6 +158,8 @@ pre {
 
 pre {
   overflow-x: auto; /* add scrollbars to wide code blocks*/
+  tab-size: 4;
+  -moz-tab-size: 4;
 }
 
 /* horizontal rule */
