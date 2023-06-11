@@ -42,6 +42,7 @@ last_modified_at: 2023-06-10
 - 방금 생성한 ABPawn이 생성되기 위해서는 게임모드의 설정을 변경해야 한다.
 - ABGameMode에 생성자 코드를 아래와 같이 추가한다.
 - ```EngineMinimal.h```와 앞서 만든 로그 매크로를 참조하기 위해 ```CoreMinimal.h```를 ```ArenaBattle.h```로 변경한다.
+
 ```cpp
 // ABGameMode.h
 
@@ -101,6 +102,7 @@ AABGameMode::AABGameMode()
     3. 플레이어 컨트롤러가 플레이어 폰을 Possess
     4. 게임의 시작
 - 플레이어 컨트롤러를 하나 생성하고 비슷하게 생성자를 수정해준다.
+
 ```cpp
 // ABGameMode.cpp
 
