@@ -3,15 +3,13 @@ title:  "Binary Tree 구현"
 excerpt: "DS-7"
 excerpt_separator: "<!--more-->"
 categories:
-  - self_implement
+  - ing
 tags:
   - DS
   - BST
 
 toc: true
 toc_sticky: true
- 
-font-family: $happiness
 
 date: 2023-06-01
 last_modified_at: 2023-06-01
@@ -105,10 +103,16 @@ class BinaryTreeNodeQueue
 {
 public:
     BinaryTreeNodeQueue(int CapacityParam = 100) 
-        : Capacity(CapacityParam), HeadIndex(0), TailIndex(1) {}
-    
+        : Capacity(CapacityParam), HeadIndex(0), TailIndex(0) {
+            CircleQueue = new BinaryTreeNode [Capacity];
+        }
+    ~BinaryTreeNodeQueue()
+    {
+        delete [] CircleQueue;
+    }
+    bool IsEmpty() { return (HeadIndex + 1)%Capacity == TailIndex; }
     bool IsFull() { return HeadIndex == TailIndex; }
-    void Enqueue();
+    void Enqueue(BinaryTreeNode* Node);
     BinaryTreeNode* Dequeue();
 
 private:
@@ -118,9 +122,27 @@ private:
     BinaryTreeNode* CircleQueue[Capacity];
 };
 
-void BinaryTreeNodeQueue::Enqueue()
+void BinaryTreeNodeQueue::Enqueue(BinaryTreeNode* Node)
 {
-    
+    if(IsFull())
+    {
+        cout<<"Queue is Full"<<endl;
+        return;
+    }
+    CircleQueue[TailIndex] = Node;
+    TailIndex = (TailIndex+1)%Capacity;
+}
+
+BinaryTreeNode* BinaryTreeNodeQueue::Dequeue()
+{
+    if(IsEmpty())
+    {
+        cout<<"Queue is Empty"<<endl;
+        return nullptr;
+    }
+    BinaryTreeNode* ReturnNode = CircleQueue[HeadIndex];
+    HeadIndex = (HeadIndex+1)%Capacity;
+    return ReturnNode;
 }
 ```
 
@@ -276,7 +298,14 @@ void BinaryTree::LevelOrder(BinaryTreeNode* BinaryTreeNodeptr)
 {
     if(BinaryTreeNodeptr != nullptr)
     {
-
+        BinaryTreeNodeQueue Queue;
+        BinaryTreeNode TempNode;
+        Queue.Enqueue(BinaryTreeNodeptr);
+        while(!Queue.IsEmpty())
+        {
+            TempNode = Queue.Dequeue();
+            cout<<TempNode->GetData()<<" ";
+        }
     }
     else
     {

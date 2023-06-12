@@ -55,6 +55,7 @@ UE_LOG(카테고리, 로깅 수준, 형식 문자열, 인자 ...)
     - 문자열은 모든 플랫폼에서 2바이트 문자열을 지원하는 ```TEXT``` 매크로를 사용하는 것이 좋다.
     - 문자열을 관리하는 기본 클래스로 ```FString``` 클래스를 제공하는데, 
     -  ```FString```으로 선언된 변수에서 문자열 정보를 얻어오려면 반드시 *연산자를 앞에 지정해줘야 한다.
+
     ```cpp
     FString::Printf(TEXT("Actor name: %s, ID : %d, Location X : %.3f"),
         *GetName(), ID, GetActorLocation().x);
@@ -70,6 +71,7 @@ UE_LOG(카테고리, 로깅 수준, 형식 문자열, 인자 ...)
 - ArenaBattle.h, ArenaBattle.cpp에 각각 선언해 주자.
 
 - ArenaBattle.h
+
 ```cpp
 // Copyright Epic Games, Inc. All Rights Reserved.
 
@@ -82,6 +84,7 @@ DECLARE_LOG_CATEGORY_EXTERN(ArenaBattle, Log, All);
 ```
 
 - ArenaBattle.cpp
+
 ```cpp
 // Copyright Epic Games, Inc. All Rights Reserved.
 
@@ -115,12 +118,14 @@ void AFountain::BeginPlay()
         - 정보에 형식 문자열로 추가 정보를 지정해 로그를 남긴다.
 - ```ArenaBattle.h``` 아래 부분에 아래 내용을 추가하고,
 - ```Fountain.cpp```의 ```BeginPlay``` 도 수정해준다.
+
 ```cpp
 #define ABLOG_CALLINFO (FString(__FUNTION__) + TEXT("(") + FString::FromInit(__LINE_) + TEXT(")"))
 #define ABLOG_S(Verbosity) UE_LOG(ArenaBattle, Verbosity, TEXT("%s"), *ABLOG_CALLINFO)
 #define ABLOG(Verbosity, Format, ...) UE_LOG(ArenaBattle, Verbosity, TEXT("%s %s"),
                                          *ABLOG_CALLINFO, *FString::Printf(Format, ##__VA_ARGS__))
 ```
+
 ```cpp
 ABLOG_S(Warning);
 ABLOG(Warning, TEXT("Actor Name : %s, ID : %d, Location X : %.3f"), *GetName(), ID, GetActorLocation().X);
