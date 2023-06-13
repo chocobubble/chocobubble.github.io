@@ -162,7 +162,7 @@ void AABCharacter::LeftRight(float NewAxisValue)
 
 #include "ABGameMode.h"
 //#include "ABPawn.h"
-#incldue "ABCharacter.h"
+#include "ABCharacter.h"
 #include "ABPlayerController.h"
 
 AABGameMode::AABGameMode()
@@ -231,7 +231,7 @@ void AABCharacter::Turn(float NewAxisValue)
 	AddControllerYawInput(NewAxisValue);
 }
 
-void AABCharacter::LeftRight(float NewAxisValue)
+void AABCharacter::LookUp(float NewAxisValue)
 {
 	AddControllerPitchInput(NewAxisValue);
 }
@@ -318,13 +318,13 @@ void AABCharacter::SetControlMode(int32 ControlMode)
 void AABCharacter::UpDown(float NewAxisValue)
 {
 	//AddMovementInput(GetActorForwardVector(), NewAxisValue);
-	AddMovementInput(FRotationMatrix(GetControlRotation()), GetUnitAxis(EAxis::X), NewAxisValue);
+	AddMovementInput(FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X), NewAxisValue);
 }
 
 void AABCharacter::LeftRight(float NewAxisValue)
 {
 	//AddMovementInput(GetActorRightVector(), NewAxisValue);
-	AddMovementInput(FRotationMatrix(GetControlRotation()), GetUnitAxis(EAxis::Y), NewAxisValue);
+	AddMovementInput(FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::Y), NewAxisValue);
 }
 
 ...
@@ -391,7 +391,7 @@ protected:
 AABCharacter::AABCharacter()
 {
     ...
-    SetContorlMode(EControlMode::DIABLO);
+    SetControlMode(EControlMode::DIABLO);
 }
 
 ...
