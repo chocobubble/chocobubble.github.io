@@ -570,6 +570,7 @@ public:
     UPROPERTY()
     EDrinkingStyle DrinkingStyle = EDrinkingStyle::PinkyExtended;
 };
+
 ```
 코드를 이런 식으로 작성했을 때의 장점은 다음과 같다.
 - 여러 컨스트럭터에 걸쳐 이니셜라이저를 복제할 필요가 없다.
@@ -724,6 +725,7 @@ switch (condition)
 - 루프에서의 동일 연산 반복을 피하자. 공통된 하위 표현식은 루프 밖으로 빼서 중복 계산을 피한다. 경우에 따라 statics를 활용하여 전역 범위에서의 함수 호출을 대상으로 하는 중복 연산을 피할 수 있는데, 스트링 리터럴에서의 ```FName``` 생성 등을 예로 들 수 있다.
 - 핫 리로드 기능을 염두에 두자. 종속성을 최소화하여 반복작업 시간을 줄이다. 리로드 동안 변할 확률이 있는 함수에는 인라인 또는 템플릿을 사용하지 않다. 리로드 동안 그대로 남아 있을 것에만 statics를 사용해야 한다.
 - 복잡한 표현식은 중간 변수를 사용하여 간소화하세요. 복잡한 표현식을 중간 변수에 할당된 하위 표현식으로 나누고, 부모 표현식 내에서 하위 표현식의 의미를 설명하는 이름을 지정하면 이해하기 더 쉬워집니다. 예를 들면 다음과 같다.
+
 ```
 if ((Blah-BlahP-WindowExists-Etc  Stuff) 
     !(bPlayerExists  bGameStarted  bPlayerStillHasPawn 
@@ -732,7 +734,9 @@ if ((Blah-BlahP-WindowExists-Etc  Stuff)
     DoSomething();
 }
 ```
+
 ```이러한 코드는 다음으로 대체해야 함```
+
 ```
 const bool bIsLegalWindow = Blah-BlahP-WindowExists-Etc  Stuff;
 const bool bIsPlayerDead = bPlayerExists  bGameStarted  bPlayerStillHasPawn  IsTuesday();

@@ -51,9 +51,9 @@ last_modified_at: 2023-06-10
     - FloatingPawnMovement
         - 중력을 고려하지 않은 간단한 움직임 구현
     - SpringArm
-        - 삼인칭 시점으로 카메라 구도를 편리하게 설정할 수 있는 부가 컴포넌트 (??)
+        - 삼인칭 시점으로 카메라 구도를 편리하게 설정할 수 있는 부가 컴포넌트
     - Camera
-        - SpringArm의 자식으로 설정하고 트랜스폼 정보를 초기화하면 자동으로 SpringArm의 끝에 걸린다(?)
+        - SpringArm의 자식으로 설정하고 트랜스폼 정보를 초기화하면 자동으로 SpringArm의 끝에 걸린다
 
 ```cpp
 // ABPawn.h
@@ -68,7 +68,7 @@ class ARENABATTLE_API AABPawn : public APawn
 
 public:
     ...
-    	UPROPERTY(VisibleAnywhere, Category=Collision)
+    UPROPERTY(VisibleAnywhere, Category=Collision)
 	UCapsuleComponent* Capsule;
 
 	UPROPERTY(VisibleAnywhere, Category=Visual)
