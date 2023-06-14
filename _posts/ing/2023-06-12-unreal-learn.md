@@ -18,17 +18,37 @@ last_modified_at: 2023-06-12
 ---
 
 
-### NativeUpdateAnimation
+### UAnimInstance::NativeUpdateAnimation
+- Anim Instance 에서 틱마다 호출되는 가상함수
 
-### TryGetPawnOwner
+### UABAnimInstance::TryGetPawnOwner
+- 애님 인스턴스를 제어하는 소유자를 폰 소유자로 간주하고 반환. (?)
+- 없을 경우 유효한 컨트롤러 확인 후 반환 (?)
+- 이마저도 없으면 nullptr 반환
 
 ### GetVelocity()
+- Returns velocity in cm/s (Unreal Units/second) of the rootcomponent if it is either using physics or has an associated MovementComponent
+
+```virtual FVector GetVelocity() const```
 
 ### ::IsValid(...)
+- Return true if the object is usable: non-null and not pending kill or garbage
+- Test validity of object
+
+```cpp
+bool IsValid
+(
+    const UObject * Test
+)
+```
 
 ### GetCharacterMovement()
+- Returns CharacterMovement subobject
 
-### JumpZVelocity
+```UCharacterMovementComponent * GetCharacterMovement() const```
+
+### UCharacterMovementComponent::JumpZVelocity
+float 	JumpZVelocity	Initial velocity (instantaneous vertical acceleration) when jumping.
 
 ### 폰의 무브먼트 컴포넌트
 - IsFalling(), IsSwimming(), IsCrouching(), IsMoveOnGround()
@@ -54,8 +74,33 @@ auto Character = Cast<AChracter>(Pawn);
 - 멤버 함수를 찾으려면 반드시 UFUNCTION 매크로가 지정돼야 하겠죠
 
 ### FMath::IsWithinInclusive<int32>(CurrentCombo, 0, MaxCombo - 1)
+- TestValue가 MinValue ~ MaxValue 안에 포함 되는 지 여부
+
+```cpp
+template<class U>
+static bool IsWithinInclusive
+(
+    const U & TestValue,
+    const U & MinValue,
+    const U & MaxValue
+)
+```
+
 
 ### FMath::Clamp<int32>(CurrentCombo + 1, 1, MaxCombo);
+- 
+Syntax
+
+template<class T>
+static T Clamp
+(
+    const T X,
+    const T Min,
+    const T Max
+)
+
+Remarks
+
 
 ### Broadcast()
 
