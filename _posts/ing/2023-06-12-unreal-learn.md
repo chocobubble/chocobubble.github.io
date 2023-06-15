@@ -117,3 +117,19 @@ Remarks
 ### .AddLambda
 
 ### NextAttackCheck 노티파이의 위치가 한 섹션이 끝나는 지점에 가까워질수록 노티파이실행->다음섹션 명령을 내려도 OnMontageEnded 가 실행되서 콤보가 안될 확률이 높다.
+
+
+# Chapter 9
+
+### FHitResult HitResult;
+
+### FCollisionQueryParams Params(NAME_None, false, this);
+
+### SweepSingleByChannel
+
+### FQuat::Identity
+
+### FCollisionShape::MakeSphere(50.0f;)
+
+### TWeakObjectPtr
+- 약 포인터?
