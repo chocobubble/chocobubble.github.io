@@ -133,3 +133,15 @@ Remarks
 
 ### TWeakObjectPtr
 - 약 포인터?
+
+### struct FDamageEvent
+Event used by AActor::TakeDamage and related functions
+
+### virtual float AActor::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser)
+virtual float APawn::TakeDamage(float Damage, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser)
+
+### virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+### can be damaged
+
+### SetActorEnableCollision(false);
