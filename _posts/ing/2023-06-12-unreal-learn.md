@@ -145,3 +145,180 @@ virtual float APawn::TakeDamage(float Damage, FDamageEvent const & DamageEvent, 
 ### can be damaged
 
 ### SetActorEnableCollision(false);
+
+### #include "DrawDebugHelpers.h"
+
+### FQuat CapsuleRot = FRotationMatrix::MakeFromZ(TraceVec).ToQuat();
+
+### FColor DrawColor = bResult ? FColor::Green : FColor::Red;
+
+
+# chapter 10
+
+## 	FName WeaponSocket(TEXT("hand_rSocket"));
+	if (GetMesh()->DoesSocketExist(WeaponSocket))
+	{
+		Weapon = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WEAPON"));
+  }
+
+
+### Weapon->SetupAttachment(GetMesh(), WeaponSocket);
+
+### Weapon->SetCollisionProfileName(TEXT("NoCollision"));
+
+### auto CurWeapon = GetWorld()->SpawnActor<AABWeapon>(FVector::ZeroVector, FRotator::ZeroRotator);
+
+### CurWeapon->AttackToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponSocket)
+
+### 	UPROPERTY(VisibleAnywhere, Category = Box)
+	UBoxComponent* Trigger;
+
+
+### Trigger->SetBoxExtent(FVector(40.0f, 42.0f, 30.0f));
+
+### 	UFUNCTION()
+	void OnCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+		int32 OtherBodyIndex, bool bFromSweep, FHitResult& SweepResult);
+
+### 	Trigger->OnComponentBeginOverlap.AddDynamic(th8is, &AABItemBox::OnCharacterOverlap);
+
+### 	UPROPERTY(EditInstanceOnly, Category = Box)
+	TSubclassOf<class AABWeapon> WeaponItemClass;
+
+### 		NewWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponSocket);
+		NewWeapon->SetOwner(this);
+
+
+### OnSystemFinished
+- dynamic delegate 에는 UFUNCTION 함수를 사용해야 하므로 람다식 표현 함수는 바인딩 할 수 없다.
+
+### void OnEffectFinished(class UParticleSystemComponent* PSystem);
+
+### Effect->SetTemplate(P_CHESTOPEN.Object);
+- Effect = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("EFFECT"));
+
+### Effect->bAutoActivate
+
+### Effect->Activate(true);
+
+### Box->SetHiddenInGame(true, true);
+
+### SetActorEnableCollision(false);
+
+### Effect->OnSystemFinished.AddDynamic(this, &AABItemBox::OnEffectFinished);
+
+### 2
+```cpp
+void AABItemBox::OnEffectFinished(UParticleSystemComponent* PSystem)
+{
+	Destroy();
+}
+```
+
+### SetVisibility vs SetHiddenInGame
+
+
+# chapter 11
+
+### GameInstance
+
+### USTRUCT(BlueprintType)
+struct FABChracterData : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+}
+
+### #include "Engine/DataTable.h"
+
+### 카테고리 "" 쓸때와 아닐 때의 차이?
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Level;
+
+### FABCharacterData* GetABCharacterData(int32 Level);
+
+### 3
+	UPROPERTY()
+	class UDataTable* ABCharacterTable;
+
+### FStrign CharacterDataPath = TEXT("/Script/Engine.DataTable'/Game/Book/GameData/ABCharacterData.ABCharacterData'");
+    static ConstructorHelpers::FObjectFinder<UDataTable> DT_ABCHARACTER(*CharacterDataPath);
+
+###  ABCHECK(ABCharacterTable->GetRowMap().Num() > 0)
+
+### ABLOG(Warning, TEXT("DropExp of Level 20 ABCharacter : %d"), GetABCharacterData(20)->DropExp);
+
+### ABCharacterTable->FindRow<FABCharacterData>(*FString::FromInt(Level), TEXT(""));
+
+### virtual void InitializeComponent() override;
+- characterComponent 에서!
+
+### bWantsInitializeComponent = true;
+- InitializeComponent 함수를 호출하기 위해서 이 불값이 참이어야 한대
+
+### UPROPERTY(Transient, VisibleInstanceOnly, Category = Stat, Meta = (AllowPrivateAccess = true))
+- Transient는 언리얼 오브젝트의 직렬화(serialization)에서 제외시키는 기능
+- 게임 시작 때마다 변경되니까..
+
+### struct FABCharacterData* CurrentStatData = nullptr;
+
+### HitResult.GetActor()->TakeDamage(CharacterStat->GetAttack(), DamageEvent, GetController(), this);
+
+
+### auto ABGameInstance = Cast<UABGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+
+### UWidgetComponent
+- 액터에 UI 위젯을 부착하는 클래스
+
+```cpp
+UPROPERTY(VisibleAnywhere, Category = UI)
+	class UWidgetComponent* HPBarWidget;
+```
+- UMG 모듈을 추가해야 한다!
+
+### UI - 위젯 블루프린트 
+- Screen 모드
+  - UI 위젯이 항상 플레이어를 향해 바라봄
+  - ```HPBarWidget->SetWidgetSpace(EWidgetSpace::Screen);```
+- ```#include "Components/WidgetComponent.h"```
+
+### ```static ConstructorHelpers::FClassFinder<UUserWidget> UI_HUD(TEXT```
+
+### HPBarWidget->SetWidgetClass(UI_HUD.Class);
+		HPBarWidget->SetDrawSize(FVector2D(150.0f, 50.0f));
+
+### UI의 로직은 애님 인스턴스와 유사하게 디자이너라는 공간에서 진행한다.
+- UI의 로직은 애님 인스턴스와 유사하게 c++ 클래스에서 미리 만들어 제공할 수 있는데,
+- 위젯 블루프린트가 사용하는 기반 c++ 클래스는 UserWidget  이다.
+
+### KINDA_SMALL_NUMBER
+- float의 값을 0 과 비교할 때는 무시 가능한 오차를 측정할 때 KINDA_SMALL_NUMBER 매크로를 사용하면 좋다.
+
+###  UI와 캐릭터가 다른 액터라면 약 포인터를 사용하는 것이 바람직하다?
+
+### void BindCharacterStat(class UABCharacterStatComponent* NewCharacterStat);
+
+### TWeakObjectPtr<class UABCharacterStatComponent> CurrentCharacterStat;
+
+### 위젯 초기화.
+- BeginPlay 에서 위젯 초기화한다.
+
+```cpp
+	auto CharacterWidget = Cast<UABCharacterWidget>(HPBarWidget->GetUserWidgetObject());
+	if(nullptr != CharacterWidget)
+	{
+		CharacterWidget->BindCharacterStat(CharacterStat);
+	}
+```
+
+### NativeConstruct 함수
+
+### UI 생성은 플레이어 컨트롤러의   BeginPlay 에서 호출됨
+
+### ```#include "Components/ProgressBar.h"```
+
+### ```NewCharacterStat->OnHPChanged.AddUObject(this, &UABCharacterWidget::UpdateHPWidget);```
+
+### HPProgressBar->SetPercent(CurrentCharacterStat->GetHPRatio());
+
+### HPProgressBar = Cast<UProgressBar>(GetWidgetFromName(TEXT("PB_HPBar")));
