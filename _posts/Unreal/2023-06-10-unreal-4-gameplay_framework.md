@@ -157,9 +157,6 @@ void AABGameMode::PostLogin(APlayerController* NewPlayer)
 #include "GameFramework/PlayerController.h"
 #include "ABPlayerController.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class ARENABATTLE_API AABPlayerController : public APlayerController
 {
@@ -285,7 +282,7 @@ void AABPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 ```cpp
 static ConstructorHelpers::FClassFinder<APawn> BP_PAWN_C(TEXT("
     /Script/Engine.Blueprint'/Game/ThirdPerson/
-    Blueprints/BP_ThirdPersonCharacter.BP_ThirdPersonCharacter'"));
+    Blueprints/BP_ThirdPersonCharacter.BP_ThirdPersonCharacter_C'"));
 if(BP_PAWN_C.Succeeded())
 {
     DefaultPawnClass = BP_PAWN_C.Class;

@@ -32,6 +32,7 @@ last_modified_at: 2023-06-10
 
 ### 출력 로그 윈도우
 - ```UE_LOG``` 매크로로 로깅 환경을 구축한다..
+
 ```cpp
 UE_LOG(카테고리, 로깅 수준, 형식 문자열, 인자 ...)
 ```
@@ -44,7 +45,7 @@ UE_LOG(카테고리, 로깅 수준, 형식 문자열, 인자 ...)
 
 ### 로깅 수준
 - 메시지(log), 경고(warning), 에러(error) 로 로그의 중요도가 나뉜다.
-- **에디터 개인설정** -> **외형** 섹션에서 색상 변경 가능하다.( 이제 안되나?)
+- **에디터 개인설정** -> **외형** 섹션에서 색상 변경 가능하다.
 
 ### 로그 필터
 - 필터를 이용해 깔끔하게 봐도 된다.
@@ -261,6 +262,7 @@ void AFountain::Tick(float DeltaTime)
 - **움직임이라는 요소를 분리해 액터와 별도로 관리하는 프레임워크**이다.
 - 위의 틱 함수 없이도 움직이는 액터 제작 가능하다.
 - ```RotatingMovement```을 활용해 위의 코드를 수정해보자
+
 ```cpp
 // Fountain.h
 ...
@@ -317,7 +319,7 @@ AFountain::AFountain()
 ## 프로젝트의 재구성
 - 액터 추가는 쉽지만 제거 메뉴는 없다. 즉, 수동으로 제거해야 한대!
 - 그 전에, .vscode, Binaries, Intermediate 폴더와 ArenaBattle.sln 파일을 제거해 보자.
-- 이후 uproject 파일ㅇ르 우클릭하고 generate visual studio project files 메뉴를 선택하면 자동으로 비주얼 스튜디오 솔루션을 생성한다.
+- 이후 uproject 파일을 우클릭하고 generate visual studio project files 메뉴를 선택하면 자동으로 비주얼 스튜디오 솔루션을 생성한다.
 - 생성된 비주얼 스튜디오를 열고 컴파일하면, Binaries 폴더가 생성되고, 빌드가 완료되면 해당 폴더 안에 에디터가 사용할 DLL 파일이 생긴다.
 - 이것들이 가능한 이유는 언리얼 빌드 툴(unreal build tool) 때문이다. 얘가 게임 프로젝트의 폴더 구조와 파일을 분석해 솔루션 파일과 프로젝트 파일을 생성한다.
 - Source 폴더를 분석하며 솔루션 파일을 생성하고, 솔루션 파일에서 참조할 프로젝트 파일은 Intermediate 폴더의 ProjectFiles 폴더에 생성한다.
