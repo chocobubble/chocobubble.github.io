@@ -321,4 +321,122 @@ UPROPERTY(VisibleAnywhere, Category = UI)
 
 ### HPProgressBar->SetPercent(CurrentCharacterStat->GetHPRatio());
 
+
+# chapter 12
+
+### AIController C++ Class
+
+### 	AIControllerClass = AABAIController::StaticClass();
+- pawn.h 
+	
+### AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
+- pawn.h
+
 ### HPProgressBar = Cast<UProgressBar>(GetWidgetFromName(TEXT("PB_HPBar")));
+
+### 네브메시 바운드 볼륨
+- 창 - 액터배치 - 볼륨 - 네브메시 바운드 볼륨
+- 뷰포트에 배치 후 사이즈 조절하고 P를 누르면 초록색으로 내비 메시 영역이 보임
+
+### GetWorld()->GetTimerManager().SetTimer(RepeatTimerHandle, this, &AABAIController::OnRepeatTimer, RepeatInterval, true);
+
+### GetWorld()->GetTimerManager().ClearTimer(RepeatTimerHandle);
+
+### 빌드.cs에 NavigationSystem 추가해주어야 함
+- #include "NavigationSystem.h"
+#include "Blueprint/AIBlueprintHelperLibrary.h"
+도 선언 해주어야 한다.
+
+### UNavigationSystemV1* NavSystem = UNavigationSystemV1::GetnavigationSystem(GetWorld());
+
+###     FNavLocation NextLocation;
+    if (NavSystem->GetRandomPointInNavigableRadius(FVector::ZeroVector, 500.0f, NextLocation))
+
+###         UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, NextLocation.Location);
+        ABLOG(Warning, TEXT("Next Location : %s"), *NextLocation.Location.ToString());
+
+### AIModule
+- Behavior tree 관련 기능을 사용하기 위한 모듈
+
+### class UBlackboardData* BBAsset;
+
+### #include "BehaviorTree/BehaviorTree.h"
+#include "BehaviorTree/BlackboardData.h"
+
+###     if (UseBlackboard(BBAsset, Blackboard))
+    {
+        if (!RunBehaviorTree(BTAsset))
+        {
+            ABLOG(Error, TEXT("AIController couldn't run behavior tree!"));
+        }
+    }
+}
+
+### 55
+
+    UBlackboardComponent* BlackboardComp = Blackboard.Get();
+    if (UseBlackboard(BBAsset, BlackboardComp))
+    {
+        this->Blackboard = BlackboardComp;
+        Blackboard->SetValueAsVector(HomePosKey, InPawn->GetActorLocation());
+
+        if (!RunBehaviorTree(BTAsset))
+        {
+            ABLOG(Error, TEXT("AIController couldn't run behavior tree!"));
+        }
+    }
+
+###  BTTaskNode
+
+	UBTTask_FindPatrolPos();
+
+	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+
+### 6
+EBTNodeResult::Type UBTTask_FindPatrolPos::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+    EBTNodeResult::Type Result = Super::ExecuteTask(OwnerComp, NodeMemory);
+}
+
+### EBTNodeResult::Failed;
+
+### auto ControllingPawn = OwnerComp.GetAIOwner()->GetPawn();
+
+###  UNavigationSystemV1* NavSystem = UNavigationSystemV1::GetNavigationSystem(ControllingPawn->GetWorld());
+
+### FVector Origin = OwnerComp.GetBlackboardComponent()->GetValueAsVector(AABAIController::HomePosKey);
+
+### OwnerComp.GetBlackboardComponent()->SetValueAsVector(AABAIController::PatrolPosKey, NextPatrol.Location);
+
+### BTService C++ class
+
+### UBTService_Detect();
+
+### virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
+
+###     UWorld* World = ControllingPawn->GetWorld();
+    FVector Center = ControllingPawn->GetActorLocation();
+
+### TArray
+
+### FCollisionQueryParams CollisionQueryParam(Name_None, false, ControllingPawn);
+
+### 67
+
+    bool bResult = World->OverlapMultiByChannel(
+        OverlapResults,
+        Center,
+        FQuat::Identity;
+        ECollisionChannel::ECC_GameTraceChannel2;
+        FCollisionShape::MakeSphere(DetectRadius);
+        CollisionQueryParam
+    );
+}
+
+### DrawDebugSphere(World, Center, DetectRadius, 16, FColor::Red, false, 0.2f;);
+
+### virtual void PossessedBy(AController* NewController) override;
+
+### IsPlayerControlled()
+
+### GetCharacterMovement()->MaxWalkSpeed
