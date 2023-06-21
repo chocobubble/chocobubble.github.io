@@ -88,9 +88,10 @@ static bool IsWithinInclusive
 
 
 ### FMath::Clamp<int32>(CurrentCombo + 1, 1, MaxCombo);
-- 
-Syntax
+- min, max 범위에서만 수치가 정해진다.
+- min 보다 낮으면 값이 min으로, max 보다 크면 값이 max가 된다.
 
+```cpp
 template<class T>
 static T Clamp
 (
@@ -98,10 +99,7 @@ static T Clamp
     const T Min,
     const T Max
 )
-
-Remarks
-
-
+```
 
 ### DECLARE_MULTICAST_DELEGATE(FOnNextAttackCheckDelegate);
 
@@ -188,6 +186,15 @@ Broadcast()
 Broadcasts this delegate to all bound objects, except to those that may have expired.
 
 ### Montage_JumpToSection(GetAttackMontageSectionName(NewSection), AttackMontage);
+- Makes a montage jump to a named section. If Montage reference is NULL, it will do that to all active montages.
+
+```cpp
+void Montage_JumpToSection
+(
+    FName SectionName,
+    const UAnimMontage * Montage
+)
+```
 
 ### ABCHECK(FMath::IsWithinInclusive<int32>(Section, 1, 4), NAME_None);
 네임 테이블에 이름이 존재하지 않는 경우, FName 의 Index 가 NAME_None 으로 설정됩니다. 참고로 일반 스트링에 하듯이 NULL 포인터 검사를 하지는 않습니다.
@@ -196,7 +203,20 @@ Broadcasts this delegate to all bound objects, except to those that may have exp
 FName 생성하기
 FName TestHUDName = FName(TEXT("ThisIsMyTestFName"));
 
-### .AddLambda
+### TBaseMulticastDelegate< void, ParamTypes... >::AddLambda
+- Adds a C++ lambda delegate technically this works for any functor types, but lambdas are the primary use case
+
+```cpp
+template<typename FunctorType, typename... VarTypes>
+FDelegateHandle AddLambda
+(
+    FunctorType && InFunctor,
+    VarTypes... Vars
+)
+```
+
+
+
 
 ### NextAttackCheck 노티파이의 위치가 한 섹션이 끝나는 지점에 가까워질수록 노티파이실행->다음섹션 명령을 내려도 OnMontageEnded 가 실행되서 콤보가 안될 확률이 높다.
 
@@ -204,6 +224,7 @@ FName TestHUDName = FName(TEXT("ThisIsMyTestFName"));
 # Chapter 9
 
 ### FHitResult HitResult;
+- Structure containing information about one hit of a trace, such as point of impact and surface normal at that point.
 
 ### FCollisionQueryParams Params(NAME_None, false, this);
 
