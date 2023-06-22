@@ -227,12 +227,51 @@ FDelegateHandle AddLambda
 - Structure containing information about one hit of a trace, such as point of impact and surface normal at that point.
 
 ### FCollisionQueryParams Params(NAME_None, false, this);
+- Structure that defines parameters passed into collision function
+```
+FCollisionQueryParams
+(
+    FName InTraceTag,
+    bool bInTraceComplex,
+    const AActor* InIgnoreActor
+)
+```
+### UWorld::SweepSingleByChannel
+- Sweep a shape against the world and return the first blocking hit using a specific channel
 
-### SweepSingleByChannel
+```cpp
+bool SweepSingleByChannel
+(
+    struct FHitResult & OutHit,
+    const FVector & Start,
+    const FVector & End,
+    const FQuat & Rot,
+    ECollisionChannel TraceChannel,
+    const FCollisionShape & CollisionShape,
+    const FCollisionQueryParams & Params,
+    const FCollisionResponseParams & ResponseParam
+) const
+```
 
 ### FQuat::Identity
+- Identity quaternion.
 
 ### FCollisionShape::MakeSphere(50.0f;)
+- Collision Shapes that supports Sphere, Capsule, Box, or Line
+
+```
+namespace ECollisionShape
+{
+    enum Type
+    {
+        Line,
+        Box,
+        Sphere,
+        Capsule,
+    }
+}
+```
+
 
 ### TWeakObjectPtr
 - 약 포인터?
@@ -242,32 +281,103 @@ Event used by AActor::TakeDamage and related functions
 
 ### virtual float AActor::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser)
 virtual float APawn::TakeDamage(float Damage, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser)
+- FDamageEvent DamageEvent
+- HitResult.GetActor()->TakeDamage(CharacterStat->GetAttack(), DamageEvent, GetController(), this);
 
 ### virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
 ### can be damaged
+- 에디터 상 속성. 언체크하면 무적?
 
-### SetActorEnableCollision(false);
+### AActor::SetActorEnableCollision
+- Allows enabling/disabling collision for the whole actor
+
+```
+void SetActorEnableCollision
+(
+    bool bNewActorEnableCollision
+)
+```
+
 
 ### #include "DrawDebugHelpers.h"
 
-### FQuat CapsuleRot = FRotationMatrix::MakeFromZ(TraceVec).ToQuat();
+### DrawDebugCapsule
+- Draw a capsule using the LineBatcher
 
-### FColor DrawColor = bResult ? FColor::Green : FColor::Red;
+```
+void DrawDebugCapsule
+(
+    const UWorld * InWorld,
+    FVector const & Center,
+    float HalfHeight,
+    float Radius,
+    const FQuat & Rotation,
+    FColor const & Color,
+    bool bPersistentLines,
+    float LifeTime,
+    uint8 DepthPriority,
+    float Thickness
+)
+
+	FVector TraceVec = GetActorForwardVector() * AttackRange;
+	FVector Center = GetActorLocation() + TraceVec * 0.5f;
+	float HalfHeight = AttackRange * 0.5f + AttackRadius;
+	FQuat CapsuleRot = FRotationMatrix::MakeFromZ(TraceVec).ToQuat();
+	FColor DrawColor = bResult ? FColor::Green : FColor::Red;
+	float DebugLifeTime = 5.0f;
+
+	DrawDebugCapsule(GetWorld(),
+		Center,
+		HalfHeight,
+		AttackRadius,
+		CapsuleRot,
+		DrawColor,
+		false,
+		DebugLifeTime);
+```
 
 
 # chapter 10
 
-## 	FName WeaponSocket(TEXT("hand_rSocket"));
-	if (GetMesh()->DoesSocketExist(WeaponSocket))
-	{
-		Weapon = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WEAPON"));
-  }
+### USkinnedMeshComponent::DoesSocketExist
+- Return true if socket with the given name exists
+
+```
+virtual bool DoesSocketExist
+(
+    FName InSocketName
+) const
+```
 
 
-### Weapon->SetupAttachment(GetMesh(), WeaponSocket);
+
+### USceneComponent::SetupAttachmen
+- Initializes desired Attach Parent and SocketName to be attached to when the component is registered. Generally intended to be called from its Owning Actor's constructor and should be preferred over AttachToComponent when a component is not registered.
+Weapon->SetupAttachment(GetMesh(), WeaponSocket);
+
+```
+void SetupAttachment
+(
+    USceneComponent * InParent,
+    FName InSocketName
+)
+```
+
+
 
 ### Weapon->SetCollisionProfileName(TEXT("NoCollision"));
+Syntax
+
+virtual void SetCollisionProfileName
+(
+    FName InCollisionProfileName,
+    bool bUpdateOverlaps
+)
+
+Remarks
+
+Set Collision Profile Name This function is called by constructors when they set ProfileName This will change current CollisionProfileName to be this, and overwrite Collision Setting
 
 ### auto CurWeapon = GetWorld()->SpawnActor<AABWeapon>(FVector::ZeroVector, FRotator::ZeroRotator);
 
