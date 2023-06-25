@@ -543,3 +543,77 @@ EBTNodeResult::Type UBTTask_FindPatrolPos::ExecuteTask(UBehaviorTreeComponent& O
 ### IsPlayerControlled()
 
 ### GetCharacterMovement()->MaxWalkSpeed
+
+### UBTDecorator_IsInAttackRange();
+
+
+
+### virtual bool CalculateRawConditionValue(UBehaviorTreeComponent& OnwenrComp, uint8* NodeMemory) const override;
+
+### Cast<AABCharacter>(OwnerComp.GetBlackboardComponent()->GetValueAsObject(AABAIController::TargetKey));
+
+### Target->GetDistanceTo(ControllingPawn) <= 200.0f
+
+### UBTTask_Attack()
+
+### 7
+UBTTaskNode_Attack::UBTTaskNode_Attack()
+{
+    bNotifyTick = true;
+}
+
+### 88
+EBTNodeResult::Type UBTTask_Attack::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+    EBTNodeResult::Type Result = Super::ExecuteTask(OwnerComp, NodeMemory);
+    return EBTNodeResult::Type InProgress;
+}
+void UBTTask_Attack::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
+{
+    Super::TickTask(OwnerComp, NodeMemory, DeltaSeconds);
+    FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+}
+
+### 9
+FVector LookVector = Target->GetActorLocation() - ABCharacter->GetActorLocation();
+    LookVector.Z = 0.0f;
+    FRotator TargetRot = FRotationMatrix::MakeFromX(LookVector).Rotator();
+    ABCharacter->SetActorRotation(FMath::RInterpTo(ABCharacter->GetActorRotation(), TargetRot, GetWorld()->GetDeltaSeconds(), 2.0f));
+
+### Simple parallel composite
+
+
+
+# Ch. 13
+
+### 주 게임 모듈(Primary Game Module)
+
+###  FSoftObjectPath
+
+### UCLASS(config=ArenaBattle)
+
+### UPROPERTY(config)
+
+### 클래스 기본 객체
+- GetDefault 함수로 가져올 수 있다.
+
+### FStreamableManager
+- 비동기 방식으로 애셋 로딩.
+- 하나만 활성화하는게 좋음
+
+### FStreamableManager StreamableManager;
+### FSoftObjectPath CharacterAssetToLoad = FSoftObjectPath(nullptr);
+
+### TSharedPtr<struct FStreamableHandle> AssetStreamingHandle;
+
+
+
+
+### int32 RandIndex = FMath::RandRange(0, DefaultSettings->CharacterAssets.Num() - 1);
+
+
+### AssetStreamingHandle = ABGameInstance->StreamableManager.RequestAsyncLoad(CharacterAssetToLoad,
+				FStreamableDelegate::CreateUObject(this, &AABCharacter:;OnAssetLoadCompleted));
+
+
+### ABCHECK(Mesh->DoesSocketExist(GateSocket));
