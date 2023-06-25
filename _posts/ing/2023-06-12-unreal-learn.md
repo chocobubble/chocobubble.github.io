@@ -727,3 +727,139 @@ FVector LookVector = Target->GetActorLocation() - ABCharacter->GetActorLocation(
 
 
 ### ABCHECK(Mesh->DoesSocketExist(GateSocket));
+
+### void OnConstruction(const FTransform& Transform) override;
+
+### OnTriggerBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitrResult &SweepResult)
+
+### NewGateTrigger -> ComponentTags.Add(GateSocket);
+
+### ABCHECK(OverlappedComponent->ComponentTags.Num() == 1);
+
+### FName(*ComponentTag.ToString().Left(2));
+
+### FCollisionQueryParams CollisionQueryParam(NAME_None, false, this);
+
+### FCollisionObjectQueryParams ObjectQueryParam(FCollisionObjectQueryParams::InitType::AllObjects);
+
+### bool bResult = GetWorld()->OverlapMultiByObjectType(
+		OverlapResults,
+		NewLocation,
+		FQuat::Identity,
+		ObjectQueryParam,
+		FCollisionShape::MakeSphere(775.0f),
+		CollisionQueryParam
+	);
+
+### FTimerHandle SpawnNPCTimerHandle = {};
+	FTimerHandle SpawnItemBoxTimerHandle = {};
+
+### GetWorld()->GetTimerManager().SetTimer(SpawnNPCTimerHandle, FTimerDelegate::CreateUObject(this, &AABSection::OnNPCSpawn), EnemySpawnTime, false)
+
+### GetWorld()->GetTimerManager().SetTimer(SpawnItemBoxTimerHandle, FTimerDelegate::CreateLambda([this]()->void {
+			FVector2D RandXY = FMath::RandPointInCircle(600.0f);
+			GetWorld()->SpawnActor<AABItemBox>(GetActorLocation() + FVector(RandXY, 30.0f), FRoatator::ZeroRotator);
+		}), ItemBoxSpawnTime, false);
+
+
+# ch.14
+
+### UENUM(BlueprintType)
+- 블루 프린트와 호환되는 enum
+
+### UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadOnly, Category = State, Meta = (AllowPrivateAccess = true))
+
+### ABPlayerController = Cast<AABPlayerController>(getController());
+
+### auto DefaultSetting = GetDefault<UABCharacterSetting>();
+```
+FORCEINLINE TOptional<int32> GetDefault() const
+{
+	return bHasDefaultValue ? TOptional<int32>(DefaultValue) : TOptional<int32>();
+}
+```
+
+### GetGameInstance()
+```
+UGameInstance* FLocalPlayerContext::GetGameInstance() const
+{
+	if (UWorld* WorldPtr = GetWorld())
+	{
+		return WorldPtr->GetGameInstance();
+	}
+
+	return nullptr;
+}
+```
+
+### AssetStreamingHandle = ABGameInstance->SteramableManager.RequestAsyncLoad(CharacterAssetToLoad, FStreamableDelegate::CreateUObject(this, &AABCharacter::OnAssetLoadCompleted));
+
+### auto BehaviorTreeComponent = Cast<UBehaviorTreeComponent>(BrainComponent);
+BehaviorTreeComponent->StopTree(EBTStopMode::Safe);
+
+### auto CharacterWidget = Cast<UABCharacterWidget>(HPBarWidget->GetUserWidgetObject());
+
+### CharacterWidget->BindCharacterStat(CharacterStat);
+
+### GetCharacterMovement()->MaxWalkSpeed = 600.0f;
+
+### ABPlayerController->RestartLevel();
+```
+void APlayerController::RestartLevel()
+{
+	if( GetNetMode()==NM_Standalone )
+	{
+		ClientTravel( TEXT("?restart"), TRAVEL_Relative );
+	}
+}
+```
+
+### PlayerState - c++ Class
+- 프렐이어의 정보 관리하기 위한 용도
+
+### UPROPERTY(Transient)
+\
+
+
+### PlayerStateClass = AABPlayerState::StaticClass();
+/** A PlayerState of this class will be associated with every player to replicate relevant player information to all clients. */
+	UPROPERTY(EditAnywhere, NoClear, BlueprintReadOnly, Category=Classes)
+	TSubclassOf<APlayerState> PlayerStateClass;
+
+
+### auto ABPlayerState = Cast<AABPlayerState>(GetPlayerState());
+
+```
+/**
+	 * @return this controller's PlayerState cast to the template type, or NULL if there is not one.
+	 * May return null if the cast fails.
+	 */
+	template < class T >
+	T* GetPlayerState() const
+	{
+		return Cast<T>(PlayerState);
+	}
+```
+
+### class UABHUDWidget* GetHUDWidget() const;
+- class를 const?
+
+### UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = UI)
+	TSubclassOf<class UABHUDWidget> HUDWidgetClass;
+
+### UPROPERTY()
+	class UABHUDWidget* HUDWidget;
+
+###  HUDWidget  = CreateWidget<UABHUDWidget>(this, HUDWidgetClass);
+
+### HUDWidget->AddToViewport();
+
+### CharacterStat->OnHPChanged.AddUObject(this, &UABHUDWidget::UpdateCharacterStat);
+
+### HPBar = Cast<UProgressBar>(GetWidgetFromName(TEXT("pbHP")));
+
+### SetPercent
+
+### PlayerName->SetText(FText::FromString(CurrentPlayerState->GetPlayerName()));
+
+### ABPlayerController->GetHUDWidget()->BindCharacterStat(CharacterStat);
