@@ -9,7 +9,7 @@ toc_sticky: true
 toc_label: "CPP_Basic"
 ---
 
-{% assign posts = site.categories.cpp%}
+{% assign posts = site.categories.CPP%}
 {% for post in posts %}
   {% include archive-single.html type=page.entries_layout %}
 {% endfor %}
