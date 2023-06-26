@@ -863,3 +863,66 @@ void APlayerController::RestartLevel()
 ### PlayerName->SetText(FText::FromString(CurrentPlayerState->GetPlayerName()));
 
 ### ABPlayerController->GetHUDWidget()->BindCharacterStat(CharacterStat);
+
+### truct FABCharacterData* CurrentStatData;
+
+### ABPlayerState = Cast<AABPlayerState>(PlayerState);
+
+### GetWorld()->GetTimerManager().ClearTime(SpawnNPCTimerHandle);
+	auto KeyNPC = GetWorld()->SpawnActor<AABCharacter>(GetActorLocation() + FVector::UpVector * 88.0f, FRotator::ZeroRotator);
+
+### auto ABPlayerController = Cast<AABPlayerController>(ABCharacter->LastHitBy);
+
+### GetPlayerControllerIterator
+- 현재 게임에 참여 중인 플레이어 컨트롤러의 목록을 반환함? 얻을 수 있음
+
+### ABGameState = Cast<AABGameState>(GameState);
+
+### for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+
+### GetWorld()->GetAuthGameMode()
+- 게임 실행 중에 게임 모드의 포인터를 가져오는 함수.
+- 멀티 플레이 게임에서 게임 모드는 게임을 관리하는 방장 역할을 하며 겡미에서 중요한 데이터를 인증하는 권한을 가진다.
+/**
+	 * Returns the current Game Mode instance, which is always valid during gameplay on the server.
+	 * This will only return a valid pointer on the server. Will always return null on a client.
+	 */
+	AGameModeBase* GetAuthGameMode() const { return AuthorityGameMode; }
+
+
+
+# ch.15
+
+### SaveGame - C++ class
+- 게임 데이터 저장 로딩 간편하게 구현 도와줌
+- 플랫폼 별로 알맞은 최적의 장소에 데이터 저장해 주며,
+- 에디터에서 저장하는 경우 프로젝트의 saved-savegames 폴더에 저장된다.
+
+### auto ABSaveGame = Cast<UABSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveSlotName, 0));
+    if (nullptr == ABSaveGame)
+    {
+        ABSaveGame = GetMutableDefault<UABSaveGame>();
+    }
+
+
+### SaveGameToSlot(NewPlayerData, SaveSlotName, 0)
+
+### UABSaveGame* NewPlayerData = NewObject<UABSaveGame>();
+- 언리얼 오브젝트 생성 시 NewObject 명령을 사용하며,
+- 이렇게 생성된 오브젝트를 더이상 사용하지 않으면 가비지 컬렉터가 탐지해
+- 자동으로 소멸시킨다.
+
+### 저장 데이터 없애고 싶으면 savegames 폴더에서 해당 파일을 샂ㄱ제함녀 됨.
+
+### CurrentWeapon->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+- AABWeapon* CurrentWeapon;
+
+### //auto ControllingPawn = OwnerComp.GetAIOwner()->GetPawn();
+    auto ControllingPawn = Cast<AABCharacter>(OwnerComp.GetAIOwner()->GetPawn());
+- 둘의 차이??
+
+### UPROPERTY 각 매개변수들
+
+### 
+			int32 TargetLevel = FMath::CeilToInt(((float)ABGameMode->GetScore() * 0.8f));
+			int32 FinalLevel = FMath::Clamp<int32>(TargetLevel, 1, 20);
