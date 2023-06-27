@@ -284,8 +284,6 @@ virtual float APawn::TakeDamage(float Damage, FDamageEvent const & DamageEvent, 
 - FDamageEvent DamageEvent
 - HitResult.GetActor()->TakeDamage(CharacterStat->GetAttack(), DamageEvent, GetController(), this);
 
-### virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
-
 ### can be damaged
 - 에디터 상 속성. 언체크하면 무적?
 
@@ -381,19 +379,46 @@ Set Collision Profile Name This function is called by constructors when they set
 
 ### auto CurWeapon = GetWorld()->SpawnActor<AABWeapon>(FVector::ZeroVector, FRotator::ZeroRotator);
 
-### CurWeapon->AttackToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponSocket)
+### CurWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponSocket)
+- Attaches the RootComponent of this Actor to the supplied component, optionally at a named socket. It is not valid to call this on components that are not Registered.
+
+```
+void AttachToComponent
+(
+    USceneComponent * Parent, // parent to attach to
+    // how to handle transforms and welding when attaching
+    const FAttachmentTransformRules & AttachmentRules,
+    // optional socket to attach on the parent
+    FName SocketName
+)
+```
+-> SnapToTargetIncludingScale: Snap the actor component to the new parent. This calculates the relative scale of the component that is being attached; so that it keeps the same scale. Essentially this is taking in the scale given and using that. (This one is usually used to attach a weapon to the character mesh.)
+
+-> SnapToTargetNotIncludingScale: This Does the same as the above, but ignores the scale param of the given relative or world transform.
+
+
 
 ### 	UPROPERTY(VisibleAnywhere, Category = Box)
 	UBoxComponent* Trigger;
 
 
 ### Trigger->SetBoxExtent(FVector(40.0f, 42.0f, 30.0f));
+- Change the box extent size. This is the unscaled size, before component scale is applied.
+
+```
+void SetBoxExtent
+(
+    FVector InBoxExtent,
+    bool bUpdateOverlaps
+)
+```
 
 ### 	UFUNCTION()
 	void OnCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex, bool bFromSweep, FHitResult& SweepResult);
 
-### 	Trigger->OnComponentBeginOverlap.AddDynamic(th8is, &AABItemBox::OnCharacterOverlap);
+### UPrimitiveComponent
+- PrimitiveComponents are SceneComponents that contain or generate some sort of geometry, generally to be rendered or used as collision data.
 
 ### 	UPROPERTY(EditInstanceOnly, Category = Box)
 	TSubclassOf<class AABWeapon> WeaponItemClass;
