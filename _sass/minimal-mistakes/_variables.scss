@@ -16,8 +16,8 @@ $indent-var: 1.3em !default;
 $serif: Georgia, Times, serif !default;
 $sans-serif: "Happiness-Sans-Regular", -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI",
   "Helvetica Neue", "Lucida Grande", Arial, sans-serif !default;
-$monospace: unset, Consolas, Monaco,  "Lucida Console", monospace !default;
-$happiness: unset, "monospace" !default;
+$monospace: Consolas, Monaco,  "Lucida Console", monospace !default;
+$happiness: Consolas,"monospace" !default;
 
 /* sans serif typefaces */
 $sans-serif-narrow: $sans-serif !default;
