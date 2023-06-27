@@ -951,3 +951,83 @@ void APlayerController::RestartLevel()
 ### 
 			int32 TargetLevel = FMath::CeilToInt(((float)ABGameMode->GetScore() * 0.8f));
 			int32 FinalLevel = FMath::Clamp<int32>(TargetLevel, 1, 20);
+
+### TSubclassOf<class UUserWidget> UIWidgetClass;
+
+### 33342
+UPROPERTY()
+	class UUserWidget* UIWidgetInstance;
+### UIWidgetInstance = CreateWidget<UUserWidget>(this, UIWidgetClass);
+
+
+### UIWidgetInstance->AddToViewport();
+
+### #include "Blueprint/UserWidget.h"
+
+### FInputModeUIOnly Mode;
+
+### Mode.SetWidgetToFocus(UIWidgetInstance->GetCachedWidget());
+
+### 334
+SetInputMode(Mode);
+bShowMouseCursor = true;
+
+### TActorIterator<액터 타입>
+- 현재 월드에 있는 특정 타입을 상속받은 액터의 목록 가져올 수 있음
+
+### UFUNCTION(BlueprintCallable)
+- 함수를 블루프린트에서 사용 가능하도록 해줌
+
+### virtual void NativeConstruct() override;
+
+### #include "EngineUtils.h"
+
+### USkeletalMesh* Asset = ABGameInstance->StreamableManager.LoadSynchronous<USkeletalMesh>(AssetRef);
+
+### 4
+for (TActorIterator<ASkeletalMeshActor> It(GetWorld()); It; ++It)
+    {
+        TargetComponent = It->GetSkeletalMeshComponent();
+        break;
+    }
+
+### PrevButton->OnClicked.AddDynamic(this, &UABCharacterSelectWidget::OnPrevClicked);
+
+### 34
+FString Charactername = TextBox->GetText().ToString();
+if (CharacterName.Len() <= 0 || CharacterName.Len() > 10) return;
+
+### UGameplayStatics::OpenLevel(GetWorld(), TEXT("Gameplay"));
+
+### virtual void SetupInputComponent() override;
+
+### InputComponent->BindAction(TEXT("GamePause"), EInputEvent::IE_Pressed, this, &AABPlayerController::OnGamePause);
+
+### 33
+	FInputModeGameOnly GameInputMode;
+	FInputModeUIOnly UIInputMode;
+
+### SetPause(true);
+
+### 4
+MenuWidget = CreateWidget<UABGameplayWidget>(this, MenuWidgetClass);
+    ABCHECK(nullptr != MenuWidget);
+    MenuWidget->AddToViewport(3);
+
+### auto ABPlayerController = Cast<AABPlayerController>(GetOwningPlayer());
+
+### RemoveFromParent();
+
+### UGameplayStatics::OpenLevel(GetWorld(), TEXT("Title"));
+
+### FConstPawnIterator It = GetWorld()->GetPawnIterator()
+(*It)->TurnOff();
+
+### for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+
+### UI 위젯의 NativeConstruct 함수는 AddToViewport 함수가 외부에서 호출될 때 UI 위젯이 초기화되면서 호출된다.
+- 그래서 플레이어 컨트롤러의 ShowResultUI 함수에서 AddToViewport 함수를 호출하기 전에 미리 UI 위젯이 게임스테이트의 정보를 읽어들일 수 있도록 바인딩을 설정해야 한다.
+
+
+### auto ABPlayerController = Cast<AABPlayerController>(GetOwningPlayer());
+        
