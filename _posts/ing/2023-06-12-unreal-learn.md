@@ -447,38 +447,79 @@ virtual void SetOwner
 ```
 
 ### OnSystemFinished
+- Called when the particle system is done.
+- delegate 같음
 
 ```
 FOnSystemFinished OnSystemFinished
-
-Remarks
-
-Called when the particle system is done.
-
+```
 - dynamic delegate 에는 UFUNCTION 함수를 사용해야 하므로 람다식 표현 함수는 바인딩 할 수 없다.
 
-### void OnEffectFinished(class UParticleSystemComponent* PSystem);
+### UParticleSystemComponentA 
+- particle emitter.
 
-### Effect->SetTemplate(P_CHESTOPEN.Object);
-- Effect = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("EFFECT"));
+### UObject::CreateDefaultSubobjectCreate
 
-### Effect->bAutoActivate
+- a component or subobject, allows creating a child class and returning the parent class.
 
-### Effect->Activate(true);
-
-### Box->SetHiddenInGame(true, true);
-
-### SetActorEnableCollision(false);
-
-### Effect->OnSystemFinished.AddDynamic(this, &AABItemBox::OnEffectFinished);
-
-### 2
-```cpp
-void AABItemBox::OnEffectFinished(UParticleSystemComponent* PSystem)
-{
-	Destroy();
-}
 ```
+template<class TReturnType, class TClassToConstructByDefault>
+TReturnType * CreateDefaultSubobject
+(
+    FName SubobjectName,
+    bool bTransient
+)
+```
+
+### UParticleSystemComponent::SetTemplate
+- Change the ParticleSystem used by this ParticleSystemComponent
+
+```
+void SetTemplate
+(
+    class UParticleSystem * NewTemplate
+)
+```
+
+### UParticleSystem
+- ParticleSystem is a complete particle effect that contains any number of ParticleEmitters
+- By allowing multiple emitters in a system, the designer can create elaborate particle effects that are held in a single system.
+- Once created using Cascade, a ParticleSystem can then be inserted into a level or created in script.
+
+```
+class UParticleSystem : public UFXSystemAsset
+```
+
+
+### Effect->bAutoActivate = false
+- 자동 재생을 막아줌
+
+### USceneComponent::SetHiddenInGame
+- Changes the value of bHiddenInGame, if false this will disable Visibility during gameplay
+
+```
+void SetHiddenInGame
+(
+    bool NewHidden,
+    bool bPropagateToChildren
+)
+```
+
+### bPropagateToChildren
+- If set to true all of the global transforms of the children of this bone will be recalculated based on their local transforms.
+-  Note: This is computationally more expensive than turning it off.
+
+```
+[UPROPERTY](Programming/UnrealArchitecture/Reference/Properties)(Meta=(Input, Constant))
+bool bPropagateToChildren
+```
+
+### AActor::SetActorEnableCollision
+- Allows enabling/disabling collision for the whole actor
+
+### USceneComponent::SetVisibilitySet
+- visibility of the component, if during game use this to turn on/off
+
 
 ### SetVisibility vs SetHiddenInGame
 
@@ -486,6 +527,14 @@ void AABItemBox::OnEffectFinished(UParticleSystemComponent* PSystem)
 # chapter 11
 
 ### GameInstance
+- high-level manager object for an instance of the running game. Spawned at game creation and not destroyed until game instance is shut down. Running as a standalone game, there will be one of these. Running in PIE (play-in-editor) will generate one of these per PIE instance.
+
+```
+class UGameInstance :
+    public UObject,
+    public FExec
+```
+
 
 ### USTRUCT(BlueprintType)
 struct FABChracterData : public FTableRowBase
