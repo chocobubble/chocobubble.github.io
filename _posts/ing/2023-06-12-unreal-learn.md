@@ -423,35 +423,103 @@ void SetBoxExtent
 ### 	UPROPERTY(EditInstanceOnly, Category = Box)
 	TSubclassOf<class AABWeapon> WeaponItemClass;
 
-### 		NewWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponSocket);
-		NewWeapon->SetOwner(this);
+    TSubclassOf 는 UClass 유형의 안전성을 보장해 주는 템플릿 클래스입니다. 예를 들어 디자이너가 대미지 유형을 지정하도록 해주는 프로젝타일 클래스를 제작중이라 가정합시다. 그냥 UPROPERTY 유형의 UClass 를 만든 다음 디자이너가 항상 UDamageType 파생 클래스만 할당하기를 바라거나, TSubclassOf 템플릿을 사용하여 선택지를 제한시킬 수도 있습니다. 그 차이점은 아래 코드와 같습니다:
 
+/** type of damage */
+UPROPERTY(EditDefaultsOnly, Category=Damage)
+UClass* DamageType;
+Vs.
+
+/** type of damage */
+UPROPERTY(EditDefaultsOnly, Category=Damage)
+TSubclassOf<UDamageType> DamageType;
+두 번째 선언에서, 템플릿 클래스는 에디터의 프로퍼티 창에 UDamageType 파생 클래스만 선택되도록 합니다. 첫 번째 선언에서는 아무 UClass 나 선택할 수 있습니다. 아래 그림에서 확인됩니다.
+
+### NewWeapon->SetOwner(this);
+
+- Set the owner of this Actor, used primarily for network replication.
+
+```
+virtual void SetOwner
+(
+    AActor * NewOwner
+)
+```
 
 ### OnSystemFinished
+- Called when the particle system is done.
+- delegate 같음
+
+```
+FOnSystemFinished OnSystemFinished
+```
 - dynamic delegate 에는 UFUNCTION 함수를 사용해야 하므로 람다식 표현 함수는 바인딩 할 수 없다.
 
-### void OnEffectFinished(class UParticleSystemComponent* PSystem);
+### UParticleSystemComponentA 
+- particle emitter.
 
-### Effect->SetTemplate(P_CHESTOPEN.Object);
-- Effect = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("EFFECT"));
+### UObject::CreateDefaultSubobjectCreate
 
-### Effect->bAutoActivate
+- a component or subobject, allows creating a child class and returning the parent class.
 
-### Effect->Activate(true);
-
-### Box->SetHiddenInGame(true, true);
-
-### SetActorEnableCollision(false);
-
-### Effect->OnSystemFinished.AddDynamic(this, &AABItemBox::OnEffectFinished);
-
-### 2
-```cpp
-void AABItemBox::OnEffectFinished(UParticleSystemComponent* PSystem)
-{
-	Destroy();
-}
 ```
+template<class TReturnType, class TClassToConstructByDefault>
+TReturnType * CreateDefaultSubobject
+(
+    FName SubobjectName,
+    bool bTransient
+)
+```
+
+### UParticleSystemComponent::SetTemplate
+- Change the ParticleSystem used by this ParticleSystemComponent
+
+```
+void SetTemplate
+(
+    class UParticleSystem * NewTemplate
+)
+```
+
+### UParticleSystem
+- ParticleSystem is a complete particle effect that contains any number of ParticleEmitters
+- By allowing multiple emitters in a system, the designer can create elaborate particle effects that are held in a single system.
+- Once created using Cascade, a ParticleSystem can then be inserted into a level or created in script.
+
+```
+class UParticleSystem : public UFXSystemAsset
+```
+
+
+### Effect->bAutoActivate = false
+- 자동 재생을 막아줌
+
+### USceneComponent::SetHiddenInGame
+- Changes the value of bHiddenInGame, if false this will disable Visibility during gameplay
+
+```
+void SetHiddenInGame
+(
+    bool NewHidden,
+    bool bPropagateToChildren
+)
+```
+
+### bPropagateToChildren
+- If set to true all of the global transforms of the children of this bone will be recalculated based on their local transforms.
+-  Note: This is computationally more expensive than turning it off.
+
+```
+[UPROPERTY](Programming/UnrealArchitecture/Reference/Properties)(Meta=(Input, Constant))
+bool bPropagateToChildren
+```
+
+### AActor::SetActorEnableCollision
+- Allows enabling/disabling collision for the whole actor
+
+### USceneComponent::SetVisibilitySet
+- visibility of the component, if during game use this to turn on/off
+
 
 ### SetVisibility vs SetHiddenInGame
 
@@ -459,6 +527,14 @@ void AABItemBox::OnEffectFinished(UParticleSystemComponent* PSystem)
 # chapter 11
 
 ### GameInstance
+- high-level manager object for an instance of the running game. Spawned at game creation and not destroyed until game instance is shut down. Running as a standalone game, there will be one of these. Running in PIE (play-in-editor) will generate one of these per PIE instance.
+
+```
+class UGameInstance :
+    public UObject,
+    public FExec
+```
+
 
 ### USTRUCT(BlueprintType)
 struct FABChracterData : public FTableRowBase
@@ -951,3 +1027,83 @@ void APlayerController::RestartLevel()
 ### 
 			int32 TargetLevel = FMath::CeilToInt(((float)ABGameMode->GetScore() * 0.8f));
 			int32 FinalLevel = FMath::Clamp<int32>(TargetLevel, 1, 20);
+
+### TSubclassOf<class UUserWidget> UIWidgetClass;
+
+### 33342
+UPROPERTY()
+	class UUserWidget* UIWidgetInstance;
+### UIWidgetInstance = CreateWidget<UUserWidget>(this, UIWidgetClass);
+
+
+### UIWidgetInstance->AddToViewport();
+
+### #include "Blueprint/UserWidget.h"
+
+### FInputModeUIOnly Mode;
+
+### Mode.SetWidgetToFocus(UIWidgetInstance->GetCachedWidget());
+
+### 334
+SetInputMode(Mode);
+bShowMouseCursor = true;
+
+### TActorIterator<액터 타입>
+- 현재 월드에 있는 특정 타입을 상속받은 액터의 목록 가져올 수 있음
+
+### UFUNCTION(BlueprintCallable)
+- 함수를 블루프린트에서 사용 가능하도록 해줌
+
+### virtual void NativeConstruct() override;
+
+### #include "EngineUtils.h"
+
+### USkeletalMesh* Asset = ABGameInstance->StreamableManager.LoadSynchronous<USkeletalMesh>(AssetRef);
+
+### 4
+for (TActorIterator<ASkeletalMeshActor> It(GetWorld()); It; ++It)
+    {
+        TargetComponent = It->GetSkeletalMeshComponent();
+        break;
+    }
+
+### PrevButton->OnClicked.AddDynamic(this, &UABCharacterSelectWidget::OnPrevClicked);
+
+### 34
+FString Charactername = TextBox->GetText().ToString();
+if (CharacterName.Len() <= 0 || CharacterName.Len() > 10) return;
+
+### UGameplayStatics::OpenLevel(GetWorld(), TEXT("Gameplay"));
+
+### virtual void SetupInputComponent() override;
+
+### InputComponent->BindAction(TEXT("GamePause"), EInputEvent::IE_Pressed, this, &AABPlayerController::OnGamePause);
+
+### 33
+	FInputModeGameOnly GameInputMode;
+	FInputModeUIOnly UIInputMode;
+
+### SetPause(true);
+
+### 4
+MenuWidget = CreateWidget<UABGameplayWidget>(this, MenuWidgetClass);
+    ABCHECK(nullptr != MenuWidget);
+    MenuWidget->AddToViewport(3);
+
+### auto ABPlayerController = Cast<AABPlayerController>(GetOwningPlayer());
+
+### RemoveFromParent();
+
+### UGameplayStatics::OpenLevel(GetWorld(), TEXT("Title"));
+
+### FConstPawnIterator It = GetWorld()->GetPawnIterator()
+(*It)->TurnOff();
+
+### for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+
+### UI 위젯의 NativeConstruct 함수는 AddToViewport 함수가 외부에서 호출될 때 UI 위젯이 초기화되면서 호출된다.
+- 그래서 플레이어 컨트롤러의 ShowResultUI 함수에서 AddToViewport 함수를 호출하기 전에 미리 UI 위젯이 게임스테이트의 정보를 읽어들일 수 있도록 바인딩을 설정해야 한다.
+
+
+### auto ABPlayerController = Cast<AABPlayerController>(GetOwningPlayer());
+        
