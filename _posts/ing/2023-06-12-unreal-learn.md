@@ -48,7 +48,11 @@ bool IsValid
 ```UCharacterMovementComponent * GetCharacterMovement() const```
 
 ### UCharacterMovementComponent::JumpZVelocity
-float 	JumpZVelocity	Initial velocity (instantaneous vertical acceleration) when jumping.
+- Initial velocity (instantaneous vertical acceleration) when jumping.
+
+```cpp
+float 	JumpZVelocity
+```	
 
 ### 폰의 무브먼트 컴포넌트
 - IsFalling(), IsSwimming(), IsCrouching(), IsMoveOnGround()
