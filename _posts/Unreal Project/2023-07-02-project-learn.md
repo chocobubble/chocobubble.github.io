@@ -105,9 +105,19 @@ void SetAnimationMode
 )
 ```
 
+### bUsePawnControlRotation
+- If this component is placed on a pawn, should it use the view/control rotation of the pawn where possible? When disabled, the component will revert to using the stored RelativeRotation of the component.
+
+```cpp
+uint32 bUsePawnControlRotation: 1
+```
 
 
 # enhanced input
 
 - debug commands
     - 'showdebug enhancedinput'
+
+
+# Animation Blueprint
+
