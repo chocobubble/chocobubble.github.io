@@ -112,6 +112,54 @@ void SetAnimationMode
 uint32 bUsePawnControlRotation: 1
 ```
 
+## line trace
+
+### UWorld::LineTraceSingleByChannel
+- Trace a ray against the world using a specific channel and return the first blocking hit
+- #include "Engine/World.h"
+- hit 하면 true 반환
+- 결과는 FHitResult 로 받으면 된다.
+- FHitResult의 멤버 변수 Actor를 약포인터로 선언해서 미 참조시 가비지 컬렉터에 의해 자동으로 제거 되게 했다.
+- 약 포인터로 지정된 액터에 접근하기 전에 IsValid 함수로 액터가 유효한지 먼저 파악해야 한다.
+
+```cpp
+bool LineTraceSingleByChannel
+(
+    struct FHitResult & OutHit,
+    const FVector & Start,
+    const FVector & End,
+    ECollisionChannel TraceChannel,
+    const FCollisionQueryParams & Params,
+    const FCollisionResponseParams & ResponseParam
+) const
+```
+- OutHit
+	- First blocking hit found
+- Start
+	-	Start location of the ray
+- End
+	-	End location of the ray
+- TraceChannel
+	-	The 'channel' that this ray is in, used to determine which components to hit
+- Params
+	- 	Additional parameters used for the trace
+- ResponseParam
+	-	ResponseContainer to be used for this trace
+
+### DrawDebugLine
+```cpp
+void DrawDebugLine(
+	const UWorld* InWorld, 
+	FVector const& LineStart, 
+	FVector const& LineEnd, 
+	FColor const& Color,
+	bool bPersistentLines = false, 
+	float LifeTime=-1.f, 
+	uint8 DepthPriority = 0, 
+	float Thickness = 0.f
+);
+```
+
 
 # enhanced input
 
