@@ -3,7 +3,7 @@ title:  "[연습문제] 전문가를 위한 C++ Ch.7"
 excerpt: "전문가를 위한 C++"
 excerpt_separator: "<!--more-->"
 categories:
-  - ing
+  - CPP
 tags:
   - CPP
   - Questions
@@ -80,7 +80,7 @@ int main()
 }
 ```
 
-# 8-4
+# 7-4
 
 ```cpp
 
