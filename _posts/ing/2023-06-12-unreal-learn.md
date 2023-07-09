@@ -559,7 +559,7 @@ struct FABChracterData : public FTableRowBase
 	UPROPERTY()
 	class UDataTable* ABCharacterTable;
 
-### FStrign CharacterDataPath = TEXT("/Script/Engine.DataTable'/Game/Book/GameData/ABCharacterData.ABCharacterData'");
+### FString CharacterDataPath = TEXT("/Script/Engine.DataTable'/Game/Book/GameData/ABCharacterData.ABCharacterData'");
     static ConstructorHelpers::FObjectFinder<UDataTable> DT_ABCHARACTER(*CharacterDataPath);
 
 ###  ABCHECK(ABCharacterTable->GetRowMap().Num() > 0)
