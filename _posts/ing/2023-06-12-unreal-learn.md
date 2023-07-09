@@ -729,11 +729,18 @@ EBTNodeResult::Type UBTTask_FindPatrolPos::ExecuteTask(UBehaviorTreeComponent& O
 ### BTService C++ class
 
 ### UBTService_Detect();
+- 주기적으로 TickNode 호출함
+
+### Interval - UBTService
+
 
 ### virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 
+
 ###     UWorld* World = ControllingPawn->GetWorld();
     FVector Center = ControllingPawn->GetActorLocation();
+
+
 
 ### TArray
 
@@ -751,11 +758,15 @@ EBTNodeResult::Type UBTTask_FindPatrolPos::ExecuteTask(UBehaviorTreeComponent& O
     );
 }
 
+- 반경 내 모든 캐릭터 감지
+- 감지된 모든 캐릭터는 TArray 로 전달
+
 ### DrawDebugSphere(World, Center, DetectRadius, 16, FColor::Red, false, 0.2f;);
 
 ### virtual void PossessedBy(AController* NewController) override;
 
 ### IsPlayerControlled()
+- 캐릭터를 조종하는 컨트롤러가 플레이어 컨트롤러인지 리턴하는 함수
 
 ### GetCharacterMovement()->MaxWalkSpeed
 
