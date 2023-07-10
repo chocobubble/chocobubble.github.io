@@ -883,11 +883,17 @@ FVector LookVector = Target->GetActorLocation() - ABCharacter->GetActorLocation(
 ### UENUM(BlueprintType)
 - 블루 프린트와 호환되는 enum
 
-### UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadOnly, Category = State, Meta = (AllowPrivateAccess = true))
+### UPROPERTY(Transient)
+- Transient는 프로퍼티 지정자 중 하나이다.
+- 휘발성이 되어(serialize 되지 않음) 저장 또는 로드되지 않는다. 이런 식의 지정자가 붙은 프로퍼티는 로드 시간에 0 으로 채워진다.
 
-### ABPlayerController = Cast<AABPlayerController>(getController());
+### GetDefault
+- Get default object of a class.  
+```cpp
+template<typename T>
+const T * GetDefault()
+```
 
-### auto DefaultSetting = GetDefault<UABCharacterSetting>();
 ```
 FORCEINLINE TOptional<int32> GetDefault() const
 {
@@ -920,6 +926,8 @@ BehaviorTreeComponent->StopTree(EBTStopMode::Safe);
 ### GetCharacterMovement()->MaxWalkSpeed = 600.0f;
 
 ### ABPlayerController->RestartLevel();
+- Restarts the current level
+
 ```
 void APlayerController::RestartLevel()
 {
@@ -930,71 +938,105 @@ void APlayerController::RestartLevel()
 }
 ```
 
-### PlayerState - c++ Class
-- 프렐이어의 정보 관리하기 위한 용도
-
 ### UPROPERTY(Transient)
-\
+- Transient는 프로퍼티 지정자 중 하나이다.
+- 휘발성이 되어(serialize 되지 않음) 저장 또는 로드되지 않는다. 이런 식의 지정자가 붙은 프로퍼티는 로드 시간에 0 으로 채워진다.
 
+### TSubclassOf
+- UClass 유형의 안전성을 보장해 주는 템플릿 클래스이다.
+- c++ 수준에서의 유형 안전성도 확보해 준다.
+- 비 호환 TSubclassOf 유형을 서로에게 할당하려는 순간 컴파일 오류가 발생한다.
 
-### PlayerStateClass = AABPlayerState::StaticClass();
-/** A PlayerState of this class will be associated with every player to replicate relevant player information to all clients. */
-	UPROPERTY(EditAnywhere, NoClear, BlueprintReadOnly, Category=Classes)
-	TSubclassOf<APlayerState> PlayerStateClass;
+```cpp
+UClass* ClassA = UDamageType::StaticClass();
 
+TSubclassOf<UDamageType> ClassB;
 
-### auto ABPlayerState = Cast<AABPlayerState>(GetPlayerState());
+ClassB = ClassA; // Performs a runtime check
 
+TSubclassOf<UDamageType_Lava> ClassC;
+
+ClassB = ClassC; // Performs a compile time check
 ```
+
+### AController::GetPlayerState
+- this controller's PlayerState cast to the template type, or NULL if there is not one. May return null if the cast fails.
+
+```cpp
 /**
-	 * @return this controller's PlayerState cast to the template type, or NULL if there is not one.
-	 * May return null if the cast fails.
-	 */
-	template < class T >
-	T* GetPlayerState() const
-	{
-		return Cast<T>(PlayerState);
-	}
+* @return this controller's PlayerState cast to the template type, or NULL if there is not one.
+* May return null if the cast fails.
+*/
+template < class T >
+T* GetPlayerState() const
+{
+	return Cast<T>(PlayerState);
+}
 ```
-
-### class UABHUDWidget* GetHUDWidget() const;
-- class를 const?
-
-### UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = UI)
-	TSubclassOf<class UABHUDWidget> HUDWidgetClass;
-
-### UPROPERTY()
-	class UABHUDWidget* HUDWidget;
 
 ###  HUDWidget  = CreateWidget<UABHUDWidget>(this, HUDWidgetClass);
 
-### HUDWidget->AddToViewport();
+```cpp
+template<typename WidgetT, typename OwnerT>
+WidgetT * CreateWidget
+(
+    OwnerT * OwningObject,
+    TSubclassOf< UUserWidget > UserWidgetClass,
+    FName WidgetName
+)
+```
 
-### CharacterStat->OnHPChanged.AddUObject(this, &UABHUDWidget::UpdateCharacterStat);
+### UUserWidget::AddToViewport
+- Adds it to the game's viewport and fills the entire screen, unless SetDesiredSizeInViewport is called to explicitly set the size.
+
+```cpp
+void AddToViewport
+(
+    // The higher the number,
+    // the more on top this widget will be.
+    int32 ZOrder
+)
+```
 
 ### HPBar = Cast<UProgressBar>(GetWidgetFromName(TEXT("pbHP")));
 
-### SetPercent
+### UUserWidget::GetWidgetFromName
+- The uobject widget corresponding to a given name
 
-### PlayerName->SetText(FText::FromString(CurrentPlayerState->GetPlayerName()));
+```cpp
+UWidget* GetWidgetFromName
+(
+    const FName& Name
+) const
+```
 
-### ABPlayerController->GetHUDWidget()->BindCharacterStat(CharacterStat);
-
-### truct FABCharacterData* CurrentStatData;
-
-### ABPlayerState = Cast<AABPlayerState>(PlayerState);
+### UTextRenderComponent::SetText
+- Change the text value and signal the primitives to be rebuilt
+- Fstring 버전은 deprecated 되었음
+```cpp
+void SetText
+(
+    const FText& Value
+)
+```
 
 ### GetWorld()->GetTimerManager().ClearTime(SpawnNPCTimerHandle);
 	auto KeyNPC = GetWorld()->SpawnActor<AABCharacter>(GetActorLocation() + FVector::UpVector * 88.0f, FRotator::ZeroRotator);
 
-### auto ABPlayerController = Cast<AABPlayerController>(ABCharacter->LastHitBy);
+### APawn.LastHitBy
+- Controller of the last Actor that caused us damage.
+
+```cpp
+AController * LastHitBy
+```
 
 ### GetPlayerControllerIterator
 - 현재 게임에 참여 중인 플레이어 컨트롤러의 목록을 반환함? 얻을 수 있음
+- Returns an iterator for the player controller list.
 
-### ABGameState = Cast<AABGameState>(GameState);
-
-### for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+```cpp
+FConstPlayerControllerIterator GetPlayerControllerIterator() const
+```
 
 ### GetWorld()->GetAuthGameMode()
 - 게임 실행 중에 게임 모드의 포인터를 가져오는 함수.
@@ -1020,18 +1062,80 @@ void APlayerController::RestartLevel()
         ABSaveGame = GetMutableDefault<UABSaveGame>();
     }
 
+### UGameplayStatics::LoadGameFromSlot
+- Load the contents from a given slot.
+
+```cpp
+static USaveGame * LoadGameFromSlot
+(
+    const FString & SlotName,
+    // For some platforms, master user index to identify the user doing the loading.
+    const int32 UserIndex
+)
+```
+
+### GetMutableDefault
+- Gets the mutable default object of a class.
+- returns Class default object (CDO)
+
+```cpp
+template<class T>
+T * GetMutableDefault
+(
+    UClass* Class
+)
+```
 
 ### SaveGameToSlot(NewPlayerData, SaveSlotName, 0)
+### UGameplayStatics::SaveGameToSlot
+- Save the contents of the SaveGameObject to a platform-specific save slot/file.
+- 성공하면 true 반환
+
+```cpp
+static bool SaveGameToSlot
+(
+    USaveGame * SaveGameObject,
+    const FString & SlotName,
+    const int32 UserIndex
+)
+```
+
 
 ### UABSaveGame* NewPlayerData = NewObject<UABSaveGame>();
 - 언리얼 오브젝트 생성 시 NewObject 명령을 사용하며,
 - 이렇게 생성된 오브젝트를 더이상 사용하지 않으면 가비지 컬렉터가 탐지해
 - 자동으로 소멸시킨다.
 
-### 저장 데이터 없애고 싶으면 savegames 폴더에서 해당 파일을 샂ㄱ제함녀 됨.
+```cpp
+template<class T>
+T * NewObject
+(
+    UObject * Outer,
+    const UClass * Class,
+    FName Name,
+    EObjectFlags Flags,
+    UObject * Template,
+    bool bCopyTransientsFromClassDefaults,
+    FObjectInstancingGraph * InInstanceGraph,
+    UPackage * ExternalPackage
+)
+```
+
+### 저장 데이터 없애고 싶으면 savegames 폴더에서 해당 파일을 삭제하면 됨.
 
 ### CurrentWeapon->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 - AABWeapon* CurrentWeapon;
+
+### AActor::DetachFromActor
+- Detaches the RootComponent of this Actor from any SceneComponent it is currently attached to.
+
+```cpp
+void DetachFromActor
+(
+    // How to handle transforms when detaching.
+    const FDetachmentTransformRules & DetachmentRules
+)
+```
 
 ### //auto ControllingPawn = OwnerComp.GetAIOwner()->GetPawn();
     auto ControllingPawn = Cast<AABCharacter>(OwnerComp.GetAIOwner()->GetPawn());
