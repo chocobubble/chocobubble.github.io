@@ -3,7 +3,7 @@ title:  "움직이는 액터 제작"
 excerpt: "Unreal Engine Ch.3"
 excerpt_separator: "<!--more-->"
 categories:
-  - Unreal
+  - Unreal_Book
 tags:
   - Unreal
   - Actor

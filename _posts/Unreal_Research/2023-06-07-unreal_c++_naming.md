@@ -3,7 +3,7 @@ title:  "언리얼 코딩 표준 "
 excerpt: "coding"
 excerpt_separator: "<!--more-->"
 categories:
-  - ing
+  - Unreal_Research
 tags:
   - Unreal
   - code

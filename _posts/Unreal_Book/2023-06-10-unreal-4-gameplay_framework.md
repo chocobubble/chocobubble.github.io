@@ -3,7 +3,7 @@ title:  "게임플레이 프레임워크"
 excerpt: "Unreal Engine Ch.4"
 excerpt_separator: "<!--more-->"
 categories:
-  - Unreal
+  - Unreal_Book
 tags:
   - Unreal
   - GamePlay

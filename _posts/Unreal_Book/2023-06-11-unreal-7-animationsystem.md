@@ -3,7 +3,7 @@ title:  "애니메이션 시스템의 설계"
 excerpt: "Unreal Engine Ch.7"
 excerpt_separator: "<!--more-->"
 categories:
-  - Unreal
+  - Unreal_Book
 tags:
   - Unreal
   - Animation

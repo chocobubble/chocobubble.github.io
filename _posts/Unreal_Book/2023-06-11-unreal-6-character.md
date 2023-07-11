@@ -3,7 +3,7 @@ title:  "캐릭터의 제작과 컨트롤"
 excerpt: "Unreal Engine Ch.6"
 excerpt_separator: "<!--more-->"
 categories:
-  - Unreal
+  - Unreal_Book
 tags:
   - Unreal
   - Charcter
