@@ -1137,92 +1137,201 @@ void DetachFromActor
 )
 ```
 
-### //auto ControllingPawn = OwnerComp.GetAIOwner()->GetPawn();
-    auto ControllingPawn = Cast<AABCharacter>(OwnerComp.GetAIOwner()->GetPawn());
-- 둘의 차이??
-
-### UPROPERTY 각 매개변수들
-
-### 
-			int32 TargetLevel = FMath::CeilToInt(((float)ABGameMode->GetScore() * 0.8f));
-			int32 FinalLevel = FMath::Clamp<int32>(TargetLevel, 1, 20);
-
 ### TSubclassOf<class UUserWidget> UIWidgetClass;
 
-### 33342
-UPROPERTY()
-	class UUserWidget* UIWidgetInstance;
 ### UIWidgetInstance = CreateWidget<UUserWidget>(this, UIWidgetClass);
-
-
-### UIWidgetInstance->AddToViewport();
-
-### #include "Blueprint/UserWidget.h"
+```cpp
+template<typename WidgetT, typename OwnerT>
+WidgetT * CreateWidget
+(
+    OwnerT * OwningObject,
+    TSubclassOf< UUserWidget > UserWidgetClass,
+    FName WidgetName
+)
+```
 
 ### FInputModeUIOnly Mode;
+### FInputModeUIOnly
+- Data structure used to setup an input mode that allows only the UI to respond to user input.
+
+```cpp
+struct FInputModeUIOnly : public FInputModeDataBase
+```
 
 ### Mode.SetWidgetToFocus(UIWidgetInstance->GetCachedWidget());
 
-### 334
-SetInputMode(Mode);
-bShowMouseCursor = true;
+### FInputModeUIOnly::SetWidgetToFocus
+- Widget to focus
+
+```cpp
+FInputModeUIOnly& SetWidgetToFocus
+(
+    TSharedPtr< SWidget > InWidgetToFocus
+)
+```
+
+### SWidget
+- Abstract base class for Slate widgets.
+
+### UWidget::GetCachedWidget
+- Gets the last created widget does not recreate the gc container for the widget if one is needed
+
+```cpp
+TSharedPtr< SWidget > GetCachedWidget() const
+```
+
+### SetInputMode(Mode);
+### APlayerController::SetInputMode
+- Setup an input mode.
+```cpp
+virtual void SetInputMode
+(
+    const FInputModeDataBase & InData
+)
+```
+
+### FInputModeUIOnly
+- Inheritance Hierarchy
+	- FInputModeDataBase
+	    - FInputModeUIOnly
+
+### APlayerController.bShowMouseCursor
+- Whether the mouse cursor should be displayed.
+- bShowMouseCursor = true;
 
 ### TActorIterator<액터 타입>
 - 현재 월드에 있는 특정 타입을 상속받은 액터의 목록 가져올 수 있음
+- Template actor iterator. Misc. Iterator types
+
+```cpp
+template<typename ActorType>
+class TActorIterator : public TActorIteratorBase< TActorIterator< ActorType > >
+```
 
 ### UFUNCTION(BlueprintCallable)
 - 함수를 블루프린트에서 사용 가능하도록 해줌
 
 ### virtual void NativeConstruct() override;
+-  AddToViewport가 외부에서 호출될 때 UI 위젯이 초기화 되며 호출된다.
 
-### #include "EngineUtils.h"
+### UButton
+- The button is a click-able primitive widget to enable basic interaction, you can place any other widget inside a button to make a more complex and interesting click-able element in your UI.
 
-### USkeletalMesh* Asset = ABGameInstance->StreamableManager.LoadSynchronous<USkeletalMesh>(AssetRef);
+```cpp
+class UButton : public UContentWidget
+```
 
-### 4
-for (TActorIterator<ASkeletalMeshActor> It(GetWorld()); It; ++It)
-    {
-        TargetComponent = It->GetSkeletalMeshComponent();
-        break;
-    }
+### UButton.OnClicked
+- Called when the button is clicked
 
-### PrevButton->OnClicked.AddDynamic(this, &UABCharacterSelectWidget::OnPrevClicked);
+```cpp
+FOnButtonClickedEvent OnClicked
+```
 
 ### 34
 FString Charactername = TextBox->GetText().ToString();
 if (CharacterName.Len() <= 0 || CharacterName.Len() > 10) return;
 
-### UGameplayStatics::OpenLevel(GetWorld(), TEXT("Gameplay"));
+### STextBlock::GetText
+- Gets the text assigned to this text block
 
-### virtual void SetupInputComponent() override;
+```cpp
+const FText & GetText() const
+```
 
-### InputComponent->BindAction(TEXT("GamePause"), EInputEvent::IE_Pressed, this, &AABPlayerController::OnGamePause);
+### STextBlock
+- A simple static text widget
+
+
+### UGameplayStatics::OpenLevel
+- Travel to another level
+
+```cpp
+static void OpenLevel
+(
+    const UObject * WorldContextObject,
+    // 	the level to open
+    FName LevelName,
+    // if true options are reset, if false options are carried over from current level
+    bool bAbsolute,
+    // a string of options to use for the travel URL
+    FString Options
+)
+```
+
 
 ### 33
 	FInputModeGameOnly GameInputMode;
 	FInputModeUIOnly UIInputMode;
 
-### SetPause(true);
+### APlayerController::SetPause
+- Locally try to pause game (call serverpause to pause network game); returns success indicator.
 
-### 4
-MenuWidget = CreateWidget<UABGameplayWidget>(this, MenuWidgetClass);
-    ABCHECK(nullptr != MenuWidget);
-    MenuWidget->AddToViewport(3);
+```cpp
+virtual bool SetPause
+(
+    bool bPause,
+    FCanUnpause CanUnpauseDelegate
+)
+```
 
 ### auto ABPlayerController = Cast<AABPlayerController>(GetOwningPlayer());
 
-### RemoveFromParent();
+### UUserWidget::GetOwningPlayer
+- Gets the player controller associated with this UI.
+- Returns the player controller that owns the UI.
 
-### UGameplayStatics::OpenLevel(GetWorld(), TEXT("Title"));
+```cpp
+virtual APlayerController * GetOwningPlayer() const
+```
+
+### UUserWidget::RemoveFromParent
+- Removes the widget from its parent widget.
+- If this widget was added to the player's screen or the viewport it will also be removed from those containers.
+
+```cpp
+virtual void RemoveFromParent()
+```
 
 ### FConstPawnIterator It = GetWorld()->GetPawnIterator()
-(*It)->TurnOff();
+- Imitation iterator class that attempts to provide the basic interface that FConstPawnIterator previously did when a typedef of TArray<TWeakObjectPtr<APawn>>::Iterator.
+- In general you should prefer not to use this iterator and instead use TActorIterator<APawn> or TActorRange<APawn> (or the desired more derived type). This iterator will likely be deprecated in a future release.
+
+```cpp
+class FConstPawnIterator
+```
+
+### UWorld::GetPawnIterator
+- Deprecated
+- The PawnIterator is an inefficient mechanism for iterating pawns. Please use TActorIterator instead.
+
+```cpp
+FConstPawnIterator GetPawnIterator() const
+```
+
+### TActorIterator
+- Template actor iterator. Misc. Iterator types
+
+```cpp
+template<typename ActorType>
+class TActorIterator : public TActorIteratorBase< TActorIterator< ActorType > >
+```
+
+### APawn::TurnOff
+- Freeze pawn - stop sounds, animations, physics, weapon firing
+
+```cpp
+virtual void TurnOff()
+```
 
 ### for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
 
+### UWorld::GetPlayerControllerIterator
+- Returns an iterator for the player controller list.
+
+```cpp
+FConstPlayerControllerIterator GetPlayerControllerIterator() const
+```
+
 ### UI 위젯의 NativeConstruct 함수는 AddToViewport 함수가 외부에서 호출될 때 UI 위젯이 초기화되면서 호출된다.
-- 그래서 플레이어 컨트롤러의 ShowResultUI 함수에서 AddToViewport 함수를 호출하기 전에 미리 UI 위젯이 게임스테이트의 정보를 읽어들일 수 있도록 바인딩을 설정해야 한다.
-
-
-### auto ABPlayerController = Cast<AABPlayerController>(GetOwningPlayer());
-        
+- 그래서 플레이어 컨트롤러의 ShowResultUI 함수에서 AddToViewport 함수를 호출하기 전에 미리 UI 위젯이 게임스테이트의 정보를 읽어들일 수 있도록 바인딩을 설정해야 한다.       
