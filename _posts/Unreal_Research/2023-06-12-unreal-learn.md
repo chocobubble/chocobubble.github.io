@@ -543,6 +543,7 @@ UPROPERTY(VisibleAnywhere, Category = UI)
 ```
 
 ### NativeConstruct 함수
+- UI 위젯 초기화 시점에서 발생하는 ㅅ함수
 
 ### UI 생성은 플레이어 컨트롤러의   BeginPlay 에서 호출됨
 
