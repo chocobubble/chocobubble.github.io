@@ -3,7 +3,7 @@ title:  "[연습문제] 전문가를 위한 C++ Ch.8"
 excerpt: "전문가를 위한 C++"
 excerpt_separator: "<!--more-->"
 categories:
-  - CPP
+  - cpp_book
 tags:
   - CPP
   - Questions
