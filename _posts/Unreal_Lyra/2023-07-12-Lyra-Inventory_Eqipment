@@ -174,3 +174,57 @@ private:
 	UPROPERTY(Replicated)
 	TSubclassOf<ULyraInventoryItemDefinition> ItemDef;
 ```
+
+
+
+# 
+- ULyraWeaponStateComponent 가 pawn controller에 부착한다.
+
+Weapon State Component
+ULyraWeaponStateComponent goes on the Pawn Controller.
+
+This component:
+
+- Is responsible for making the Pawn’s currently equipped weapon Tick()
+- During Targeting:
+	- Keeps track of weapon “hit markers” for the local player
+		- e.g. so you can see bullets actually hit their targets (if they do hit something)
+- When server processes TargetData:
+	- Remembers the “hit markers” that actually resulted in valid hits
+		- Makes these available to SHitMarkerConfirmationWidget to draw the hit markers on the player’s screen
+
+
+# Ranged Weapon Base Ability
+-  대부분 BP로 제작
+- This is the base class for all Lyra Ranged Weapons, and is implemented by:
+
+- GA_Weapon_Fire
+	- GA_Weapon_Fire_Pistol
+	- GA_Weapon_Fire_Rifle_Auto
+	- GA_Weapon_Fire_Shotgun
+	- GA_WeaponNetShooter (prototype)
+
+
+# Important Code to Consider
+
+- You should consider this to understand how it helps support the system overall.
+
+
+- ULyraEquipmentManagerComponent::EquipItem
+```cpp
+ULyraEquipmentInstance* EquipItem (TSubclassOf<ULyraEquipmentDefinition> EquipmentDefinition);
+```
+- Called whenever a new piece of equipment should be equipped. An Equipment Instance is spawned based on the Equipment Definition.
+
+- The Equipment Instance is created via a call to:
+
+
+- FLyraEquipmentList::AddEntry
+```cpp
+ULyraEquipmentInstance* AddEntry (TSubclassOf<ULyraEquipmentDefinition> EquipmentDefinition);
+```
+- Creates a new Equipment Instance (ULyraEquipmentInstance) based on the Equipment Definition (ULyraEquipmentDefinition)
+	- Equipment Instance Owner = The Equipment Manager’s Owner Actor
+- Adds the equipment’s ability sets to the Equipment Manager Owner’s ASC
+	- Sets SourceObject for each ability to the Equipment Instance
+- Spawns the equipment actors
