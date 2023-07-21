@@ -1,12 +1,13 @@
 ---
-title:  "[언리얼 엔진] TimerManager"
+title:  "[언리얼 엔진] Time"
 excerpt: "Unreal Engine"
 excerpt_separator: "<!--more-->"
 categories:
   - Unreal_Research
 tags:
   - Unreal
-  - Timer
+  - Time
+  - TimerManager
 
 toc: true
 toc_sticky: true
@@ -14,7 +15,21 @@ toc_sticky: true
 use_math: true
 
 date: 2023-07-20
-last_modified_at: 2023-07-20
+last_modified_at: 2023-07-21
+---
+
+# Time
+- UWorld는 여러 시간을 관리한다.
+
+## TimeSeconds
+- 게임이 시작되고 난 뒤 지난 시간.
+- 게임의 정지, IS의 증가, 제한 등이 적용된다.
+
+### UWorld::GetTimeSeconds
+
+
+<br>
+<br>
 ---
 
 # TimerManager
