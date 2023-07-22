@@ -54,20 +54,24 @@ last_modified_at: 2023-07-17
 
 ## 디스크에서 로드
 - 이미 레벨에 있는 액터에 대해, LoadMap 이나 AddToWorld 가 호출될 때 발생
+
 1. PostLoad
   - 디스크에서 로드 완료 후 serialize 된 액터에 의해 호출됨
   - 커스텀 버전이나 픽스 작업은 여기서.
   - PostActorCreated 와 상호 배제됨
+
 2. InitializeActorsForPlay
   - 플레이용 액터 초기화
+
 3. RouteActorInitialize
-  - 액터 초기화 경로 변경. 초기화되지 않은 액터에 대해 호출됨
-  1. PreInitializeComponents
-    - 액터의 컴포넌트에 InitializeComponent 호출 전 호출
-  2. InitializeComponent
-    - 액터에 정의된 각 컴포넌트 생성용 헬퍼 함수
-  3. PostInitializeComponents
+  - 액터 초기화 경로 변경. 초기화되지 않은 액터에 대해 호출됨  
+  1. PreInitializeComponents  
+    - 액터의 컴포넌트에 InitializeComponent 호출 전 호출  
+  2. InitializeComponent  
+    - 액터에 정의된 각 컴포넌트 생성용 헬퍼 함수  
+  3. PostInitializeComponents  
     - 액터 컴포넌트 초기화 완료 후 호출
+		
 4. BeginPlay
   - 레벨이 시작되면 호출됨
 
