@@ -125,3 +125,15 @@ last_modified_at: 2023-07-17
 - OnDestory
   - legacy
 
+
+# AActor 관련 메서드들
+
+### AActor::GetDebugName
+- Retrieves actor's name used for logging, or string "NULL" if Actor is null
+
+```cpp
+static FString GetDebugName
+(
+    const AActor * Actor
+)
+```
