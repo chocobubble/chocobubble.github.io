@@ -16,7 +16,7 @@ use_math: true
 date: 2023-07-03
 last_modified_at: 2023-07-03
 ---
-> 언리얼 공식 document 일부를 정리한 내용이다.
+> 언리얼 공식 document 일부를 정리한 내용입니다.
 
 ---
 

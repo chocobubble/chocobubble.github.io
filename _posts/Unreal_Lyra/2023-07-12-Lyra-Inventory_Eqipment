@@ -1,0 +1,230 @@
+---
+title:  "인벤토리 및 장비"
+excerpt: "Unreal Lyra Sample"
+excerpt_separator: "<!--more-->"
+categories:
+  - Unreal_Lyra
+tags:
+  - Unreal
+  - Unreal_Lyra
+
+toc: true
+toc_sticky: true
+
+use_math: true
+
+date: 2023-07-12
+last_modified_at: 2023-07-12
+---
+> https://docs.unrealengine.com/5.2/ko/lyra-inventory-and-equipment-in-unreal-engine/
+
+
+# 라이라의 인벤토리, 장비
+- Inventory
+    - 소지한 아이템 컬렉션
+    - 보유하는 내내 인스턴스가 유지되고, 드롭시 파괴
+    - GameplayTag stack 을 사용해 상태 유지
+    - InventoryManagerComponent의 컨트롤러가 소유함
+    - Inventory Fragment를 활용해 확장 가능
+    - 아이템 정의에 연결된 Equipment 정의가 지정되어 있음
+    - 접두사 'ID_' 사용
+- Equipment
+    - 손에 들거나, 입거나, 사용하는 아이템
+    - 사용 중에 액터가 생성돼 소유자에게 부착됨
+    - 장착시 인스턴스 생성되고, 장착 해제 시 파괴됨
+    - 따라서 장착/해제 간에 상태가 유지되지 않고, 장착 시 능력 부여 가능
+    - EquipmentManagerComponent의 폰이 소유함
+    - 접두사 'WID_'를 사용
+
+# 인벤토리
+- 인벤토리 아이템은 획득하거나 주울 수 있는 오브젝트이며 **Inventory Fragments** 배열을 통해 상호작용한다.
+
+## InventoryItemFragment
+- 코드 상 다음과 같이 정의되어 있다.
+- UObject를 상속받고, OnInstanceCreated 가상함수가 하나 추가된 형태다.
+
+```cpp
+// LyraInventoryItemDefinition.h
+public:
+	virtual void OnInstanceCreated(ULyraInventoryItemInstance* Instance) const {}
+```
+
+- 이 클래스를 상속받는 다양한 프래그먼트가 있어 Inventory Item에 적용 가능하다. 
+
+### InventoryFragment_PickupIcon
+- 픽업 준비가 된 아이템의 월드 내 표현 방식을 결정
+
+```cpp
+public:
+	TObjectPtr<USkeletalMesh> SkeletalMesh;
+	FText DisplayName;
+	FLinearColor PadColor;
+```
+
+### InventoryFragment_EquippableItem
+- 아이템에 Equipment 정의를 연결
+
+```cpp
+public:
+	TSubclassOf<ULyraEquipmentDefinition> EquipmentDefinition;
+```
+
+### InventoryFragment_SetStats
+- GameplayTag 기반 stack set을 부여
+
+```cpp
+protected:
+	TMap<FGameplayTag, int32> InitialItemStats;
+
+public:
+	virtual void OnInstanceCreated(ULyraInventoryItemInstance* Instance) const override;
+
+	int32 GetItemStatByTag(FGameplayTag Tag) const;
+```
+
+### InventoryFragment_QuickbarIcon
+- UI 슬롯을 차지하는 아이템에 사용되는 HUD 아이콘을 결정
+
+```cpp
+public:
+	FSlateBrush Brush;
+	FSlateBrush AmmoBrush;
+	FText DisplayNameWhenEquipped;
+```
+
+### InventoryFragment_ReticleConfig
+- 아이템 장착시 인스턴스화할 대체 HUD 십자선 클래스 지정
+
+
+## InventoryManagerComponent
+- 인벤토리 아이템 컬렉션을 관리
+- InventoryItemDefinitions을 InventoryItemInstances로 변환하여 관리하며,
+- 중복 아이템은 StackCount가 있는 단일 InventoryItemInstances로 표현하기도 함
+- LyraPlayerController가 소유
+- UActorComponent의 상속을 받는다.
+
+```cpp
+public:
+	ULyraInventoryManagerComponent(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+
+	//~UFUNCTION
+	bool CanAddItemDefinition(TSubclassOf<ULyraInventoryItemDefinition> ItemDef, int32 StackCount = 1);
+	ULyraInventoryItemInstance* AddItemDefinition(TSubclassOf<ULyraInventoryItemDefinition> ItemDef, int32 StackCount = 1);
+	void AddItemInstance(ULyraInventoryItemInstance* ItemInstance);
+	void RemoveItemInstance(ULyraInventoryItemInstance* ItemInstance);
+	TArray<ULyraInventoryItemInstance*> GetAllItems() const;
+	ULyraInventoryItemInstance* FindFirstItemStackByDefinition(TSubclassOf<ULyraInventoryItemDefinition> ItemDef) const;
+    //~End of UFUNCTION
+
+	int32 GetTotalItemCountByDefinition(TSubclassOf<ULyraInventoryItemDefinition> ItemDef) const;
+	bool ConsumeItemsByDefinition(TSubclassOf<ULyraInventoryItemDefinition> ItemDef, int32 NumToConsume);
+
+	//~UObject interface
+	virtual bool ReplicateSubobjects(class UActorChannel* Channel, class FOutBunch* Bunch, FReplicationFlags* RepFlags) override;
+	virtual void ReadyForReplication() override;
+	//~End of UObject interface
+
+private:
+	UPROPERTY(Replicated)
+	FLyraInventoryList InventoryList;
+```
+
+## InventoryItemInstance
+- 아이템이 인벤토리에 추가되면 생성된다.
+- 원본 InventoryItemDefinitions을 참조함
+- 통계 태그의 'stack'을 활용함
+- UObject의 상속을 받음
+
+```cpp
+public:
+	// Adds a specified number of stacks to the tag (does nothing if StackCount is below 1)
+	void AddStatTagStack(FGameplayTag Tag, int32 StackCount);
+
+	// Removes a specified number of stacks from the tag (does nothing if StackCount is below 1)
+	void RemoveStatTagStack(FGameplayTag Tag, int32 StackCount);
+
+	// Returns the stack count of the specified tag (or 0 if the tag is not present)
+	int32 GetStatTagStackCount(FGameplayTag Tag) const;
+
+	// Returns true if there is at least one stack of the specified tag
+	bool HasStatTag(FGameplayTag Tag) const;
+
+	TSubclassOf<ULyraInventoryItemDefinition> GetItemDef() const
+	{
+		return ItemDef;
+	}
+
+	const ULyraInventoryItemFragment* FindFragmentByClass(TSubclassOf<ULyraInventoryItemFragment> FragmentClass) const;
+
+	template <typename ResultClass>
+	const ResultClass* FindFragmentByClass() const
+	{
+		return (ResultClass*)FindFragmentByClass(ResultClass::StaticClass());
+	}
+
+private:
+	void SetItemDef(TSubclassOf<ULyraInventoryItemDefinition> InDef);
+	friend struct FLyraInventoryList;
+
+private:
+	UPROPERTY(Replicated)
+	FGameplayTagStackContainer StatTags;
+
+	// The item definition
+	UPROPERTY(Replicated)
+	TSubclassOf<ULyraInventoryItemDefinition> ItemDef;
+```
+
+
+
+# 
+- ULyraWeaponStateComponent 가 pawn controller에 부착한다.
+
+Weapon State Component
+ULyraWeaponStateComponent goes on the Pawn Controller.
+
+This component:
+
+- Is responsible for making the Pawn’s currently equipped weapon Tick()
+- During Targeting:
+	- Keeps track of weapon “hit markers” for the local player
+		- e.g. so you can see bullets actually hit their targets (if they do hit something)
+- When server processes TargetData:
+	- Remembers the “hit markers” that actually resulted in valid hits
+		- Makes these available to SHitMarkerConfirmationWidget to draw the hit markers on the player’s screen
+
+
+# Ranged Weapon Base Ability
+-  대부분 BP로 제작
+- This is the base class for all Lyra Ranged Weapons, and is implemented by:
+
+- GA_Weapon_Fire
+	- GA_Weapon_Fire_Pistol
+	- GA_Weapon_Fire_Rifle_Auto
+	- GA_Weapon_Fire_Shotgun
+	- GA_WeaponNetShooter (prototype)
+
+
+# Important Code to Consider
+
+- You should consider this to understand how it helps support the system overall.
+
+
+- ULyraEquipmentManagerComponent::EquipItem
+```cpp
+ULyraEquipmentInstance* EquipItem (TSubclassOf<ULyraEquipmentDefinition> EquipmentDefinition);
+```
+- Called whenever a new piece of equipment should be equipped. An Equipment Instance is spawned based on the Equipment Definition.
+
+- The Equipment Instance is created via a call to:
+
+
+- FLyraEquipmentList::AddEntry
+```cpp
+ULyraEquipmentInstance* AddEntry (TSubclassOf<ULyraEquipmentDefinition> EquipmentDefinition);
+```
+- Creates a new Equipment Instance (ULyraEquipmentInstance) based on the Equipment Definition (ULyraEquipmentDefinition)
+	- Equipment Instance Owner = The Equipment Manager’s Owner Actor
+- Adds the equipment’s ability sets to the Equipment Manager Owner’s ASC
+	- Sets SourceObject for each ability to the Equipment Instance
+- Spawns the equipment actors

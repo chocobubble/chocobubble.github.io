@@ -55,8 +55,8 @@
           </ul>
           <ul>
             {% for category in site.categories %}
-                {% if category[0] == "CPP" %}
-                    <li><a href="/categories/cpp/basic" class="">CPP Basic -> ({{category[1].size}})</a></li>
+                {% if category[0] == "cpp_book" %}
+                    <li><a href="/categories/cpp_book" class="">CPP 책 정리 -> ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
@@ -83,6 +83,13 @@
               {% for category in site.categories %}
                   {% if category[0] == "Unreal_Research" %}
                       <li><a href="/categories/Unreal_Research" class="">Unreal 자료 조사 -> ({{category[1].size}})</a></li>
+                  {% endif %}
+              {% endfor %}
+          </ul>
+          <ul>
+              {% for category in site.categories %}
+                  {% if category[0] == "Unreal_Lyra" %}
+                      <li><a href="/categories/Unreal_Lyra" class="">Unreal Lyra 샘플 분석 -> ({{category[1].size}})</a></li>
                   {% endif %}
               {% endfor %}
           </ul>
