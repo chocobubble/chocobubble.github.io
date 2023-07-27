@@ -1,12 +1,15 @@
 ---
-title:  "[Unreal Engine] 회전"
-excerpt: "Rotation"
+title:  "[Unreal Engine] Transform"
+excerpt: "Transform"
 excerpt_separator: "<!--more-->"
 categories:
   - Unreal_Research
 tags:
   - Unreal
-  - Rotation
+  - Transform
+  - Rotator
+  - Vector
+  - Quaternion
 
 toc: true
 toc_sticky: true
@@ -14,11 +17,20 @@ toc_sticky: true
 use_math: true
 
 date: 2023-07-16
-last_modified_at: 2023-07-16
+last_modified_at: 2023-07-27
 ---
 > 언리얼 공식 document 일부를 정리한 내용입니다.
 
 ---
+
+# FVector
+### FVector::Rotation
+- FVector의 방향으로부터 FRotator를 구해 리턴
+- yaw와 pitch를 설정한다. roll은 vector로 부터 구할 수 없으므로 0으로 설정.
+
+```cpp
+FRotator Rotation() const
+```
 
 # 언리얼 엔진의 회전
 ## FRotator

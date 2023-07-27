@@ -14,7 +14,7 @@ toc_sticky: true
 use_math: true
 
 date: 2023-07-03
-last_modified_at: 2023-07-03
+last_modified_at: 2023-07-27
 ---
 > 언리얼 공식 document 일부를 정리한 내용입니다.
 
@@ -128,7 +128,7 @@ last_modified_at: 2023-07-03
 
 -  입력 매핑 컨텍스트를 채우면 폰의 플레이어 컨트롤러와 연결된 로컬 플레이어에게 이를 추가할 수 있다. 이를 위해 PawnClientRestart 함수를 오버라이드하고 다음과 같은 코드 블록을 추가한다.
 
-```
+```cpp
  // 유효한 플레이어 컨트롤러가 있는지 확인한다.
  if (APlayerController* PC = Cast<APlayerController>(GetController()))
  {
@@ -159,6 +159,19 @@ last_modified_at: 2023-07-03
 - 이 규칙에서 한 가지 예외는 다른 입력 액션이 트리거되어야 하는 'Chorded Action' 입력 트리거이다. 
 - 기본으로 입력에 대한 사용자 활동은 모든 틱에서 트리거된다. 
 -  향상된 입력 플러그인에 존재하지 않는 입력 트리거가 프로젝트에 필요하다면 UInputTrigger 클래스를 직접 만들 수 있다.
+
+## 트리거 종류 
+- UInputTriggerDown
+  - 입력이 작동한계치를 넘어서면 트리거가 발동된다.
+  - 바인딩된 트리거가 없는 경우 작동한계치가 0을 넘는 입력이 디폴트이다.
+- UInputTriggerPressed
+  - 입력이 작동한계치를 초과했을 때 한번만 발동된다.
+- UInputTriggerHold
+  - 
+- UInputTriggerHoldAndRelease
+  - HoldTimeThreshold초 이상 작동한 후 입력이 release 되면 트리거 발동
+- UInputTirggerPulse
+  - 입력이 작동되는 동안 특정 시간 단위로 트리거 발동
 
 # 디버그 명령
 - showdebug enhancedinput
