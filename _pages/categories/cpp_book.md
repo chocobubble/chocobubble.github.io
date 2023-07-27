@@ -1,7 +1,7 @@
 ---
 title: "CPP Book"
 layout: archive
-permalink: categories/cpp/book
+permalink: categories/cpp_book
 author_profile: true
 sidebar_main: true
 toc: true
