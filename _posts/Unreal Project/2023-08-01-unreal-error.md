@@ -41,3 +41,5 @@ class UWorld* UObject::GetWorld() const
 	return nullptr;
 }
 ```
+
+내 에러 상황 추가해주기..
