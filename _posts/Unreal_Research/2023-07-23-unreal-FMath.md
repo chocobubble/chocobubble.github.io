@@ -17,7 +17,9 @@ date: 2023-07-23
 last_modified_at: 2023-07-23
 ---
 
-> 언리얼의 FMath 클래스 중 필요한 부분을 정리하였다.
+> 언리얼의 FMath 클래스 중 필요한 부분을 정리하였습니다.
+
+---
 
 ## FMath::FRandRange
 - InMin, InMax 사이의 수 중 랜덤 숫자를 반환한다.

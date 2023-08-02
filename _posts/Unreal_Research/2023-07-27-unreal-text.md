@@ -17,9 +17,9 @@ date: 2023-07-27
 last_modified_at: 2023-07-27
 ---
 
-> 언리얼의 Text 관련 내용을 정리하였다.
+> 언리얼의 Text 관련 내용을 정리하였습니다.
 
-> https://docs.unrealengine.com/4.27/ko/ProgrammingAndScripting/ProgrammingWithCPP/UnrealArchitecture/StringHandling/
+> [Document] (https://docs.unrealengine.com/4.27/ko/ProgrammingAndScripting/ProgrammingWithCPP/UnrealArchitecture/StringHandling/)
 
 
 # FName
@@ -41,18 +41,17 @@ FName TestHUDName = FName(TEXT("ThisIsMyTestFName"));
 MyString = MyName.ToString();
 ```
 - FName에서 FText
-
 ```cpp
 MyText = FText::FromName(MyName);
 ```
-	- 이 경우 FName의 내용이 FText의 auto localization을 지원 받지 못한다.
+- 이 경우 FName의 내용이 FText의 auto localization을 지원 받지 못한다.
 - FString에서 FName
-
 ```cpp
 MyName = FName(*MyString);
 ```
-	- FName은 대소문자를 구분하지 않아 손실성 변환이다.
-	- FName에서 사용할 수 없는 글자가 들어가 버릴 수 있다.
+
+- FName은 대소문자를 구분하지 않아 손실성 변환이다.
+- FName에서 사용할 수 없는 글자가 들어가 버릴 수 있다.
 
 ## 비교
 - == 연산자
@@ -67,3 +66,15 @@ CompareFloat = MyName.Compare(OtherName);
 1. 콘텐츠 브라우저에서 새 에셋 이름을 지을 때
 2. dynamic material instance의 파라미터를 변경할 때
 3. skeletal mesh에서 bone에 접근할 때
+
+---
+
+# FText
+- 언리얼 엔진에서 Text Localization을 위해 주로 사용된다.
+- 유저가 보는 모든 텍스트는 FText를 사용하여야 한다.
+### Text Localization 이란?
+- text를 다른 언어로 번역하는 과정
+
+## 사용처
+- Slate / UMG
+- HUD / Canvas
