@@ -187,3 +187,17 @@ enum ECollisionChannel
     ECC_MAX,
 }
 ```
+
+# FHitResult
+## 주요 멤버 변수
+
+## 주요 메서드
+### GetActor()
+- hit 된 컴포넌트를 소유하고 있는 액터를 반환함
+
+```cpp
+FORCEINLINE AActor* GetActor() const
+{
+	return HitObjectHandle.FetchActor();
+}
+```
