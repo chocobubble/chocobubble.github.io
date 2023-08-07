@@ -137,3 +137,10 @@ static FString GetDebugName
     const AActor * Actor
 )
 ```
+
+### AActor::GetActorForwardVector
+- 액터의 forward (X) 단위벡터를 리턴한다.
+
+```cpp
+FVector GetActorForwardVector() const
+```

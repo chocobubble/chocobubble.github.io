@@ -79,3 +79,51 @@ void ULSInventoryComponent::SetDefaultWeapon()
 
 ```
 
+
+
+
+# 
+- CharacterStat 이 nullptr 인데 SetNewLevel(FinalLevel) 에 접근해서 다음 에러 발생.. 
+	- Exception has occurred: W32/0xC0000005
+	- Unhandled exception thrown: read access violation.
+	- this was nullptr.
+
+```cpp
+void ALSMonster::SetCharacterState(ECharacterState NewState)
+{	
+	...
+	CharacterStat->SetNewLevel(FinalLevel);
+	...
+}
+
+void ULSCharacterStatComponent::SetNewLevel(int32 NewLevel)
+{
+	// Error happens.
+	ULSGameInstance* LSGameInstance = Cast<ULSGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	...
+}
+
+```
+
+# similarly
+- ItemBox 가 nullptr 인데 GetWeaponItem 메서드에서 WeaponItem에 접근해 에러 발생
+- nullptr 체크를 못해줬음..
+
+```cpp
+void ALSCharacter::Interact(const FInputActionValue& Value)
+{
+	...
+	ALSItemBox* ItemBox = Cast<ALSItemBox>(HitResult.GetActor());
+	//LSCHECK(ItemBox != nullptr);
+
+	WeaponDefinition = ItemBox->GetWeaponItem();
+	...
+}
+...
+ULSWeaponDefinition* ALSItemBox::GetWeaponItem()
+{
+	// Error
+	LSCHECK(WeaponItem != nullptr, nullptr);
+	return WeaponItem;
+}
+```
