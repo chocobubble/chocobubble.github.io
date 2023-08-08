@@ -1,0 +1,2 @@
+long long tempNum = potions[mid] * (long long)spellValue;
+- 우측에 (long long) 없으면 int 타입 임시객체 생성으로 값 초과..
