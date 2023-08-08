@@ -13,7 +13,7 @@ toc: true
 toc_sticky: true
 
 date: 2023-08-01
-last_modified_at: 2023-08-01
+last_modified_at: 2023-08-09
 ---
 > 개인 프로젝트의 인벤토리와 관련된 내용입니다.  
 ---
@@ -28,3 +28,6 @@ last_modified_at: 2023-08-01
 
 # 성능 향상을 위해 구현한 점
 - 인벤토리 속 아이템들은 실제 액터로 구현하지 않고, 데이터만 보관한 클래스로 구현했습니다.
+
+# UML
+![image](https://github.com/chocobubble/Test/issues/1#issue-1842195440)
