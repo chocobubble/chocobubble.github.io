@@ -19,3 +19,8 @@ last_modified_at: 2023-08-21
 
 # using std::string
 - string에 대해서만 std 생략
+
+# FILE* fp = fopen(filePath.c_str(), "rt")
+fgets(row, 100, fp);
+char* token = strtok(row, ",");
+token = strtok(NULL, ",");
