@@ -67,7 +67,7 @@
 			<ul>
 			  {% for category in site.categories %}
 				  {% if category[0] == "c_research" %}
-					  <li><a href="/categories/c_research" class="">C 자료 조사 -> ({{category[1].size}})</a></li>
+					  <li><a href="/categories/c/research" class="">C 자료 조사 -> ({{category[1].size}})</a></li>
 				  {% endif %}
 			  {% endfor %}
 		  </ul>
