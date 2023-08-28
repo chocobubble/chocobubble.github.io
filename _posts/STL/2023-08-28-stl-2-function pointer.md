@@ -81,7 +81,12 @@ pt->print();// 3
 print(10);      // 1. namespace에 없는 전역 함수 호출
 A::print(10);   // 2. A namespace에 있는 전역 함수 호출
 Point::print(1);// 3. Point 클래스의 정적 멤버 함수 호출
+```
 
+## 정적 함수 호출
+- 아래에서 볼 수 있듯이 정적 함수는 모두 같은 정적 함수 포인터를 사용한다.
+
+```cpp
 void (*pf)(int) // 정적 함수 포인터 선언
 pf = print;
 pf(10);
@@ -89,4 +94,22 @@ pf = A::print;
 pf(10);
 pf = Point::print;
 pf(10);
+```
+
+## 객체와 주소로 멤버 함수 호출
+- 멤버 함수 포인터는 함수 포인터 선언에 어떤 클래스의 멤버 함수를 가리킬 것인지 클래스 이름을 지정해 주어야 한다.
+- 연산자 우선순위로 인해 아래와 같이 사용해야 한다.
+
+```cpp
+void (Point::*pf1)() const;
+pf1 = &Point::Print;
+void (Point::*pf2)(int);
+pf2 = &Point::PrintInt;
+
+Point pt(1, 1);
+(pt.*pf1)(); // 객체로 멤버 함수 포인터를 이용한 호출
+(pt.*pf2)(10);
+Point *ptr = &pt;
+(p->*pf1)(); // 주소로 멤버 함수 포인터를 이용한 호출
+(p->*pf2)(10); 
 ```
