@@ -11,7 +11,6 @@ tags:
   - list
   - deque
 
-
 toc: true
 toc_sticky: true
 use_math: true
@@ -19,12 +18,11 @@ use_math: true
 date: 2023-08-29
 last_modified_at: 2023-08-29
 ---
+
 > '뇌를 자극하는 C++ STL - 공동환' 책 및 c++ reference를 참고하여 작성한 포스트입니다.
 
 
 # Vector 컨테이너
-
-<템플릿 형식>
 
 ```cpp
 template<typename T,
