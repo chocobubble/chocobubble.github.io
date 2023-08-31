@@ -3,8 +3,9 @@ title:  "재귀"
 excerpt: "알고리즘"
 excerpt_separator: "<!--more-->"
 categories:
-  - Recursion
+  - Algorithm
 tags:
+  - Algorithm
   - Recursion
 
 toc: true
