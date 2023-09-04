@@ -127,3 +127,92 @@ ULSWeaponDefinition* ALSItemBox::GetWeaponItem()
 	return WeaponItem;
 }
 ```
+
+
+
+
+
+# 
+- InventoryComponent의 WeaponList의 모든 원소가 nullptr인데
+- EquipmentComponent의 WeaponInstanceList에는 제대로 인스턴스화 된 객체 원소 둘이 들어가 있었다.
+
+- 아래 코드와 비슷한 현상 같음
+```cpp
+int* somefunc() {
+    int a = 9;
+    int* aptr = &a;
+	int* bptr = aptr;
+    cout<<"bptr : "<< bptr << endl;
+    cout <<"*bptr  : " << *bptr <<endl;
+    cout<<"aptr : "<< aptr << endl;
+    cout<<"*aptr : " << *aptr << endl;
+    return aptr;
+}
+
+int main() {
+    int* bptr = somefunc();
+    cout<<"bptr : "<< bptr << endl;
+    cout <<"*bptr  : " << *bptr <<endl;
+    return 0;
+}
+/*
+bptr : 0x61fdcc
+*bptr  : 9
+aptr : 0x61fdcc
+*aptr : 9
+bptr : 0x61fdcc
+*bptr  : 0
+*/
+```
+
+
+
+
+
+```cpp
+void ULSInventoryComponent::SetDefaultWeapon()
+{
+	TObjectPtr<ULSWeaponDefinition> WeaponDefinition1 = NewObject<ULSWeaponDefinition>(this);
+	WeaponDefinition1->SetWeaponDefinitionData(EWeaponType::RIFLE, 3);
+	ALSWeaponInstance* WeaponInstance1 = WeaponDefinition1->InstantiateWeapon();
+	LSCHECK(EquipmentManager != nullptr);
+	EquipmentManager->EquipWeapon(WeaponInstance1);
+	AddWeaponToInventory(WeaponDefinition1);
+}
+void ULSInventoryComponent::AddWeaponToInventory(TObjectPtr<ULSWeaponDefinition> WeaponDefinition)
+{
+	LSCHECK(WeaponDefinition != nullptr);
+	if(CurrentInventoryCapacity == MaxInventoryCapacity)
+	{
+		LSLOG(Warning, TEXT("Inventory is Full"));
+		return;
+	}
+	else
+	{
+		LSLOG(Warning, TEXT("Inventory is not Full"));
+	}
+	int32 num = 0;
+	for(TObjectPtr<ULSWeaponDefinition> Weapon : WeaponList)
+	{
+		if(Weapon == nullptr)
+		{
+			LSLOG(Warning, TEXT("loop %d times"), num);
+			Weapon = WeaponDefinition;
+			LSCHECK(Weapon != nullptr);
+			CurrentInventoryCapacity += 1;
+			LSLOG(Warning, TEXT("Adding Weapon to Weapon List in Inventory success"));
+			break;
+		}
+		num++;
+	}
+}
+```
+
+
+# GetMesh()->GetAnimInstance() nullptr 에러
+- GetMesh()->GetAnimInstance() 전에 GetMesh()->SetSkeletalMesh()를 해주지 않아서 nullptr을 반환하는 것 같다.
+- 자세한건 더 알아보자.\
+
+
+# bind error
+- 델리게이트에 bind 에러 발생 시 UFUNCITON() 을 빼먹진 않았는 지 확인하기
