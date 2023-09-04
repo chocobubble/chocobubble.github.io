@@ -1,2 +1,24 @@
 long long tempNum = potions[mid] * (long long)spellValue;
 - 우측에 (long long) 없으면 int 타입 임시객체 생성으로 값 초과..
+
+
+dfs 나 isvalid 등 함수 빼낼 때 파라미터로 너무 큰 애를 값 형식으로 넣으면
+	- 시간초과 발생 가능
+
+else if 조심..
+
+
+uinon find
+void unionParent(int a, int b) {
+        if(findParent(a) != findParent(b)) {
+            //if(a <= b) parent[b] = a;
+            //else parent[a] = b;
+            parent[findParent(b)] = a;
+        }
+    }
+    int findParent(int a) {
+        if(a == parent[a]) return a;
+        else return findParent(parent[a]);
+    }
+    bool equationsPossible(vector<string>& equations) {
+        parent = vector<int> (26, 0);
