@@ -30,4 +30,4 @@ last_modified_at: 2023-08-09
 - 인벤토리 속 아이템들은 실제 액터로 구현하지 않고, 데이터만 보관한 클래스로 구현했습니다.
 
 # UML
-![image](https://github.com/chocobubble/Test/assets/100405650/77df4ade-effd-4206-b128-b60b748aaf6f)
+![image](https://github.com/chocobubble/Test/assets/100405650/4f548931-6e31-453c-aca7-c01801091226)
