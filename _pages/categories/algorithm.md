@@ -1,12 +1,12 @@
 ---
 title: "Algorithm"
 layout: archive
-permalink: categories/algorithm
+permalink: categories/Algorithm
 author_profile: true
 sidebar_main: true
 toc: true
 toc_sticky: true
-toc_label: "algorithm"
+toc_label: "Algorithm"
 ---
 
 {% assign posts = site.categories.Algorithm%}
