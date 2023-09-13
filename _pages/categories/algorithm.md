@@ -1,15 +1,15 @@
 ---
-title: "Algorithm"
+title: "algorithm"
 layout: archive
-permalink: categories/Algorithm
+permalink: categories/algorithm
 author_profile: true
 sidebar_main: true
 toc: true
 toc_sticky: true
-toc_label: "Algorithm"
+toc_label: "algorithm"
 ---
 
-{% assign posts = site.categories.Algorithm%}
+{% assign posts = site.categories.algorithm%}
 {% for post in posts %}
   {% include archive-single.html type=page.entries_layout %}
 {% endfor %}

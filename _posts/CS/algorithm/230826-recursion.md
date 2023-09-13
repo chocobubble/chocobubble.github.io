@@ -3,7 +3,7 @@ title:  "재귀"
 excerpt: "알고리즘"
 excerpt_separator: "<!--more-->"
 categories:
-  - Algorithm
+  - algorithm
 tags:
   - Algorithm
   - Recursion
