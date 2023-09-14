@@ -16,6 +16,13 @@
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
 			<ul>
                 {% for category in site.categories %}
+                    {% if category[0] == "for_test" %}
+                        <li><a href="/categories/test" class=""> Test ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+			<ul>
+                {% for category in site.categories %}
                     {% if category[0] == "algo" %}
                         <li><a href="/categories/algo" class=""> Algorithm ({{category[1].size}})</a></li>
                     {% endif %}
