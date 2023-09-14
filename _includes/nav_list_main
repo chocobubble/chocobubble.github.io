@@ -23,8 +23,8 @@
             </ul>
 			<ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "algo" %}
-                        <li><a href="/categories/algo" class=""> Algorithm ({{category[1].size}})</a></li>
+                    {% if category[0] == "algorithm" %}
+                        <li><a href="/categories/algorithm" class=""> Algorithm ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
