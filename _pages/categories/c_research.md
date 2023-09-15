@@ -1,4 +1,3 @@
-
 ---
 title: "C Research"
 layout: archive

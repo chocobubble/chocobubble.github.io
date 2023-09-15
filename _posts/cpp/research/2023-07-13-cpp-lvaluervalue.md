@@ -3,7 +3,7 @@ title:  "[C++ 정리] lvalue & rvalue"
 excerpt: "C++"
 excerpt_separator: "<!--more-->"
 categories:
-  - cpp_research
+  - cppresearch
 tags:
   - CPP
   - lvalue

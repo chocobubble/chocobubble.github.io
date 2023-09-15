@@ -3,7 +3,7 @@ title:  "[C++ 정리] 짤막정리"
 excerpt: "C++"
 excerpt_separator: "<!--more-->"
 categories:
-  - cpp_research
+  - cppresearch
 tags:
   - CPP
 
