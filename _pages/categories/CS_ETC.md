@@ -6,7 +6,7 @@ author_profile: true
 sidebar_main: true
 toc: true
 toc_sticky: true
-toc_label: "CS_ETC
+toc_label: "CS_ETC"
 ---
 
 {% assign posts = site.categories.CS_ETC%}

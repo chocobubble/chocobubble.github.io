@@ -7,6 +7,7 @@ sidebar_main: true
 toc: true
 toc_sticky: true
 toc_label: "algorithm"
+published: true
 ---
 
 {% assign posts = site.categories.algorithm%}
