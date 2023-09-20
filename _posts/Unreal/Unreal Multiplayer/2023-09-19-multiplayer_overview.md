@@ -3,7 +3,7 @@ title:  "[Unreal] 멀티플레이어 개요"
 excerpt: "Unreal Engine"
 excerpt_separator: "<!--more-->"
 categories:
-  - Unreal
+  - Unreal_Multiplayer
 tags:
   - Unreal
   - Multiplayer
