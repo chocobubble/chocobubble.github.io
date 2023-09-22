@@ -105,6 +105,12 @@
               {% endfor %}
           </ul>
           <ul>
+            {% for category in site.categories %}
+                {% if category[0] == "Unreal_Multiplayer" %}
+                    <li><a href="/categories/Unreal_Multiplayer" class="">Unreal 서버 -> ({{category[1].size}})</a></li>
+                {% endif %}
+            {% endfor %}
+          <ul>
               {% for category in site.categories %}
                   {% if category[0] == "Unreal_Research" %}
                       <li><a href="/categories/Unreal_Research" class="">Unreal 자료 조사 -> ({{category[1].size}})</a></li>

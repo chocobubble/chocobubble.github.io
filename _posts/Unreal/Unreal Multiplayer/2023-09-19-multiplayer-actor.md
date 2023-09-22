@@ -3,7 +3,7 @@ title:  "[Unreal] 멀티플레이어 액터"
 excerpt: "Unreal Engine"
 excerpt_separator: "<!--more-->"
 categories:
-  - Unreal
+  - Unreal_Multiplayer
 tags:
   - Unreal
   - Multiplayer
@@ -46,7 +46,19 @@ if(GetLocalRole() == ENetRole::ROLE_Authority())
 - 원하는 변수에 UPROPERTY(Replicated) 매크로를 붙여준다.
 - GetLiftimeReplicatedProps() 함수를 이용하고,
 - DOREPLIFETIME 매크로를 이용해 설정한다.
-- 조건을 넣고 싶다면 DOREPLIFETIME_CONDITIO N
+
+### 조건식 property replication
+- 프로퍼티가 일단 replication 등록되면 해제할 수 없다.
+- 조건을 넣고 싶다면 DOREPLIFETIME_CONDITION을 사용한다.
+- 예시  
+```cpp
+void AActor::GetLifetimeReplicatedProps( TArray< FLifetimeProperty > & OutLifetimeProps ) const
+{
+    DOREPLIFETIME_CONDITION( AActor, ReplicatedMovement, COND_SimulatedOnly);
+}
+```
+
+- 위의 예시의 경우 액터의 시뮬레이션 사본이 있는 클라이언트에만 replicate 된다. 
 
 ## REP NOtices
 - 메서드를 Replicate할 때 쓴다.
