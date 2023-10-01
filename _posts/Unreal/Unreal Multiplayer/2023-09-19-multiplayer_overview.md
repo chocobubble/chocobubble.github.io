@@ -135,3 +135,42 @@ last_modified_at: 2023-09-19
 
 - 첫 로컬 플레이어를 호스트로 하려면
 	- UWorld->GetFirstLocalPlayerFromController() 이용
+
+
+# Net Update Frequency
+- 얼마나 액터가 자주 replicated 되는지 설정 한다
+- 단위는 초 단위이고, 이를 통해 Net Update Time 이 결정된다.
+
+# Min Net Update Frequency
+- replicated 된 property가 변경되지 않고 오랜 시간이 지났을 때 이 수치에 따라 일정 시간 간격으로 한번은 업데이트 되게 한다.
+
+
+# Game Framework
+## Game mode
+- server only
+- default class들을 관리한다
+- 게임 룰 결정
+- 게임 경과 시간 등 state 관리
+
+## Game State
+- server and all clients
+- 게임의 상태 관리
+	- 플레이어들의 점수, 팀 점수, 팀 리더 등 
+- player state 관리
+
+## Player State
+- server and all clients
+- 플레이어들의 state 
+	- 플레이어 점수 등
+	- 총, 탄약 등
+
+## Player Controller
+- server and all clients
+- HUD 에 접근, 업데이트
+
+## Pawn
+- server and all clients
+
+## Hud, Widget
+- Client
+
