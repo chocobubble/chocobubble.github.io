@@ -174,3 +174,55 @@ last_modified_at: 2023-09-19
 ## Hud, Widget
 - Client
 
+<br><br>
+
+# Syncing Time
+- 클라와 서버의 시간을 동기화하려면 클라이언트는 서버의 현재 시간을 알아야 한다.
+- 클라는 서버가 게임을 시작하고 나서 시간이 어느정도 지난 후 참가한다.
+	- 따라서 클라에서 단순히 World에서 GetTimeSeconds를 하면 서버와 시간이 맞지 않는다.
+- 해결하려면 GetServerTime() 메서드를 이용한다.
+	- 그래도 네트워킹 시간이 있기 때문에 정확하진 않다.
+- 클라에서 서버에 도착하는 시간과 서버에서 클라에 도착하는 시간을 합친 시간을 Round-Trip Time 이라 한다.
+	- 대략적으로 이 값을 반으로 나눈 값을 GetServerTime() 에 더해 시간을 동기화한다.
+	- Round-Trip Time은 현재 클라이언트의 시간에서 요청을 보낸 시간을 빼주면 된다.
+
+<br><br>
+
+# Game Mode vs Game Mode Base
+- Game Mode Base
+	- Default classes
+	- spawns player's pawn
+	- restart players
+	- restart the game
+- Game Mode
+	- match State
+	- handling match states
+	- custom match states
+- 즉, match state를 이용하지 않는다면 game mode base로 충분하다.
+
+## match state
+- EnteringMap
+- WaitingToStart
+- InProgress
+- WaitingPostMatch
+- LeavingMap
+- Aborted
+
+- hasMatchStarted()
+- HasMatchEnded()
+- GetmatchState()
+- SetMatchState()
+- OnMatchStateSet()
+- StartMatch()
+
+## Delayed Start
+- bDelayedStart 
+- 절차
+	- WaitingToStart 상태에서 대기
+		- WarmupTime
+	- StartMatch() 호출
+		- InProgress 상태가 됨
+		- Spawn Character
+
+
+
