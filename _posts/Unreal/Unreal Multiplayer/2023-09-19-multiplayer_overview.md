@@ -224,5 +224,31 @@ last_modified_at: 2023-09-19
 		- InProgress 상태가 됨
 		- Spawn Character
 
+# ping
+- packet internet(or inter-network) groper
+- 네트워크를 통해 상대의 접근 여부를 조사하기 위한 프로그램.
+- 요청하고 응답까지 걸리는 시간을 알 수 있다.
 
+# Lag Compensation
+- lag이 없는 것처럼 해주는 기능
+- 언리얼 엔진에서는
+	- extrapolation 으로 이동을 예측하고
+	- interpolation 을 통해 부드럽게 이동시킨다.
+	- rubber banding 이라 부른다.
 
+## server-side rewind
+- 서버는 플레이어의 움직임에 따른 위치들을 저장한다.
+- 클라이언트의 사격 등이 발생했을 때 서버에 요청하고,
+- 서버는 rewind 해서 해당 시각의 위치를 찾아 유효한지 판단한다.
+
+## Client-side Prediction
+- 클라이언트의 정보가 서버에 도달하는 시간은 Round-Trip Time 의 반이다.
+- 
+
+### Reconciliation
+1. 클라이언트가 먼저 움직이고 나서,
+2. RPC를 보내고 저장한다.
+3. 서버로부터 응답을 받고,
+4. 응답에 따라 위치를 수정한다.
+5. 처리된 RPC들을 제거한다.
+6. 처리되지 않은 RPC들에 따라 움직임을 처리한다.
